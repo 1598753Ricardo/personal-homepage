@@ -1,0 +1,31 @@
+:root {
+  --bg: transparent;
+  --text: #F2E8D0;
+  --text-heading: #EAEBEC;
+  --text-muted: #888C90;
+  --border: rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.15);
+  --accent: #FF4650;
+  --glass: rgba(255,255,255,0.06);
+  --glass-hover: rgba(255,255,255,0.10);
+  --font: "SF Pro", "PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", ui-monospace, monospace;
+  --hero-text: clamp(3rem, 6vw, 5rem);
+  --h2: clamp(2rem, 3.5vw, 3rem);
+  --h3: 1.25rem;
+  --body: 1.0625rem;
+  --body-sm: 0.9375rem;
+  --caption: 0.8125rem;
+  --sp-xs: 8px; --sp-sm: 12px; --sp-md: 16px; --sp-lg: 24px;
+  --sp-xl: 32px; --sp-2xl: 48px; --sp-3xl: 72px; --sp-4xl: 104px;
+  --r-sm: 8px; --r-md: 10px; --r-lg: 14px; --r-full: 9999px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-glass: 0 0 0 1px rgba(0,0,0,0.55), 0 8px 40px rgba(0,0,0,0.42), inset 0 0 3px 1px rgba(255,255,255,0.12), inset 0 1px 0 0 rgba(255,255,255,0.12);
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
+  --dur-fast: 150ms; --dur-base: 350ms; --dur-slow: 500ms;
+  --max-w: 1216px;
+  --nav-h: 52px;
+  --z-nav: 200;
+}
+html, body { overflow-x: clip; }
