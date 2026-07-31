@@ -655,14 +655,16 @@ function GutterFold() {
 }
 
 function Desk() {
+  const deskY = -1.9
+
   return (
     <group>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, -0.56]} receiveShadow>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, deskY, -0.56]} receiveShadow>
         <planeGeometry args={[15, 10]} />
         <meshStandardMaterial color="#21140c" roughness={0.92} />
       </mesh>
       {Array.from({ length: 13 }).map((_, index) => (
-        <mesh key={index} rotation={[-Math.PI / 2, 0, 0]} position={[-6.5 + index * 1.08, 0, -0.555]}>
+        <mesh key={index} rotation={[-Math.PI / 2, 0, 0]} position={[-6.5 + index * 1.08, deskY + 0.002, -0.555]}>
           <planeGeometry args={[0.014, 10]} />
           <meshBasicMaterial color="#583419" transparent opacity={0.38} />
         </mesh>

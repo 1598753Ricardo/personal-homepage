@@ -90176,12 +90176,13 @@ function GutterFold() {
   ] });
 }
 function Desk() {
+  const deskY = -1.9;
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { rotation: [-Math.PI / 2, 0, 0], position: [0, 0, -0.56], receiveShadow: true, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { rotation: [-Math.PI / 2, 0, 0], position: [0, deskY, -0.56], receiveShadow: true, children: [
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [15, 10] }),
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshStandardMaterial", { color: "#21140c", roughness: 0.92 })
     ] }),
-    Array.from({ length: 13 }).map((_, index) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { rotation: [-Math.PI / 2, 0, 0], position: [-6.5 + index * 1.08, 0, -0.555], children: [
+    Array.from({ length: 13 }).map((_, index) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { rotation: [-Math.PI / 2, 0, 0], position: [-6.5 + index * 1.08, deskY + 2e-3, -0.555], children: [
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [0.014, 10] }),
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshBasicMaterial", { color: "#583419", transparent: true, opacity: 0.38 })
     ] }, index))
