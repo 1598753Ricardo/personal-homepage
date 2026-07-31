@@ -90049,8 +90049,8 @@ function Desk() {
 function CenteredCamera() {
   const { camera } = useThree();
   (0, import_react4.useEffect)(() => {
-    camera.position.set(0, 3.8, 9.2);
-    camera.lookAt(0, -0.08, 0);
+    camera.position.set(0, 4.35, 10.4);
+    camera.lookAt(0, -0.22, 0);
     camera.updateProjectionMatrix();
     console.log("[Book3D] camera.position", camera.position.toArray());
   }, [camera]);
@@ -90092,7 +90092,7 @@ function BookModel({ book }) {
   }
   const leftPage = getPage(book, pageIndex);
   const rightPage = getPage(book, pageIndex + 1);
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { ref: groupRef, rotation: [-0.98, 0, 0.01], position: [0, 0, 0], scale: 0.72, children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { ref: groupRef, rotation: [-1.16, 0, 0.01], position: [0, -0.08, 0], scale: 0.68, children: [
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(HardCover, { side: "left", book }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(HardCover, { side: "right", book }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PageStack, { side: "left" }),
@@ -90124,7 +90124,7 @@ function Book3D({ book, phase = "open", onClose }) {
       Canvas2,
       {
         shadows: true,
-        camera: { position: [0, 3.8, 9.2], fov: 38 },
+        camera: { position: [0, 4.35, 10.4], fov: 38 },
         gl: { antialias: true, alpha: false, physicallyCorrectLights: true },
         onCreated: ({ gl }) => {
           gl.toneMapping = ACESFilmicToneMapping;
