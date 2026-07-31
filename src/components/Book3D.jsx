@@ -505,8 +505,8 @@ function CenteredCamera() {
   const { camera } = useThree()
 
   useEffect(() => {
-    camera.position.set(0, 5.25, 6.55)
-    camera.lookAt(0, 0, 0)
+    camera.position.set(0, 3.8, 9.2)
+    camera.lookAt(0, -0.08, 0)
     camera.updateProjectionMatrix()
     console.log('[Book3D] camera.position', camera.position.toArray())
   }, [camera])
@@ -559,7 +559,7 @@ function BookModel({ book }) {
   const rightPage = getPage(book, pageIndex + 1)
 
   return (
-    <group ref={groupRef} rotation={[-0.98, 0, 0.01]} position={[0, 0, 0]}>
+    <group ref={groupRef} rotation={[-0.98, 0, 0.01]} position={[0, 0, 0]} scale={0.72}>
       <HardCover side="left" book={book} />
       <HardCover side="right" book={book} />
       <PageStack side="left" />
@@ -598,7 +598,7 @@ export default function Book3D({ book, phase = 'open', onClose }) {
       <div className="book3d-canvas-wrap">
         <Canvas
           shadows
-          camera={{ position: [0, 5.25, 6.55], fov: 38 }}
+          camera={{ position: [0, 3.8, 9.2], fov: 38 }}
           gl={{ antialias: true, alpha: false, physicallyCorrectLights: true }}
           onCreated={({ gl }) => {
             gl.toneMapping = THREE.ACESFilmicToneMapping
