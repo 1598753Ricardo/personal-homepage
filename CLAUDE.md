@@ -13,6 +13,28 @@
 ## 项目目标
 搭建个人主页，作为线上身份入口。
 
+## 每次修改后的固定收尾
+每次完成任何代码、页面、资源或配置修改后，必须执行：
+
+1. 将当前完整网页源码提交到 Git。
+2. push 到 GitHub 仓库：
+   `https://github.com/1598753Ricardo/personal-homepage`
+3. 最终回复必须使用以下格式：
+
+```
+本次修改已推送 GitHub。
+
+仓库：
+[https://github.com/1598753Ricardo/personal-homepage](https://github.com/1598753Ricardo/personal-homepage)
+
+修改文件：
+`文件1`
+`文件2`
+
+最新 commit：
+`commit id`
+```
+
 ## 用户技术背景
 - 不会写代码
 - 使用AI工具辅助开发
