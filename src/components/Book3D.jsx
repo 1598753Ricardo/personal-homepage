@@ -646,7 +646,6 @@ export default function Book3D({ book, phase = 'open', onClose }) {
           top: 0;
           width: 100vw;
           height: 100vh;
-          transform-origin: center center;
           animation: book3dExtract 980ms cubic-bezier(.16,1,.3,1) both;
         }
 
@@ -684,31 +683,26 @@ export default function Book3D({ book, phase = 'open', onClose }) {
         @keyframes book3dExtract {
           0% {
             opacity: 0;
-            transform: scale(0.86);
           }
           64% {
             opacity: 1;
-            transform: scale(0.94);
           }
           100% {
             opacity: 1;
-            transform: scale(1);
           }
         }
 
         @keyframes book3dSettle {
-          from { transform: scale(0.985); }
-          to { transform: scale(1); }
+          from { opacity: 0.98; }
+          to { opacity: 1; }
         }
 
         @keyframes book3dReturn {
           from {
             opacity: 1;
-            transform: scale(1);
           }
           to {
             opacity: 0;
-            transform: scale(0.86);
           }
         }
       `}</style>
