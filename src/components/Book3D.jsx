@@ -79,13 +79,13 @@ function makeCurvedPageGeometry(side = 'right', width = 3.05, height = 4.18, opt
       const b = a + 1
       const c = a + (xSegments + 1)
       const d = c + 1
-      indices.push(a, c, b, b, c, d)
+      indices.push(a, b, c, b, d, c)
 
       const ab = a + layerSize
       const bb = b + layerSize
       const cb = c + layerSize
       const db = d + layerSize
-      indices.push(ab, bb, cb, bb, db, cb)
+      indices.push(ab, cb, bb, bb, cb, db)
     }
   }
 
@@ -334,7 +334,7 @@ function makeSpineGeometry(width = 0.82, height = 4.86, depth = 0.74) {
       const localX = (t - 0.5) * width
       const arch = Math.cos((t - 0.5) * Math.PI) * 0.16
       const groove = -Math.exp(-Math.pow((t - 0.5) * 7, 2)) * 0.08
-      const z = -depth * 0.28 + arch + groove
+      const z = -depth * 0.34 + arch + groove
       vertices.push(localX, localY, z)
     }
   }
@@ -372,7 +372,7 @@ function makeGutterFoldGeometry(width = 0.76, height = 4.2) {
       const centerSink = -Math.exp(-Math.pow((t - 0.5) * 8, 2)) * 0.12
       const shoulderLift = Math.pow(Math.abs(t - 0.5) * 2, 1.6) * 0.08
       const endSoftness = -Math.pow(Math.abs(v - 0.5) * 2, 4) * 0.025
-      vertices.push(localX, localY, 0.2 + centerSink + shoulderLift + endSoftness)
+      vertices.push(localX, localY, 0.12 + centerSink + shoulderLift + endSoftness)
     }
   }
 
@@ -428,15 +428,15 @@ function Spine({ book }) {
 
   return (
     <group position={[0, 0, -0.3]}>
-      <mesh castShadow receiveShadow>
-        <boxGeometry args={[0.9, 4.92, 0.62]} />
+      <mesh position={[0, 0, -0.12]} castShadow receiveShadow>
+        <boxGeometry args={[0.58, 4.92, 0.56]} />
         <meshPhysicalMaterial color={book.color || '#20190f'} roughness={0.74} metalness={0.08} clearcoat={0.12} />
       </mesh>
-      <mesh geometry={spineSurface} position={[0, 0, 0.28]} receiveShadow castShadow>
+      <mesh geometry={spineSurface} position={[0, 0, 0.16]} receiveShadow castShadow>
         <meshPhysicalMaterial color="#2b2114" roughness={0.84} metalness={0.05} clearcoat={0.08} side={THREE.DoubleSide} />
       </mesh>
       {[-0.17, 0.17].map(x => (
-        <mesh key={x} position={[x * 2.05, 0, 0.13]} receiveShadow castShadow>
+        <mesh key={x} position={[x * 1.55, 0, 0.03]} receiveShadow castShadow>
           <boxGeometry args={[0.045, 4.42, 0.22]} />
           <meshPhysicalMaterial color={book.accent || '#bda779'} roughness={0.66} metalness={0.12} />
         </mesh>
@@ -634,13 +634,13 @@ function GutterFold() {
       <mesh geometry={foldGeometry} receiveShadow castShadow>
         <meshStandardMaterial color="#3a2e1d" roughness={0.94} side={THREE.DoubleSide} />
       </mesh>
-      <mesh position={[-0.26, 0, 0.18]} rotation={[0, 0.03, 0]}>
+      <mesh position={[-0.2, 0, 0.1]} rotation={[0, 0.03, 0]}>
         <planeGeometry args={[0.42, 4.16, 12, 1]} />
-        <meshBasicMaterial color="#2a1d10" transparent opacity={0.11} depthWrite={false} />
+        <meshBasicMaterial color="#2a1d10" transparent opacity={0.07} depthWrite={false} />
       </mesh>
-      <mesh position={[0.26, 0, 0.18]} rotation={[0, -0.03, 0]}>
+      <mesh position={[0.2, 0, 0.1]} rotation={[0, -0.03, 0]}>
         <planeGeometry args={[0.42, 4.16, 12, 1]} />
-        <meshBasicMaterial color="#2a1d10" transparent opacity={0.11} depthWrite={false} />
+        <meshBasicMaterial color="#2a1d10" transparent opacity={0.07} depthWrite={false} />
       </mesh>
       <mesh position={[0, 2.13, 0.28]}>
         <planeGeometry args={[6.1, 0.26]} />
