@@ -244,14 +244,19 @@ function usePaperEdgeMaterial() {
   }), [])
 }
 
+const COVER_ANGLE = 0.2
+const PAGE_ANGLE = 0.16
+const STACK_ANGLE = 0.18
+const BOOK_SCALE = 0.66
+
 function HardCover({ side, book }) {
   const direction = side === 'right' ? 1 : -1
-  const angle = side === 'right' ? -0.5 : 0.5
+  const angle = side === 'right' ? -COVER_ANGLE : COVER_ANGLE
 
   return (
-    <group rotation={[0, angle, 0]} position={[0, 0, -0.36]}>
-      <mesh position={[direction * 1.78, 0, 0]} castShadow receiveShadow>
-        <boxGeometry args={[3.55, 4.75, 0.32]} />
+    <group rotation={[0, angle, 0]} position={[0, 0, -0.43]}>
+      <mesh position={[direction * 1.82, 0, -0.02]} castShadow receiveShadow>
+        <boxGeometry args={[3.64, 4.82, 0.38]} />
         <meshPhysicalMaterial
           color={book.color || '#282014'}
           roughness={0.64}
@@ -260,8 +265,8 @@ function HardCover({ side, book }) {
           clearcoatRoughness={0.72}
         />
       </mesh>
-      <mesh position={[direction * 1.78, 0, 0.18]} receiveShadow>
-        <boxGeometry args={[3.32, 4.52, 0.034]} />
+      <mesh position={[direction * 1.82, 0, 0.2]} receiveShadow>
+        <boxGeometry args={[3.38, 4.56, 0.04]} />
         <meshPhysicalMaterial color="#504d36" roughness={0.78} metalness={0.03} clearcoat={0.08} />
       </mesh>
     </group>
@@ -270,19 +275,19 @@ function HardCover({ side, book }) {
 
 function Spine({ book }) {
   return (
-    <group position={[0, 0, -0.16]}>
+    <group position={[0, 0, -0.28]}>
       <mesh castShadow receiveShadow>
-        <boxGeometry args={[0.66, 4.86, 0.62]} />
-        <meshPhysicalMaterial color="#15110b" roughness={0.72} metalness={0.1} clearcoat={0.1} />
+        <boxGeometry args={[0.78, 4.9, 0.7]} />
+        <meshPhysicalMaterial color={book.color || '#20190f'} roughness={0.74} metalness={0.08} clearcoat={0.12} />
       </mesh>
-      <mesh position={[0, 0, 0.34]} receiveShadow>
-        <boxGeometry args={[0.28, 4.58, 0.1]} />
-        <meshStandardMaterial color="#050403" roughness={0.98} />
+      <mesh position={[0, 0, 0.39]} receiveShadow castShadow>
+        <cylinderGeometry args={[0.2, 0.2, 4.64, 28, 1, false, 0, Math.PI]} />
+        <meshPhysicalMaterial color="#2d2417" roughness={0.88} metalness={0.04} clearcoat={0.04} side={THREE.DoubleSide} />
       </mesh>
       {[-0.17, 0.17].map(x => (
-        <mesh key={x} position={[x * 1.35, 0, 0.38]} receiveShadow>
-          <boxGeometry args={[0.028, 4.32, 0.055]} />
-          <meshPhysicalMaterial color={book.accent || '#bda779'} roughness={0.62} metalness={0.16} />
+        <mesh key={x} position={[x * 1.7, 0, 0.26]} receiveShadow castShadow>
+          <boxGeometry args={[0.035, 4.38, 0.12]} />
+          <meshPhysicalMaterial color={book.accent || '#bda779'} roughness={0.66} metalness={0.12} />
         </mesh>
       ))}
     </group>
@@ -291,27 +296,27 @@ function Spine({ book }) {
 
 function PageStack({ side }) {
   const direction = side === 'right' ? 1 : -1
-  const angle = side === 'right' ? -0.5 : 0.5
-  const pages = useMemo(() => Array.from({ length: 74 }), [])
+  const angle = side === 'right' ? -STACK_ANGLE : STACK_ANGLE
+  const pages = useMemo(() => Array.from({ length: 96 }), [])
   const geometry = useMemo(() => makeCurvedPageGeometry(side, 3.02, 4.12, {
-    gutter: 0.3,
-    crown: 0.08,
-    outerSag: 0.08,
-    cornerCurl: 0.03,
+    gutter: 0.16,
+    crown: 0.035,
+    outerSag: 0.045,
+    cornerCurl: 0.04,
   }), [side])
   const edgeGeometry = useMemo(() => makePageEdgeGeometry(side, 'outer', 3.02, 4.12, 0.018, {
-    gutter: 0.3,
-    crown: 0.08,
-    outerSag: 0.08,
-    cornerCurl: 0.03,
+    gutter: 0.16,
+    crown: 0.035,
+    outerSag: 0.045,
+    cornerCurl: 0.04,
   }), [side])
   const edgeMaterial = usePaperEdgeMaterial()
 
   return (
-    <group rotation={[0, angle, 0]} position={[0, 0, -0.02]}>
+    <group rotation={[0, angle, 0]} position={[0, 0, -0.06]}>
       {pages.map((_, index) => {
-        const z = -0.19 + index * 0.005
-        const yOffset = (index - pages.length / 2) * 0.0008
+        const z = -0.34 + index * 0.0046
+        const yOffset = (index - pages.length / 2) * 0.00055
         return (
           <group key={index} position={[0, yOffset, z]}>
             <mesh geometry={geometry} receiveShadow castShadow={index % 11 === 0}>
@@ -321,8 +326,8 @@ function PageStack({ side }) {
           </group>
         )
       })}
-      <mesh position={[direction * 3.08, 0, 0.04]} receiveShadow castShadow>
-        <boxGeometry args={[0.12, 4.05, 0.38]} />
+      <mesh position={[direction * 3.08, 0, -0.02]} receiveShadow castShadow>
+        <boxGeometry args={[0.14, 4.08, 0.48]} />
         <meshStandardMaterial color="#d6c7a9" roughness={0.96} />
       </mesh>
     </group>
@@ -331,10 +336,10 @@ function PageStack({ side }) {
 
 function CurrentPage({ side, book, page, number }) {
   const pageOptions = useMemo(() => ({
-    gutter: 0.42,
-    crown: 0.2,
-    outerSag: side === 'right' ? 0.14 : 0.12,
-    cornerCurl: 0.1,
+    gutter: 0.2,
+    crown: 0.075,
+    outerSag: side === 'right' ? 0.055 : 0.05,
+    cornerCurl: 0.075,
   }), [side])
   const geometry = useMemo(() => makeCurvedPageGeometry(side, 3.05, 4.18, pageOptions), [side, pageOptions])
   const undersideGeometry = useMemo(() => makeCurvedPageGeometry(side, 3.05, 4.18, {
@@ -347,10 +352,10 @@ function CurrentPage({ side, book, page, number }) {
   const bottomEdge = useMemo(() => makePageEdgeGeometry(side, 'bottom', 3.05, 4.18, 0.024, pageOptions), [side, pageOptions])
   const material = usePageMaterial(book, page, number, side)
   const edgeMaterial = usePaperEdgeMaterial()
-  const angle = side === 'right' ? -0.5 : 0.5
+  const angle = side === 'right' ? -PAGE_ANGLE : PAGE_ANGLE
 
   return (
-    <group rotation={[0, angle, 0]} position={[0, 0, 0.18]}>
+    <group rotation={[0, angle, 0]} position={[0, 0, 0.19]}>
       <mesh geometry={geometry} material={material} castShadow receiveShadow />
       <mesh geometry={undersideGeometry} position={[0, 0, -0.032]} receiveShadow>
         <meshStandardMaterial color="#d5c8af" roughness={0.96} side={THREE.DoubleSide} />
@@ -368,23 +373,23 @@ function TurningPage({ direction, book, page, backPage, number, onDone }) {
   const doneRef = useRef(false)
   const side = direction === 'next' ? 'right' : 'left'
   const geometry = useMemo(() => makeCurvedPageGeometry(side, 3.05, 4.18, {
-    gutter: 0.42,
-    crown: 0.22,
-    outerSag: 0.12,
+    gutter: 0.2,
+    crown: 0.09,
+    outerSag: 0.06,
     cornerCurl: 0.1,
     turnCurl: 0.08,
   }), [side])
   const undersideGeometry = useMemo(() => makeCurvedPageGeometry(side, 3.05, 4.18, {
-    gutter: 0.44,
-    crown: 0.18,
-    outerSag: 0.14,
+    gutter: 0.22,
+    crown: 0.075,
+    outerSag: 0.07,
     cornerCurl: 0.08,
     turnCurl: 0.06,
   }), [side])
   const outerEdge = useMemo(() => makePageEdgeGeometry(side, 'outer', 3.05, 4.18, 0.03, {
-    gutter: 0.42,
-    crown: 0.22,
-    outerSag: 0.12,
+    gutter: 0.2,
+    crown: 0.09,
+    outerSag: 0.06,
     cornerCurl: 0.1,
   }), [side])
   const frontMaterial = usePageMaterial(book, page, number, side)
@@ -404,26 +409,26 @@ function TurningPage({ direction, book, page, backPage, number, onDone }) {
     const bendLift = arc * 0.56
 
     reshapePageGeometry(geometry, side, {
-      gutter: 0.42 + arc * 0.08,
-      crown: 0.18 + arc * 0.28,
-      outerSag: 0.1 + arc * 0.04,
+      gutter: 0.2 + arc * 0.08,
+      crown: 0.08 + arc * 0.25,
+      outerSag: 0.055 + arc * 0.04,
       cornerCurl: 0.1 + arc * 0.13,
       turnCurl: arc * 0.42,
     })
     reshapePageGeometry(undersideGeometry, side, {
-      gutter: 0.45 + arc * 0.08,
-      crown: 0.15 + arc * 0.22,
-      outerSag: 0.13 + arc * 0.04,
+      gutter: 0.22 + arc * 0.08,
+      crown: 0.07 + arc * 0.2,
+      outerSag: 0.065 + arc * 0.04,
       cornerCurl: 0.08 + arc * 0.1,
       turnCurl: arc * 0.34,
     })
 
     if (direction === 'next') {
-      ref.current.rotation.y = -0.43 - t * Math.PI
+      ref.current.rotation.y = -PAGE_ANGLE - t * Math.PI
       ref.current.position.z = 0.16 + bendLift
       ref.current.rotation.z = -arc * 0.08
     } else {
-      ref.current.rotation.y = 0.43 + t * Math.PI
+      ref.current.rotation.y = PAGE_ANGLE + t * Math.PI
       ref.current.position.z = 0.16 + bendLift
       ref.current.rotation.z = arc * 0.08
     }
@@ -457,28 +462,28 @@ function EdgeHitbox({ side, onClick }) {
   )
 }
 
-function BookOcclusion() {
+function GutterFold() {
   return (
     <group>
-      <mesh position={[0, 0, 0.34]} rotation={[0, 0, 0]} receiveShadow>
-        <boxGeometry args={[0.38, 4.25, 0.018]} />
-        <meshBasicMaterial color="#000000" transparent opacity={0.42} depthWrite={false} />
+      <mesh position={[0, 0, 0.24]} receiveShadow castShadow>
+        <cylinderGeometry args={[0.18, 0.18, 4.32, 32, 1, false, 0, Math.PI]} />
+        <meshStandardMaterial color="#3a2e1d" roughness={0.96} side={THREE.DoubleSide} />
       </mesh>
-      <mesh position={[-0.34, 0, 0.29]} rotation={[0, 0.28, 0]}>
-        <planeGeometry args={[0.8, 4.18]} />
-        <meshBasicMaterial color="#000000" transparent opacity={0.18} depthWrite={false} />
+      <mesh position={[-0.18, 0, 0.27]} rotation={[0, 0.12, 0]}>
+        <planeGeometry args={[0.42, 4.16]} />
+        <meshBasicMaterial color="#1c1309" transparent opacity={0.16} depthWrite={false} />
       </mesh>
-      <mesh position={[0.34, 0, 0.29]} rotation={[0, -0.28, 0]}>
-        <planeGeometry args={[0.8, 4.18]} />
-        <meshBasicMaterial color="#000000" transparent opacity={0.18} depthWrite={false} />
+      <mesh position={[0.18, 0, 0.27]} rotation={[0, -0.12, 0]}>
+        <planeGeometry args={[0.42, 4.16]} />
+        <meshBasicMaterial color="#1c1309" transparent opacity={0.16} depthWrite={false} />
       </mesh>
       <mesh position={[0, 2.13, 0.28]}>
         <planeGeometry args={[6.1, 0.26]} />
-        <meshBasicMaterial color="#000000" transparent opacity={0.1} depthWrite={false} />
+        <meshBasicMaterial color="#2c1d0e" transparent opacity={0.08} depthWrite={false} />
       </mesh>
       <mesh position={[0, -2.13, 0.28]}>
         <planeGeometry args={[6.1, 0.26]} />
-        <meshBasicMaterial color="#000000" transparent opacity={0.13} depthWrite={false} />
+        <meshBasicMaterial color="#2c1d0e" transparent opacity={0.1} depthWrite={false} />
       </mesh>
     </group>
   )
@@ -559,7 +564,7 @@ function BookModel({ book }) {
   const rightPage = getPage(book, pageIndex + 1)
 
   return (
-    <group ref={groupRef} rotation={[-1.16, 0, 0.01]} position={[0, -0.08, 0]} scale={0.68}>
+    <group ref={groupRef} rotation={[-1.08, 0, 0.01]} position={[0, -0.1, 0]} scale={BOOK_SCALE}>
       <HardCover side="left" book={book} />
       <HardCover side="right" book={book} />
       <PageStack side="left" />
@@ -567,7 +572,7 @@ function BookModel({ book }) {
       <Spine book={book} />
       <CurrentPage side="left" book={book} page={leftPage} number={pageIndex + 1} />
       <CurrentPage side="right" book={book} page={rightPage} number={pageIndex + 2} />
-      <BookOcclusion />
+      <GutterFold />
       {turning ? (
         <TurningPage
           direction={turning}
