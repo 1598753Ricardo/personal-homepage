@@ -1,5 +1,6 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import * as THREE from 'three'
 
 const FALLBACK_PAGE = {
@@ -507,6 +508,7 @@ function CenteredCamera() {
     camera.position.set(0, 5.25, 6.55)
     camera.lookAt(0, 0, 0)
     camera.updateProjectionMatrix()
+    console.log('[Book3D] camera.position', camera.position.toArray())
   }, [camera])
 
   return null
@@ -522,6 +524,12 @@ function BookModel({ book }) {
     setPageIndex(0)
     setTurning(null)
   }, [book.id])
+
+  useEffect(() => {
+    if (!groupRef.current) return
+    console.log('[Book3D] book.group.position', groupRef.current.position.toArray())
+    console.log('[Book3D] book.group.scale', groupRef.current.scale.toArray())
+  }, [])
 
   useFrame((state) => {
     if (!groupRef.current) return
@@ -579,7 +587,7 @@ function BookModel({ book }) {
 export default function Book3D({ book, phase = 'open', onClose }) {
   if (!book) return null
 
-  return (
+  const stage = (
     <div className={`book3d-stage is-${phase}`}>
       {onClose ? (
         <button type="button" className="book3d-close" onClick={onClose}>
@@ -620,8 +628,11 @@ export default function Book3D({ book, phase = 'open', onClose }) {
 
       <style>{`
         .book3d-stage {
-          position: absolute;
-          inset: 0;
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100vw;
+          height: 100vh;
           z-index: 12;
           overflow: hidden;
           background:
@@ -630,8 +641,11 @@ export default function Book3D({ book, phase = 'open', onClose }) {
         }
 
         .book3d-canvas-wrap {
-          position: absolute;
-          inset: 0;
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100vw;
+          height: 100vh;
           transform-origin: center center;
           animation: book3dExtract 980ms cubic-bezier(.16,1,.3,1) both;
         }
@@ -700,4 +714,6 @@ export default function Book3D({ book, phase = 'open', onClose }) {
       `}</style>
     </div>
   )
+
+  return createPortal(stage, document.body)
 }

@@ -22612,7 +22612,7 @@ var require_react_dom_development = __commonJS({
           return root2;
         }
         var ReactVersion = "18.3.1";
-        function createPortal2(children, containerInfo, implementation) {
+        function createPortal3(children, containerInfo, implementation) {
           var key = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : null;
           {
             checkKeyStringCoercion(key);
@@ -23469,7 +23469,7 @@ var require_react_dom_development = __commonJS({
           if (!isValidContainer(container)) {
             throw new Error("Target container is not a DOM element.");
           }
-          return createPortal2(children, container, null, key);
+          return createPortal3(children, container, null, key);
         }
         function renderSubtreeIntoContainer(parentComponent, element, containerNode, callback) {
           return unstable_renderSubtreeIntoContainer(parentComponent, element, containerNode, callback);
@@ -39539,7 +39539,7 @@ var require_react_reconciler_development = __commonJS({
           return root;
         }
         var ReactVersion = "18.0.0-fc46dba67-20220329";
-        function createPortal2(children, containerInfo, implementation) {
+        function createPortal3(children, containerInfo, implementation) {
           var key = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : null;
           {
             checkKeyStringCoercion(key);
@@ -39966,7 +39966,7 @@ var require_react_reconciler_development = __commonJS({
         exports2.createContainer = createContainer;
         exports2.createHasPseudoClassSelector = createHasPseudoClassSelector;
         exports2.createHydrationContainer = createHydrationContainer;
-        exports2.createPortal = createPortal2;
+        exports2.createPortal = createPortal3;
         exports2.createRoleSelector = createRoleSelector;
         exports2.createTestNameSelector = createTestNameSelector;
         exports2.createTextSelector = createTextSelector;
@@ -89621,6 +89621,7 @@ var Canvas2 = /* @__PURE__ */ React14.forwardRef(function CanvasWrapper(props, r
 
 // src/components/Book3D.jsx
 var import_react4 = __toESM(require_react(), 1);
+var import_react_dom = __toESM(require_react_dom(), 1);
 var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
 var FALLBACK_PAGE = {
   title: "ARCHIVE PAGE",
@@ -90051,6 +90052,7 @@ function CenteredCamera() {
     camera.position.set(0, 5.25, 6.55);
     camera.lookAt(0, 0, 0);
     camera.updateProjectionMatrix();
+    console.log("[Book3D] camera.position", camera.position.toArray());
   }, [camera]);
   return null;
 }
@@ -90063,6 +90065,11 @@ function BookModel({ book }) {
     setPageIndex(0);
     setTurning(null);
   }, [book.id]);
+  (0, import_react4.useEffect)(() => {
+    if (!groupRef.current) return;
+    console.log("[Book3D] book.group.position", groupRef.current.position.toArray());
+    console.log("[Book3D] book.group.scale", groupRef.current.scale.toArray());
+  }, []);
   useFrame((state) => {
     if (!groupRef.current) return;
     groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.35) * 8e-3;
@@ -90111,7 +90118,7 @@ function BookModel({ book }) {
 }
 function Book3D({ book, phase = "open", onClose }) {
   if (!book) return null;
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: `book3d-stage is-${phase}`, children: [
+  const stage = /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: `book3d-stage is-${phase}`, children: [
     onClose ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("button", { type: "button", className: "book3d-close", onClick: onClose, children: "CLOSE BOOK" }) : null,
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "book3d-canvas-wrap", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
       Canvas2,
@@ -90150,8 +90157,11 @@ function Book3D({ book, phase = "open", onClose }) {
     ) }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("style", { children: `
         .book3d-stage {
-          position: absolute;
-          inset: 0;
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100vw;
+          height: 100vh;
           z-index: 12;
           overflow: hidden;
           background:
@@ -90160,8 +90170,11 @@ function Book3D({ book, phase = "open", onClose }) {
         }
 
         .book3d-canvas-wrap {
-          position: absolute;
-          inset: 0;
+          position: fixed;
+          left: 0;
+          top: 0;
+          width: 100vw;
+          height: 100vh;
           transform-origin: center center;
           animation: book3dExtract 980ms cubic-bezier(.16,1,.3,1) both;
         }
@@ -90229,6 +90242,7 @@ function Book3D({ book, phase = "open", onClose }) {
         }
       ` })
   ] });
+  return (0, import_react_dom.createPortal)(stage, document.body);
 }
 
 // src/components/Projects.jsx
