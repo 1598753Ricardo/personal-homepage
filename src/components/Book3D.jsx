@@ -395,18 +395,20 @@ function makeGutterFoldGeometry(width = 0.76, height = 4.2) {
 }
 
 const BOOK_SCALE = 0.66
+const PAGE_WIDTH = 3.05
+const PAGE_HEIGHT = 4.18
 
 function HardCover({ side, book }) {
   const direction = side === 'right' ? 1 : -1
-  const coverGeometry = useMemo(() => makeRoundedSlabGeometry(3.72, 4.88, 0.42, 0.18), [])
+  const coverGeometry = useMemo(() => makeRoundedSlabGeometry(3.86, 5.02, 0.46, 0.2), [])
   const liningGeometry = useMemo(() => makeRoundedSlabGeometry(3.42, 4.58, 0.055, 0.14), [])
 
   return (
-    <group position={[direction * 1.86, 0, -0.42]}>
+    <group position={[direction * 1.92, 0, -0.46]}>
       <mesh geometry={coverGeometry} castShadow receiveShadow>
         <meshPhysicalMaterial
           color={book.color || '#282014'}
-          roughness={0.64}
+          roughness={0.7}
           metalness={0.08}
           clearcoat={0.18}
           clearcoatRoughness={0.72}
@@ -416,9 +418,15 @@ function HardCover({ side, book }) {
         <meshPhysicalMaterial color="#504d36" roughness={0.78} metalness={0.03} clearcoat={0.08} />
       </mesh>
       <mesh position={[-direction * 1.78, 0, 0.06]} receiveShadow castShadow>
-        <boxGeometry args={[0.16, 4.64, 0.5]} />
+        <boxGeometry args={[0.18, 4.72, 0.56]} />
         <meshPhysicalMaterial color={book.color || '#21180d'} roughness={0.78} metalness={0.06} clearcoat={0.1} />
       </mesh>
+      {[-2.24, 2.24].map((y) => (
+        <mesh key={y} position={[0, y, 0.1]} receiveShadow castShadow>
+          <boxGeometry args={[3.48, 0.045, 0.12]} />
+          <meshPhysicalMaterial color="#171107" roughness={0.82} metalness={0.04} />
+        </mesh>
+      ))}
     </group>
   )
 }
@@ -440,6 +448,50 @@ function Spine({ book }) {
           <boxGeometry args={[0.045, 4.42, 0.22]} />
           <meshPhysicalMaterial color={book.accent || '#bda779'} roughness={0.66} metalness={0.12} />
         </mesh>
+      ))}
+      {[-1.55, -0.55, 0.55, 1.55].map(y => (
+        <mesh key={y} position={[0, y, 0.18]} receiveShadow castShadow>
+          <boxGeometry args={[0.5, 0.09, 0.2]} />
+          <meshPhysicalMaterial color="#1b1309" roughness={0.72} metalness={0.08} clearcoat={0.08} />
+        </mesh>
+      ))}
+    </group>
+  )
+}
+
+function PageCutLines({ side }) {
+  const direction = side === 'right' ? 1 : -1
+  const lines = useMemo(() => Array.from({ length: 22 }), [])
+
+  return (
+    <group>
+      {lines.map((_, index) => {
+        const y = -PAGE_HEIGHT / 2 + 0.2 + index * ((PAGE_HEIGHT - 0.4) / (lines.length - 1))
+        const z = -0.18 + (index % 5) * 0.012
+        return (
+          <mesh key={index} position={[direction * (PAGE_WIDTH + 0.075), y, z]} receiveShadow>
+            <boxGeometry args={[0.028, 0.012, 0.34]} />
+            <meshStandardMaterial color={index % 2 ? '#b8a98d' : '#e3d7be'} roughness={0.98} />
+          </mesh>
+        )
+      })}
+      {[-1, 1].map((edge) => (
+        <group key={edge}>
+          {Array.from({ length: 16 }).map((_, index) => (
+            <mesh
+              key={index}
+              position={[
+                direction * (1.7 + index * 0.085),
+                edge * (PAGE_HEIGHT / 2 + 0.02),
+                -0.2 + (index % 4) * 0.014,
+              ]}
+              receiveShadow
+            >
+              <boxGeometry args={[0.06, 0.012, 0.32]} />
+              <meshStandardMaterial color={index % 2 ? '#cabda1' : '#eadfc8'} roughness={0.98} />
+            </mesh>
+          ))}
+        </group>
       ))}
     </group>
   )
@@ -484,6 +536,7 @@ function PageStack({ side }) {
         <boxGeometry args={[0.16, 4.08, 0.46]} />
         <meshStandardMaterial color="#d6c7a9" roughness={0.96} />
       </mesh>
+      <PageCutLines side={side} />
     </group>
   )
 }
@@ -641,6 +694,10 @@ function GutterFold() {
       <mesh position={[0.2, 0, 0.1]} rotation={[0, -0.03, 0]}>
         <planeGeometry args={[0.42, 4.16, 12, 1]} />
         <meshBasicMaterial color="#2a1d10" transparent opacity={0.07} depthWrite={false} />
+      </mesh>
+      <mesh position={[0, 0, 0.205]}>
+        <planeGeometry args={[0.8, 4.1, 16, 1]} />
+        <meshBasicMaterial color="#120c06" transparent opacity={0.16} depthWrite={false} />
       </mesh>
       <mesh position={[0, 2.13, 0.28]}>
         <planeGeometry args={[6.1, 0.26]} />
