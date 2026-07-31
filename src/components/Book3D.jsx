@@ -47,8 +47,8 @@ function edgeNoise(u, v, side) {
   const seed = side === 'right' ? 1.7 : 3.1
   const outerWeight = Math.max(0, (u - 0.88) / 0.12)
   const topBottomWeight = Math.max(0, (Math.abs(v - 0.5) * 2 - 0.86) / 0.14)
-  const outer = (Math.sin(v * 91 + seed) + Math.sin(v * 37 + seed * 2.3)) * 0.006 * outerWeight
-  const vertical = Math.sign(v - 0.5) * (Math.sin(u * 73 + seed) * 0.007) * topBottomWeight
+  const outer = (Math.sin(v * 91 + seed) + Math.sin(v * 37 + seed * 2.3)) * 0.0022 * outerWeight
+  const vertical = Math.sign(v - 0.5) * (Math.sin(u * 73 + seed) * 0.0028) * topBottomWeight
 
   return { outer, vertical }
 }
@@ -402,7 +402,7 @@ function makeRoundedSlabGeometry(width, height, depth, radius = 0.16) {
   return geometry
 }
 
-function makeSpineGeometry(width = 0.82, height = 4.86, depth = 0.74) {
+function makeSpineGeometry(width = 0.62, height = 4.86, depth = 0.68) {
   const segments = 34
   const rows = 44
   const vertices = []
@@ -415,8 +415,8 @@ function makeSpineGeometry(width = 0.82, height = 4.86, depth = 0.74) {
     for (let x = 0; x <= segments; x += 1) {
       const t = x / segments
       const localX = (t - 0.5) * width
-      const arch = Math.cos((t - 0.5) * Math.PI) * 0.16
-      const groove = -Math.exp(-Math.pow((t - 0.5) * 7, 2)) * 0.08
+      const arch = Math.cos((t - 0.5) * Math.PI) * 0.11
+      const groove = -Math.exp(-Math.pow((t - 0.5) * 7, 2)) * 0.045
       const z = -depth * 0.34 + arch + groove
       vertices.push(localX, localY, z)
     }
@@ -440,7 +440,7 @@ function makeSpineGeometry(width = 0.82, height = 4.86, depth = 0.74) {
   return geometry
 }
 
-function makeGutterFoldGeometry(width = 0.76, height = 4.2) {
+function makeGutterFoldGeometry(width = 0.56, height = 4.2) {
   const xSegments = 36
   const ySegments = 42
   const vertices = []
@@ -452,8 +452,8 @@ function makeGutterFoldGeometry(width = 0.76, height = 4.2) {
     for (let x = 0; x <= xSegments; x += 1) {
       const t = x / xSegments
       const localX = (t - 0.5) * width
-      const centerSink = -Math.exp(-Math.pow((t - 0.5) * 8, 2)) * 0.12
-      const shoulderLift = Math.pow(Math.abs(t - 0.5) * 2, 1.6) * 0.08
+      const centerSink = -Math.exp(-Math.pow((t - 0.5) * 8, 2)) * 0.075
+      const shoulderLift = Math.pow(Math.abs(t - 0.5) * 2, 1.6) * 0.045
       const endSoftness = -Math.pow(Math.abs(v - 0.5) * 2, 4) * 0.025
       vertices.push(localX, localY, 0.12 + centerSink + shoulderLift + endSoftness)
     }
@@ -485,6 +485,7 @@ function HardCover({ side, book }) {
   const direction = side === 'right' ? 1 : -1
   const coverGeometry = useMemo(() => makeRoundedSlabGeometry(3.86, 5.02, 0.46, 0.2), [])
   const liningGeometry = useMemo(() => makeRoundedSlabGeometry(3.42, 4.58, 0.055, 0.14), [])
+  const endpaperGeometry = useMemo(() => makeRoundedSlabGeometry(3.26, 4.42, 0.035, 0.12), [])
   const leatherMaterial = useLeatherMaterial(book)
   const hingeMaterial = useLeatherMaterial(book, 0.72)
 
@@ -493,6 +494,9 @@ function HardCover({ side, book }) {
       <mesh geometry={coverGeometry} material={leatherMaterial} castShadow receiveShadow />
       <mesh geometry={liningGeometry} position={[0, 0, 0.22]} receiveShadow>
         <meshPhysicalMaterial color="#4d4932" roughness={0.86} metalness={0.02} clearcoat={0.04} />
+      </mesh>
+      <mesh geometry={endpaperGeometry} position={[0, 0, 0.275]} receiveShadow>
+        <meshStandardMaterial color="#d7ceb8" roughness={0.96} metalness={0} />
       </mesh>
       <mesh position={[-direction * 1.78, 0, 0.06]} material={hingeMaterial} receiveShadow castShadow>
         <boxGeometry args={[0.18, 4.72, 0.56]} />
@@ -515,12 +519,12 @@ function Spine({ book }) {
   return (
     <group position={[0, 0, -0.3]}>
       <mesh position={[0, 0, -0.12]} material={deepLeatherMaterial} castShadow receiveShadow>
-        <boxGeometry args={[0.58, 4.92, 0.56]} />
+        <boxGeometry args={[0.44, 4.92, 0.5]} />
       </mesh>
       <mesh geometry={spineSurface} material={leatherMaterial} position={[0, 0, 0.16]} receiveShadow castShadow />
       {[-0.17, 0.17].map(x => (
-        <mesh key={x} position={[x * 1.55, 0, 0.03]} receiveShadow castShadow>
-          <boxGeometry args={[0.045, 4.42, 0.22]} />
+        <mesh key={x} position={[x * 1.2, 0, 0.02]} receiveShadow castShadow>
+          <boxGeometry args={[0.032, 4.42, 0.16]} />
           <meshPhysicalMaterial color={book.accent || '#bda779'} roughness={0.66} metalness={0.12} />
         </mesh>
       ))}
@@ -595,19 +599,19 @@ function PageStack({ side }) {
   const paperA = usePaperFiberMaterial('#efe4cf')
   const paperB = usePaperFiberMaterial('#e8dcc5')
   const geometry = useMemo(() => makeCurvedPageGeometry(side, 3.02, 4.12, {
-    gutter: 0.2,
-    crown: 0.055,
-    outerLift: 0.075,
-    outerSag: 0.035,
-    cornerCurl: 0.045,
+    gutter: 0.16,
+    crown: 0.04,
+    outerLift: 0.05,
+    outerSag: 0.022,
+    cornerCurl: 0.028,
     thickness: 0.018,
   }), [side])
   const edgeGeometry = useMemo(() => makePageEdgeGeometry(side, 'outer', 3.02, 4.12, 0.018, {
-    gutter: 0.2,
-    crown: 0.055,
-    outerLift: 0.075,
-    outerSag: 0.035,
-    cornerCurl: 0.045,
+    gutter: 0.16,
+    crown: 0.04,
+    outerLift: 0.05,
+    outerSag: 0.022,
+    cornerCurl: 0.028,
   }), [side])
   const edgeMaterial = usePaperEdgeMaterial()
 
@@ -636,11 +640,11 @@ function PageStack({ side }) {
 
 function CurrentPage({ side, book, page, number }) {
   const pageOptions = useMemo(() => ({
-    gutter: 0.24,
-    crown: 0.11,
-    outerLift: 0.12,
-    outerSag: side === 'right' ? 0.055 : 0.05,
-    cornerCurl: 0.085,
+    gutter: 0.18,
+    crown: 0.075,
+    outerLift: 0.075,
+    outerSag: side === 'right' ? 0.034 : 0.03,
+    cornerCurl: 0.05,
     thickness: 0.03,
   }), [side])
   const geometry = useMemo(() => makeCurvedPageGeometry(side, 3.05, 4.18, pageOptions), [side, pageOptions])
@@ -777,19 +781,19 @@ function GutterFold() {
   return (
     <group>
       <mesh geometry={foldGeometry} receiveShadow castShadow>
-        <meshStandardMaterial color="#3a2e1d" roughness={0.94} side={THREE.DoubleSide} />
+        <meshStandardMaterial color="#3b2a19" roughness={0.96} side={THREE.DoubleSide} />
       </mesh>
-      <mesh position={[-0.2, 0, 0.1]} rotation={[0, 0.03, 0]}>
-        <planeGeometry args={[0.42, 4.16, 12, 1]} />
-        <meshBasicMaterial color="#2a1d10" transparent opacity={0.07} depthWrite={false} />
+      <mesh position={[-0.16, 0, 0.095]} rotation={[0, 0.025, 0]}>
+        <planeGeometry args={[0.3, 4.08, 12, 1]} />
+        <meshBasicMaterial color="#3a2818" transparent opacity={0.055} depthWrite={false} />
       </mesh>
-      <mesh position={[0.2, 0, 0.1]} rotation={[0, -0.03, 0]}>
-        <planeGeometry args={[0.42, 4.16, 12, 1]} />
-        <meshBasicMaterial color="#2a1d10" transparent opacity={0.07} depthWrite={false} />
+      <mesh position={[0.16, 0, 0.095]} rotation={[0, -0.025, 0]}>
+        <planeGeometry args={[0.3, 4.08, 12, 1]} />
+        <meshBasicMaterial color="#3a2818" transparent opacity={0.055} depthWrite={false} />
       </mesh>
-      <mesh position={[0, 0, 0.205]}>
-        <planeGeometry args={[0.8, 4.1, 16, 1]} />
-        <meshBasicMaterial color="#120c06" transparent opacity={0.16} depthWrite={false} />
+      <mesh position={[0, 0, 0.18]}>
+        <planeGeometry args={[0.48, 4.04, 16, 1]} />
+        <meshBasicMaterial color="#20150b" transparent opacity={0.105} depthWrite={false} />
       </mesh>
       <mesh position={[0, 2.13, 0.28]}>
         <planeGeometry args={[6.1, 0.26]} />

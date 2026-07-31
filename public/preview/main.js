@@ -89662,8 +89662,8 @@ function edgeNoise(u2, v, side) {
   const seed = side === "right" ? 1.7 : 3.1;
   const outerWeight = Math.max(0, (u2 - 0.88) / 0.12);
   const topBottomWeight = Math.max(0, (Math.abs(v - 0.5) * 2 - 0.86) / 0.14);
-  const outer = (Math.sin(v * 91 + seed) + Math.sin(v * 37 + seed * 2.3)) * 6e-3 * outerWeight;
-  const vertical = Math.sign(v - 0.5) * (Math.sin(u2 * 73 + seed) * 7e-3) * topBottomWeight;
+  const outer = (Math.sin(v * 91 + seed) + Math.sin(v * 37 + seed * 2.3)) * 22e-4 * outerWeight;
+  const vertical = Math.sign(v - 0.5) * (Math.sin(u2 * 73 + seed) * 28e-4) * topBottomWeight;
   return { outer, vertical };
 }
 function makeCurvedPageGeometry(side = "right", width = 3.05, height = 4.18, options = {}) {
@@ -89970,7 +89970,7 @@ function makeRoundedSlabGeometry(width, height, depth, radius = 0.16) {
   geometry.computeVertexNormals();
   return geometry;
 }
-function makeSpineGeometry(width = 0.82, height = 4.86, depth = 0.74) {
+function makeSpineGeometry(width = 0.62, height = 4.86, depth = 0.68) {
   const segments = 34;
   const rows = 44;
   const vertices = [];
@@ -89981,8 +89981,8 @@ function makeSpineGeometry(width = 0.82, height = 4.86, depth = 0.74) {
     for (let x = 0; x <= segments; x += 1) {
       const t = x / segments;
       const localX = (t - 0.5) * width;
-      const arch = Math.cos((t - 0.5) * Math.PI) * 0.16;
-      const groove = -Math.exp(-Math.pow((t - 0.5) * 7, 2)) * 0.08;
+      const arch = Math.cos((t - 0.5) * Math.PI) * 0.11;
+      const groove = -Math.exp(-Math.pow((t - 0.5) * 7, 2)) * 0.045;
       const z = -depth * 0.34 + arch + groove;
       vertices.push(localX, localY, z);
     }
@@ -90003,7 +90003,7 @@ function makeSpineGeometry(width = 0.82, height = 4.86, depth = 0.74) {
   geometry.computeVertexNormals();
   return geometry;
 }
-function makeGutterFoldGeometry(width = 0.76, height = 4.2) {
+function makeGutterFoldGeometry(width = 0.56, height = 4.2) {
   const xSegments = 36;
   const ySegments = 42;
   const vertices = [];
@@ -90014,8 +90014,8 @@ function makeGutterFoldGeometry(width = 0.76, height = 4.2) {
     for (let x = 0; x <= xSegments; x += 1) {
       const t = x / xSegments;
       const localX = (t - 0.5) * width;
-      const centerSink = -Math.exp(-Math.pow((t - 0.5) * 8, 2)) * 0.12;
-      const shoulderLift = Math.pow(Math.abs(t - 0.5) * 2, 1.6) * 0.08;
+      const centerSink = -Math.exp(-Math.pow((t - 0.5) * 8, 2)) * 0.075;
+      const shoulderLift = Math.pow(Math.abs(t - 0.5) * 2, 1.6) * 0.045;
       const endSoftness = -Math.pow(Math.abs(v - 0.5) * 2, 4) * 0.025;
       vertices.push(localX, localY, 0.12 + centerSink + shoulderLift + endSoftness);
     }
@@ -90043,11 +90043,13 @@ function HardCover({ side, book }) {
   const direction = side === "right" ? 1 : -1;
   const coverGeometry = (0, import_react4.useMemo)(() => makeRoundedSlabGeometry(3.86, 5.02, 0.46, 0.2), []);
   const liningGeometry = (0, import_react4.useMemo)(() => makeRoundedSlabGeometry(3.42, 4.58, 0.055, 0.14), []);
+  const endpaperGeometry = (0, import_react4.useMemo)(() => makeRoundedSlabGeometry(3.26, 4.42, 0.035, 0.12), []);
   const leatherMaterial = useLeatherMaterial(book);
   const hingeMaterial = useLeatherMaterial(book, 0.72);
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { position: [direction * 1.92, 0, -0.46], children: [
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: coverGeometry, material: leatherMaterial, castShadow: true, receiveShadow: true }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: liningGeometry, position: [0, 0, 0.22], receiveShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshPhysicalMaterial", { color: "#4d4932", roughness: 0.86, metalness: 0.02, clearcoat: 0.04 }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: endpaperGeometry, position: [0, 0, 0.275], receiveShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshStandardMaterial", { color: "#d7ceb8", roughness: 0.96, metalness: 0 }) }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { position: [-direction * 1.78, 0, 0.06], material: hingeMaterial, receiveShadow: true, castShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.18, 4.72, 0.56] }) }),
     [-2.24, 2.24].map((y) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [0, y, 0.1], receiveShadow: true, castShadow: true, children: [
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [3.48, 0.045, 0.12] }),
@@ -90060,10 +90062,10 @@ function Spine({ book }) {
   const leatherMaterial = useLeatherMaterial(book, 0.78);
   const deepLeatherMaterial = useLeatherMaterial(book, 0.55);
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { position: [0, 0, -0.3], children: [
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { position: [0, 0, -0.12], material: deepLeatherMaterial, castShadow: true, receiveShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.58, 4.92, 0.56] }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { position: [0, 0, -0.12], material: deepLeatherMaterial, castShadow: true, receiveShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.44, 4.92, 0.5] }) }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: spineSurface, material: leatherMaterial, position: [0, 0, 0.16], receiveShadow: true, castShadow: true }),
-    [-0.17, 0.17].map((x) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [x * 1.55, 0, 0.03], receiveShadow: true, castShadow: true, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.045, 4.42, 0.22] }),
+    [-0.17, 0.17].map((x) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [x * 1.2, 0, 0.02], receiveShadow: true, castShadow: true, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.032, 4.42, 0.16] }),
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshPhysicalMaterial", { color: book.accent || "#bda779", roughness: 0.66, metalness: 0.12 })
     ] }, x)),
     [-1.55, -0.55, 0.55, 1.55].map((y) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [0, y, 0.18], receiveShadow: true, castShadow: true, children: [
@@ -90121,19 +90123,19 @@ function PageStack({ side }) {
   const paperA = usePaperFiberMaterial("#efe4cf");
   const paperB = usePaperFiberMaterial("#e8dcc5");
   const geometry = (0, import_react4.useMemo)(() => makeCurvedPageGeometry(side, 3.02, 4.12, {
-    gutter: 0.2,
-    crown: 0.055,
-    outerLift: 0.075,
-    outerSag: 0.035,
-    cornerCurl: 0.045,
+    gutter: 0.16,
+    crown: 0.04,
+    outerLift: 0.05,
+    outerSag: 0.022,
+    cornerCurl: 0.028,
     thickness: 0.018
   }), [side]);
   const edgeGeometry = (0, import_react4.useMemo)(() => makePageEdgeGeometry(side, "outer", 3.02, 4.12, 0.018, {
-    gutter: 0.2,
-    crown: 0.055,
-    outerLift: 0.075,
-    outerSag: 0.035,
-    cornerCurl: 0.045
+    gutter: 0.16,
+    crown: 0.04,
+    outerLift: 0.05,
+    outerSag: 0.022,
+    cornerCurl: 0.028
   }), [side]);
   const edgeMaterial = usePaperEdgeMaterial();
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { position: [0, 0, -0.09], children: [
@@ -90156,11 +90158,11 @@ function PageStack({ side }) {
 }
 function CurrentPage({ side, book, page, number }) {
   const pageOptions = (0, import_react4.useMemo)(() => ({
-    gutter: 0.24,
-    crown: 0.11,
-    outerLift: 0.12,
-    outerSag: side === "right" ? 0.055 : 0.05,
-    cornerCurl: 0.085,
+    gutter: 0.18,
+    crown: 0.075,
+    outerLift: 0.075,
+    outerSag: side === "right" ? 0.034 : 0.03,
+    cornerCurl: 0.05,
     thickness: 0.03
   }), [side]);
   const geometry = (0, import_react4.useMemo)(() => makeCurvedPageGeometry(side, 3.05, 4.18, pageOptions), [side, pageOptions]);
@@ -90277,18 +90279,18 @@ function EdgeHitbox({ side, onClick }) {
 function GutterFold() {
   const foldGeometry = (0, import_react4.useMemo)(() => makeGutterFoldGeometry(), []);
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: foldGeometry, receiveShadow: true, castShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshStandardMaterial", { color: "#3a2e1d", roughness: 0.94, side: DoubleSide }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [-0.2, 0, 0.1], rotation: [0, 0.03, 0], children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [0.42, 4.16, 12, 1] }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshBasicMaterial", { color: "#2a1d10", transparent: true, opacity: 0.07, depthWrite: false })
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: foldGeometry, receiveShadow: true, castShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshStandardMaterial", { color: "#3b2a19", roughness: 0.96, side: DoubleSide }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [-0.16, 0, 0.095], rotation: [0, 0.025, 0], children: [
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [0.3, 4.08, 12, 1] }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshBasicMaterial", { color: "#3a2818", transparent: true, opacity: 0.055, depthWrite: false })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [0.2, 0, 0.1], rotation: [0, -0.03, 0], children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [0.42, 4.16, 12, 1] }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshBasicMaterial", { color: "#2a1d10", transparent: true, opacity: 0.07, depthWrite: false })
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [0.16, 0, 0.095], rotation: [0, -0.025, 0], children: [
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [0.3, 4.08, 12, 1] }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshBasicMaterial", { color: "#3a2818", transparent: true, opacity: 0.055, depthWrite: false })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [0, 0, 0.205], children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [0.8, 4.1, 16, 1] }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshBasicMaterial", { color: "#120c06", transparent: true, opacity: 0.16, depthWrite: false })
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [0, 0, 0.18], children: [
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [0.48, 4.04, 16, 1] }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshBasicMaterial", { color: "#20150b", transparent: true, opacity: 0.105, depthWrite: false })
     ] }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [0, 2.13, 0.28], children: [
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [6.1, 0.26] }),
