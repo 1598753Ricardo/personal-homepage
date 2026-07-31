@@ -89658,6 +89658,14 @@ function pageZ(u2, v, options = {}) {
   const dynamicCurl = turnCurl * Math.sin(u2 * Math.PI) * (0.45 + sideEdges * 0.55);
   return gutterDrop + pageBelly + outsideLift + outsideDrop + curledCorners + dynamicCurl;
 }
+function edgeNoise(u2, v, side) {
+  const seed = side === "right" ? 1.7 : 3.1;
+  const outerWeight = Math.max(0, (u2 - 0.88) / 0.12);
+  const topBottomWeight = Math.max(0, (Math.abs(v - 0.5) * 2 - 0.86) / 0.14);
+  const outer = (Math.sin(v * 91 + seed) + Math.sin(v * 37 + seed * 2.3)) * 6e-3 * outerWeight;
+  const vertical = Math.sign(v - 0.5) * (Math.sin(u2 * 73 + seed) * 7e-3) * topBottomWeight;
+  return { outer, vertical };
+}
 function makeCurvedPageGeometry(side = "right", width = 3.05, height = 4.18, options = {}) {
   const xSegments = 72;
   const ySegments = 46;
@@ -89673,10 +89681,11 @@ function makeCurvedPageGeometry(side = "right", width = 3.05, height = 4.18, opt
       const localY = (v - 0.5) * height;
       for (let x = 0; x <= xSegments; x += 1) {
         const u2 = x / xSegments;
-        const pageX = direction * u2 * width;
+        const noise = edgeNoise(u2, v, side);
+        const pageX = direction * (u2 * width + noise.outer);
         const crownPinch = Math.pow(Math.sin(u2 * Math.PI), 2) * Math.pow(Math.abs(v - 0.5) * 2, 2) * 0.018;
         const z = pageZ(u2, v, options) - (isBottom ? thickness : 0) - crownPinch;
-        vertices.push(pageX, localY, z);
+        vertices.push(pageX, localY + noise.vertical, z);
         uvs.push(side === "right" ? u2 : 1 - u2, 1 - v);
       }
     }
@@ -89870,6 +89879,71 @@ function usePaperEdgeMaterial() {
     metalness: 0
   }), []);
 }
+function makeNoiseTexture(kind = "paper") {
+  const canvas = document.createElement("canvas");
+  canvas.width = 256;
+  canvas.height = 256;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = kind === "leather" ? "#2a2115" : "#e9ddc5";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  for (let y = 0; y < canvas.height; y += 1) {
+    for (let x = 0; x < canvas.width; x += 1) {
+      const value = Math.sin(x * 0.17 + y * 0.09) * 12 + Math.sin((x + y) * 0.045) * 18;
+      const alpha = kind === "leather" ? 0.12 : 0.08;
+      ctx.fillStyle = `rgba(${kind === "leather" ? "255,230,185" : "70,48,24"},${Math.abs(value) / 255 * alpha})`;
+      ctx.fillRect(x, y, 1, 1);
+    }
+  }
+  if (kind === "leather") {
+    ctx.strokeStyle = "rgba(224,178,102,0.12)";
+    for (let i2 = 0; i2 < 34; i2 += 1) {
+      ctx.beginPath();
+      const y = i2 * 8 + Math.sin(i2) * 4;
+      ctx.moveTo(0, y);
+      ctx.bezierCurveTo(70, y + 16, 160, y - 10, 256, y + 8);
+      ctx.stroke();
+    }
+  } else {
+    ctx.strokeStyle = "rgba(96,68,34,0.08)";
+    for (let y = 12; y < 256; y += 13) {
+      ctx.beginPath();
+      ctx.moveTo(0, y + Math.sin(y) * 2);
+      ctx.lineTo(256, y + Math.cos(y) * 2);
+      ctx.stroke();
+    }
+  }
+  const texture = new CanvasTexture(canvas);
+  texture.colorSpace = SRGBColorSpace;
+  texture.wrapS = RepeatWrapping;
+  texture.wrapT = RepeatWrapping;
+  texture.repeat.set(kind === "leather" ? 3.2 : 2.4, kind === "leather" ? 4.4 : 3.4);
+  return texture;
+}
+function useLeatherMaterial(book, tone = 1) {
+  return (0, import_react4.useMemo)(() => {
+    const texture = makeNoiseTexture("leather");
+    return new MeshPhysicalMaterial({
+      map: texture,
+      color: book.color || (tone > 0.9 ? "#2a2415" : "#1c1409"),
+      roughness: 0.84,
+      metalness: 0.04,
+      clearcoat: 0.06,
+      clearcoatRoughness: 0.88
+    });
+  }, [book, tone]);
+}
+function usePaperFiberMaterial(color = "#efe3cc") {
+  return (0, import_react4.useMemo)(() => {
+    const texture = makeNoiseTexture("paper");
+    return new MeshStandardMaterial({
+      map: texture,
+      color,
+      roughness: 0.98,
+      metalness: 0,
+      side: DoubleSide
+    });
+  }, [color]);
+}
 function makeRoundedSlabGeometry(width, height, depth, radius = 0.16) {
   const shape = new Shape();
   const x = -width / 2;
@@ -89969,22 +90043,12 @@ function HardCover({ side, book }) {
   const direction = side === "right" ? 1 : -1;
   const coverGeometry = (0, import_react4.useMemo)(() => makeRoundedSlabGeometry(3.86, 5.02, 0.46, 0.2), []);
   const liningGeometry = (0, import_react4.useMemo)(() => makeRoundedSlabGeometry(3.42, 4.58, 0.055, 0.14), []);
+  const leatherMaterial = useLeatherMaterial(book);
+  const hingeMaterial = useLeatherMaterial(book, 0.72);
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { position: [direction * 1.92, 0, -0.46], children: [
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: coverGeometry, castShadow: true, receiveShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-      "meshPhysicalMaterial",
-      {
-        color: book.color || "#282014",
-        roughness: 0.7,
-        metalness: 0.08,
-        clearcoat: 0.18,
-        clearcoatRoughness: 0.72
-      }
-    ) }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: liningGeometry, position: [0, 0, 0.22], receiveShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshPhysicalMaterial", { color: "#504d36", roughness: 0.78, metalness: 0.03, clearcoat: 0.08 }) }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [-direction * 1.78, 0, 0.06], receiveShadow: true, castShadow: true, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.18, 4.72, 0.56] }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshPhysicalMaterial", { color: book.color || "#21180d", roughness: 0.78, metalness: 0.06, clearcoat: 0.1 })
-    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: coverGeometry, material: leatherMaterial, castShadow: true, receiveShadow: true }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: liningGeometry, position: [0, 0, 0.22], receiveShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshPhysicalMaterial", { color: "#4d4932", roughness: 0.86, metalness: 0.02, clearcoat: 0.04 }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { position: [-direction * 1.78, 0, 0.06], material: hingeMaterial, receiveShadow: true, castShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.18, 4.72, 0.56] }) }),
     [-2.24, 2.24].map((y) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [0, y, 0.1], receiveShadow: true, castShadow: true, children: [
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [3.48, 0.045, 0.12] }),
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshPhysicalMaterial", { color: "#171107", roughness: 0.82, metalness: 0.04 })
@@ -89993,12 +90057,11 @@ function HardCover({ side, book }) {
 }
 function Spine({ book }) {
   const spineSurface = (0, import_react4.useMemo)(() => makeSpineGeometry(), []);
+  const leatherMaterial = useLeatherMaterial(book, 0.78);
+  const deepLeatherMaterial = useLeatherMaterial(book, 0.55);
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { position: [0, 0, -0.3], children: [
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [0, 0, -0.12], castShadow: true, receiveShadow: true, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.58, 4.92, 0.56] }),
-      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshPhysicalMaterial", { color: book.color || "#20190f", roughness: 0.74, metalness: 0.08, clearcoat: 0.12 })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: spineSurface, position: [0, 0, 0.16], receiveShadow: true, castShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshPhysicalMaterial", { color: "#2b2114", roughness: 0.84, metalness: 0.05, clearcoat: 0.08, side: DoubleSide }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { position: [0, 0, -0.12], material: deepLeatherMaterial, castShadow: true, receiveShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.58, 4.92, 0.56] }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: spineSurface, material: leatherMaterial, position: [0, 0, 0.16], receiveShadow: true, castShadow: true }),
     [-0.17, 0.17].map((x) => /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [x * 1.55, 0, 0.03], receiveShadow: true, castShadow: true, children: [
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.045, 4.42, 0.22] }),
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshPhysicalMaterial", { color: book.accent || "#bda779", roughness: 0.66, metalness: 0.12 })
@@ -90039,9 +90102,24 @@ function PageCutLines({ side }) {
     )) }, edge))
   ] });
 }
+function PageContactShadows({ side }) {
+  const direction = side === "right" ? 1 : -1;
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [direction * 0.42, 0, 0.215], rotation: [0, direction * 0.04, 0], children: [
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [0.72, 4.08, 18, 1] }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshBasicMaterial", { color: "#1a1007", transparent: true, opacity: 0.13, depthWrite: false })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("mesh", { position: [direction * 2.86, 0, 0.08], rotation: [0, -direction * 0.06, 0], children: [
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("planeGeometry", { args: [0.42, 4.04, 14, 1] }),
+      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshBasicMaterial", { color: "#745932", transparent: true, opacity: 0.1, depthWrite: false })
+    ] })
+  ] });
+}
 function PageStack({ side }) {
   const direction = side === "right" ? 1 : -1;
   const sheets = (0, import_react4.useMemo)(() => Array.from({ length: 34 }), []);
+  const paperA = usePaperFiberMaterial("#efe4cf");
+  const paperB = usePaperFiberMaterial("#e8dcc5");
   const geometry = (0, import_react4.useMemo)(() => makeCurvedPageGeometry(side, 3.02, 4.12, {
     gutter: 0.2,
     crown: 0.055,
@@ -90064,7 +90142,7 @@ function PageStack({ side }) {
       const yOffset = Math.sin(index * 1.7) * 3e-3;
       const xOffset = direction * Math.sin(index * 0.9) * 4e-3;
       return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { position: [xOffset, yOffset, z], children: [
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry, receiveShadow: true, castShadow: index % 11 === 0, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshStandardMaterial", { color: index % 2 ? "#eadfc8" : "#f1e7d3", roughness: 0.94 }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry, material: index % 2 ? paperB : paperA, receiveShadow: true, castShadow: index % 11 === 0 }),
         /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: edgeGeometry, material: edgeMaterial, receiveShadow: true, position: [0, 0, -2e-3] })
       ] }, index);
     }),
@@ -90072,7 +90150,8 @@ function PageStack({ side }) {
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("boxGeometry", { args: [0.16, 4.08, 0.46] }),
       /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshStandardMaterial", { color: "#d6c7a9", roughness: 0.96 })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PageCutLines, { side })
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PageCutLines, { side }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PageContactShadows, { side })
   ] });
 }
 function CurrentPage({ side, book, page, number }) {
@@ -90095,9 +90174,10 @@ function CurrentPage({ side, book, page, number }) {
   const bottomEdge = (0, import_react4.useMemo)(() => makePageEdgeGeometry(side, "bottom", 3.05, 4.18, 0.024, pageOptions), [side, pageOptions]);
   const material = usePageMaterial(book, page, number, side);
   const edgeMaterial = usePaperEdgeMaterial();
+  const undersideMaterial = usePaperFiberMaterial("#d5c8af");
   return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { position: [0, 0, 0.19], children: [
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry, material, castShadow: true, receiveShadow: true }),
-    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: undersideGeometry, position: [0, 0, -0.032], receiveShadow: true, children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("meshStandardMaterial", { color: "#d5c8af", roughness: 0.96, side: DoubleSide }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: undersideGeometry, material: undersideMaterial, position: [0, 0, -0.032], receiveShadow: true }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: outerEdge, material: edgeMaterial, receiveShadow: true, castShadow: true }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: topEdge, material: edgeMaterial, receiveShadow: true }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("mesh", { geometry: bottomEdge, material: edgeMaterial, receiveShadow: true })
