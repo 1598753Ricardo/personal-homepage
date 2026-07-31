@@ -88840,6 +88840,9 @@ function useStore() {
   if (!store) throw new Error("R3F: Hooks can only be used within the Canvas component!");
   return store;
 }
+function useThree(selector = (state) => state, equalityFn) {
+  return useStore()(selector, equalityFn);
+}
 function useFrame(callback, renderPriority = 0) {
   const store = useStore();
   const subscribe = store.getState().internal.subscribe;
@@ -90042,6 +90045,15 @@ function Desk() {
     ] }, index))
   ] });
 }
+function CenteredCamera() {
+  const { camera } = useThree();
+  (0, import_react4.useEffect)(() => {
+    camera.position.set(0, 5.25, 6.55);
+    camera.lookAt(0, 0, 0);
+    camera.updateProjectionMatrix();
+  }, [camera]);
+  return null;
+}
 function BookModel({ book }) {
   const [pageIndex, setPageIndex] = (0, import_react4.useState)(0);
   const [turning, setTurning] = (0, import_react4.useState)(null);
@@ -90113,6 +90125,7 @@ function Book3D({ book, phase = "open", onClose }) {
         },
         children: [
           /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("color", { attach: "background", args: ["#080604"] }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(CenteredCamera, {}),
           /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("ambientLight", { intensity: 0.32 }),
           /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
             "directionalLight",
@@ -90187,31 +90200,31 @@ function Book3D({ book, phase = "open", onClose }) {
         @keyframes book3dExtract {
           0% {
             opacity: 0;
-            transform: translate3d(0, 0, -220px) scale(0.86);
+            transform: scale(0.86);
           }
           64% {
             opacity: 1;
-            transform: translate3d(0, 0, 0) scale(0.94);
+            transform: scale(0.94);
           }
           100% {
             opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
+            transform: scale(1);
           }
         }
 
         @keyframes book3dSettle {
-          from { transform: translate3d(0, -8px, 0) scale(0.985); }
-          to { transform: translate3d(0, 0, 0) scale(1); }
+          from { transform: scale(0.985); }
+          to { transform: scale(1); }
         }
 
         @keyframes book3dReturn {
           from {
             opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
+            transform: scale(1);
           }
           to {
             opacity: 0;
-            transform: translate3d(0, 0, -220px) scale(0.86);
+            transform: scale(0.86);
           }
         }
       ` })
@@ -90385,7 +90398,7 @@ function Projects() {
               onPointerLeave: () => setHoveredId(null),
               onFocus: () => setHoveredId(book.id),
               onBlur: () => setHoveredId(null),
-              onClick: (event) => openBook(book, event),
+              onClick: () => openBook(book),
               children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("span", { className: "book-spine-face", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "book-year", children: book.year }),
                 /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { className: "book-name", children: book.title }),

@@ -1,4 +1,4 @@
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import * as THREE from 'three'
 
@@ -500,6 +500,18 @@ function Desk() {
   )
 }
 
+function CenteredCamera() {
+  const { camera } = useThree()
+
+  useEffect(() => {
+    camera.position.set(0, 5.25, 6.55)
+    camera.lookAt(0, 0, 0)
+    camera.updateProjectionMatrix()
+  }, [camera])
+
+  return null
+}
+
 function BookModel({ book }) {
   const [pageIndex, setPageIndex] = useState(0)
   const [turning, setTurning] = useState(null)
@@ -586,6 +598,7 @@ export default function Book3D({ book, phase = 'open', onClose }) {
           }}
         >
           <color attach="background" args={['#080604']} />
+          <CenteredCamera />
           <ambientLight intensity={0.32} />
           <directionalLight
             position={[-3.8, 6.4, 4.8]}
@@ -657,31 +670,31 @@ export default function Book3D({ book, phase = 'open', onClose }) {
         @keyframes book3dExtract {
           0% {
             opacity: 0;
-            transform: translate3d(0, 0, -220px) scale(0.86);
+            transform: scale(0.86);
           }
           64% {
             opacity: 1;
-            transform: translate3d(0, 0, 0) scale(0.94);
+            transform: scale(0.94);
           }
           100% {
             opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
+            transform: scale(1);
           }
         }
 
         @keyframes book3dSettle {
-          from { transform: translate3d(0, -8px, 0) scale(0.985); }
-          to { transform: translate3d(0, 0, 0) scale(1); }
+          from { transform: scale(0.985); }
+          to { transform: scale(1); }
         }
 
         @keyframes book3dReturn {
           from {
             opacity: 1;
-            transform: translate3d(0, 0, 0) scale(1);
+            transform: scale(1);
           }
           to {
             opacity: 0;
-            transform: translate3d(0, 0, -220px) scale(0.86);
+            transform: scale(0.86);
           }
         }
       `}</style>

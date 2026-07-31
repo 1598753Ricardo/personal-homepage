@@ -174,7 +174,7 @@ export default function Projects() {
                 onPointerLeave={() => setHoveredId(null)}
                 onFocus={() => setHoveredId(book.id)}
                 onBlur={() => setHoveredId(null)}
-                onClick={event => openBook(book, event)}
+                onClick={() => openBook(book)}
               >
                 <span className="book-spine-face">
                   <span className="book-year">{book.year}</span>
