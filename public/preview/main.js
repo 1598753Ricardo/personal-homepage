@@ -90190,8 +90190,8 @@ function Desk() {
 function CenteredCamera() {
   const { camera } = useThree();
   (0, import_react4.useEffect)(() => {
-    camera.position.set(0, 4.35, 10.4);
-    camera.lookAt(0, -0.22, 0);
+    camera.position.set(0, 5.1, 8.6);
+    camera.lookAt(0, 0.1, 0);
     camera.updateProjectionMatrix();
     console.log("[Book3D] camera.position", camera.position.toArray());
   }, [camera]);
@@ -90233,7 +90233,7 @@ function BookModel({ book }) {
   }
   const leftPage = getPage(book, pageIndex);
   const rightPage = getPage(book, pageIndex + 1);
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { ref: groupRef, rotation: [-1.08, 0, 0.01], position: [0, -0.1, 0], scale: BOOK_SCALE, children: [
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("group", { ref: groupRef, rotation: [-0.58, 0, 0.01], position: [0, -0.28, -0.18], scale: BOOK_SCALE, children: [
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(HardCover, { side: "left", book }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(HardCover, { side: "right", book }),
     /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(PageStack, { side: "left" }),

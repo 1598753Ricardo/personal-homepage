@@ -675,8 +675,8 @@ function CenteredCamera() {
   const { camera } = useThree()
 
   useEffect(() => {
-    camera.position.set(0, 4.35, 10.4)
-    camera.lookAt(0, -0.22, 0)
+    camera.position.set(0, 5.1, 8.6)
+    camera.lookAt(0, 0.1, 0)
     camera.updateProjectionMatrix()
     console.log('[Book3D] camera.position', camera.position.toArray())
   }, [camera])
@@ -729,7 +729,7 @@ function BookModel({ book }) {
   const rightPage = getPage(book, pageIndex + 1)
 
   return (
-    <group ref={groupRef} rotation={[-1.08, 0, 0.01]} position={[0, -0.1, 0]} scale={BOOK_SCALE}>
+    <group ref={groupRef} rotation={[-0.58, 0, 0.01]} position={[0, -0.28, -0.18]} scale={BOOK_SCALE}>
       <HardCover side="left" book={book} />
       <HardCover side="right" book={book} />
       <PageStack side="left" />
