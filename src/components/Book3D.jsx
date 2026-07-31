@@ -402,7 +402,7 @@ function makeRoundedSlabGeometry(width, height, depth, radius = 0.16) {
   return geometry
 }
 
-function makeSpineGeometry(width = 0.22, height = 4.86, depth = 0.42) {
+function makeSpineGeometry(width = 0.12, height = 4.86, depth = 0.34) {
   const segments = 34
   const rows = 44
   const vertices = []
@@ -415,8 +415,8 @@ function makeSpineGeometry(width = 0.22, height = 4.86, depth = 0.42) {
     for (let x = 0; x <= segments; x += 1) {
       const t = x / segments
       const localX = (t - 0.5) * width
-      const arch = Math.cos((t - 0.5) * Math.PI) * 0.055
-      const groove = -Math.exp(-Math.pow((t - 0.5) * 7, 2)) * 0.025
+      const arch = Math.cos((t - 0.5) * Math.PI) * 0.032
+      const groove = -Math.exp(-Math.pow((t - 0.5) * 7, 2)) * 0.016
       const z = -depth * 0.34 + arch + groove
       vertices.push(localX, localY, z)
     }
@@ -440,7 +440,7 @@ function makeSpineGeometry(width = 0.22, height = 4.86, depth = 0.42) {
   return geometry
 }
 
-function makeGutterFoldGeometry(width = 0.2, height = 4.2) {
+function makeGutterFoldGeometry(width = 0.1, height = 4.2) {
   const xSegments = 36
   const ySegments = 42
   const vertices = []
@@ -452,8 +452,8 @@ function makeGutterFoldGeometry(width = 0.2, height = 4.2) {
     for (let x = 0; x <= xSegments; x += 1) {
       const t = x / xSegments
       const localX = (t - 0.5) * width
-      const centerSink = -Math.exp(-Math.pow((t - 0.5) * 8, 2)) * 0.04
-      const shoulderLift = Math.pow(Math.abs(t - 0.5) * 2, 1.6) * 0.02
+      const centerSink = -Math.exp(-Math.pow((t - 0.5) * 8, 2)) * 0.026
+      const shoulderLift = Math.pow(Math.abs(t - 0.5) * 2, 1.6) * 0.012
       const endSoftness = -Math.pow(Math.abs(v - 0.5) * 2, 4) * 0.025
       vertices.push(localX, localY, 0.12 + centerSink + shoulderLift + endSoftness)
     }
@@ -520,7 +520,7 @@ function Spine({ book }) {
       <mesh geometry={spineSurface} material={leatherMaterial} position={[0, 0, 0.16]} receiveShadow castShadow />
       {[-1.55, -0.55, 0.55, 1.55].map(y => (
         <mesh key={y} position={[0, y, 0.12]} receiveShadow castShadow>
-          <boxGeometry args={[0.18, 0.045, 0.08]} />
+          <boxGeometry args={[0.09, 0.035, 0.055]} />
           <meshPhysicalMaterial color="#3a2a18" roughness={0.76} metalness={0.04} clearcoat={0.04} />
         </mesh>
       ))}
@@ -773,17 +773,17 @@ function GutterFold() {
       <mesh geometry={foldGeometry} position={[0, 0, -0.015]} receiveShadow castShadow>
         <meshStandardMaterial color="#4a3722" roughness={0.96} side={THREE.DoubleSide} />
       </mesh>
-      <mesh position={[-0.08, 0, 0.085]} rotation={[0, 0.015, 0]}>
-        <planeGeometry args={[0.12, 4.02, 12, 1]} />
-        <meshBasicMaterial color="#3a2818" transparent opacity={0.04} depthWrite={false} />
+      <mesh position={[-0.045, 0, 0.08]} rotation={[0, 0.01, 0]}>
+        <planeGeometry args={[0.07, 4.0, 12, 1]} />
+        <meshBasicMaterial color="#3a2818" transparent opacity={0.032} depthWrite={false} />
       </mesh>
-      <mesh position={[0.08, 0, 0.085]} rotation={[0, -0.015, 0]}>
-        <planeGeometry args={[0.12, 4.02, 12, 1]} />
-        <meshBasicMaterial color="#3a2818" transparent opacity={0.04} depthWrite={false} />
+      <mesh position={[0.045, 0, 0.08]} rotation={[0, -0.01, 0]}>
+        <planeGeometry args={[0.07, 4.0, 12, 1]} />
+        <meshBasicMaterial color="#3a2818" transparent opacity={0.032} depthWrite={false} />
       </mesh>
       <mesh position={[0, 0, 0.13]}>
-        <planeGeometry args={[0.16, 3.98, 16, 1]} />
-        <meshBasicMaterial color="#2a1b0f" transparent opacity={0.07} depthWrite={false} />
+        <planeGeometry args={[0.08, 3.96, 16, 1]} />
+        <meshBasicMaterial color="#2a1b0f" transparent opacity={0.055} depthWrite={false} />
       </mesh>
       <mesh position={[0, 2.13, 0.28]}>
         <planeGeometry args={[6.1, 0.26]} />
