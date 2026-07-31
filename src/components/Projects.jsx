@@ -110,7 +110,6 @@ export default function Projects() {
   const [hoveredId, setHoveredId] = useState(null)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('shelf')
-  const [bookOrigin, setBookOrigin] = useState({ x: 0, y: 0, scale: 0.08 })
   const [light, setLight] = useState({ x: 0, y: 0 })
 
   const activeBook = useMemo(() => books.find(book => book.id === activeId), [activeId])
@@ -124,16 +123,7 @@ export default function Projects() {
     })
   }
 
-  function openBook(book, event) {
-    const rect = event.currentTarget.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2 - window.innerWidth / 2
-    const centerY = rect.top + rect.height / 2 - window.innerHeight / 2
-
-    setBookOrigin({
-      x: Math.round(centerX),
-      y: Math.round(centerY),
-      scale: Math.max(0.06, Math.min(0.18, rect.width / 820)),
-    })
+  function openBook(book) {
     setActiveId(book.id)
     setPhase('opening')
     window.setTimeout(() => setPhase('open'), 980)
@@ -201,7 +191,6 @@ export default function Projects() {
         <Book3D
           book={activeBook}
           phase={phase}
-          origin={bookOrigin}
           onClose={closeBook}
         />
       ) : null}
