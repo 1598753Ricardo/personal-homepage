@@ -477,7 +477,7 @@ function makeGutterFoldGeometry(width = 0.1, height = 4.2) {
   return geometry
 }
 
-const BOOK_SCALE = 0.66
+const BOOK_SCALE = 0.99
 const PAGE_WIDTH = 3.05
 const PAGE_HEIGHT = 4.18
 

@@ -90036,7 +90036,7 @@ function makeGutterFoldGeometry(width = 0.1, height = 4.2) {
   geometry.computeVertexNormals();
   return geometry;
 }
-var BOOK_SCALE = 0.66;
+var BOOK_SCALE = 0.99;
 var PAGE_WIDTH = 3.05;
 var PAGE_HEIGHT = 4.18;
 function HardCover({ side, book }) {
