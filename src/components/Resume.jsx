@@ -16,8 +16,8 @@ export default function Resume() {
                   <stop offset="100%" stopColor="rgba(255,255,255,.62)" />
                 </linearGradient>
               </defs>
-              <path className="timeline-road-glow" d="M20 80 C8 72 26 63 40 60 C57 56 43 43 60 40 C74 37 68 21 80 20" />
-              <path className="timeline-road-line" d="M20 80 C8 72 26 63 40 60 C57 56 43 43 60 40 C74 37 68 21 80 20" />
+              <path className="timeline-road-glow" d="M14 86 C6 76 24 69 32 64 C48 55 38 48 50 44 C66 39 58 28 70 24 C80 20 77 12 88 10" />
+              <path className="timeline-road-line" d="M14 86 C6 76 24 69 32 64 C48 55 38 48 50 44 C66 39 58 28 70 24 C80 20 77 12 88 10" />
             </svg>
             {siteData.experience.items.map((item, i) => (
               <article key={item.title} className="glass timeline-card" tabIndex={0}>

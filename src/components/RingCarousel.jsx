@@ -70,8 +70,9 @@ function RingCard({
       onMouseLeave={() => onHover(null)}
       onFocus={() => onHover(card.id)}
       onBlur={() => onHover(null)}
-      onClick={() => {
-        console.log(card)
+      onClick={(event) => {
+        event.currentTarget.blur()
+        onHover(null)
         onSelect(card.id)
       }}
     >
@@ -97,10 +98,10 @@ export default function RingCarousel() {
   const [rotation, setRotation] = useState(0)
   const [hoveredId, setHoveredId] = useState(null)
   const [selectedId, setSelectedId] = useState(null)
+  const ringRef = useRef(null)
   const rotationRef = useRef(0)
   const lastFrameRef = useRef(null)
   const pausedRef = useRef(false)
-  const selectedIdRef = useRef(null)
 
   const selectedIndex = useMemo(
     () => orbitItems.findIndex(card => card.id === selectedId),
@@ -108,12 +109,8 @@ export default function RingCarousel() {
   )
 
   useEffect(() => {
-    pausedRef.current = hoveredId !== null
+    pausedRef.current = false
   }, [hoveredId])
-
-  useEffect(() => {
-    selectedIdRef.current = selectedId
-  }, [selectedId])
 
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -127,9 +124,9 @@ export default function RingCarousel() {
       const delta = time - lastFrameRef.current
       lastFrameRef.current = time
 
-      if (!pausedRef.current && selectedIdRef.current === null) {
+      if (!pausedRef.current) {
         rotationRef.current = rotationRef.current + delta * degreesPerMs
-        setRotation(rotationRef.current)
+        ringRef.current?.style.setProperty('--ring-rotation', `${rotationRef.current}deg`)
       }
 
       frameId = requestAnimationFrame(tick)
@@ -145,6 +142,13 @@ export default function RingCarousel() {
     const targetRotation = normalizeAngle(-selectedIndex * (FULL_TURN / orbitItems.length))
     rotationRef.current = targetRotation
     setRotation(targetRotation)
+    ringRef.current?.style.setProperty('--ring-rotation', `${targetRotation}deg`)
+
+    const clearSelection = window.setTimeout(() => {
+      setSelectedId(null)
+    }, 900)
+
+    return () => window.clearTimeout(clearSelection)
   }, [selectedIndex])
 
   return (
@@ -160,6 +164,7 @@ export default function RingCarousel() {
         </div>
 
         <div
+          ref={ringRef}
           className="orbit-ring"
           style={{ '--ring-rotation': `${rotation}deg` }}
         >

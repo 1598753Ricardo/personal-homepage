@@ -89,6 +89,11 @@ const siteData = {
         points: ['整理保险纠纷立案材料', '核对案件信息、归类证据材料', '参与基础文书准备和起诉状初稿撰写'],
       },
       {
+        time: '2026.07 - 2026.08',
+        title: '东方昆仑律所 · 实习',
+        points: ['围绕案件事实与争议焦点开展材料检索', '协助整理案件材料并完成归档', '参与基础法律文书撰写与文本校对'],
+      },
+      {
         time: '持续参与',
         title: '竞赛与社会实践',
         points: ['2届模拟政协大赛团队队长', '大学生新文科创新实践大赛团队负责人', '对接团委、镇政府等单位开展社会实践'],
@@ -120,7 +125,7 @@ const siteData = {
       },
     ],
     credentials: [
-      { title: '大学英语四级证书', slug: 'cet4', image: '/certificates/sample-certificate.png' },
+      { title: '大学英语六级证书', slug: 'cet6', image: '/certificates/sample-certificate.png' },
       { title: '助理会计师资格证', slug: 'accounting', image: '/certificates/sample-certificate.png' },
       { title: '涉外投资与法律风控微专业证书', slug: 'foreign-investment-law', image: '/certificates/sample-certificate.png' },
       { title: '红十字救护员证', slug: 'red-cross-first-aid', image: '/certificates/sample-certificate.png' },
