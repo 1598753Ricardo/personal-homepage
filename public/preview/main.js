@@ -1091,7 +1091,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useReducer(reducer, initialArg, init);
         }
-        function useRef8(initialValue) {
+        function useRef9(initialValue) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useRef(initialValue);
         }
@@ -1111,7 +1111,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useCallback(callback, deps);
         }
-        function useMemo7(create, deps) {
+        function useMemo8(create, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useMemo(create, deps);
         }
@@ -1883,9 +1883,9 @@ var require_react_development = __commonJS({
         exports.useImperativeHandle = useImperativeHandle;
         exports.useInsertionEffect = useInsertionEffect;
         exports.useLayoutEffect = useLayoutEffect4;
-        exports.useMemo = useMemo7;
+        exports.useMemo = useMemo8;
         exports.useReducer = useReducer;
-        exports.useRef = useRef8;
+        exports.useRef = useRef9;
         exports.useState = useState9;
         exports.useSyncExternalStore = useSyncExternalStore;
         exports.useTransition = useTransition;
@@ -27409,30 +27409,45 @@ var IMAGE_CARDS = {
   4: "/orbit-fund-intelligence.png",
   7: "/orbit-social-impact.png"
 };
-function getCardDepth(isMuted, isHovered, isSelected) {
-  const opacity = isMuted ? 0.28 : 0.94;
+function normalizeAngle(angle) {
+  return (angle % FULL_TURN + FULL_TURN) % FULL_TURN;
+}
+function distanceFromFront(angle) {
+  const normalized = normalizeAngle(angle);
+  return Math.min(normalized, FULL_TURN - normalized);
+}
+function getCardDepth(angle, isMuted, isHovered, isSelected) {
+  const distance = distanceFromFront(angle);
+  const frontness = 1 - Math.min(distance / 180, 1);
+  const baseOpacity = 0.32 + frontness * 0.68;
+  const opacity = isMuted ? 0.2 : baseOpacity;
+  const blur = isHovered || isSelected ? 0 : (1 - frontness) * 2.2;
   const scale = isSelected ? 1.35 : isHovered ? 1.15 : 1;
   const lift = isSelected ? 120 : isHovered ? 80 : 0;
   return {
     opacity,
-    transform: `translateZ(${lift}px) scale(${scale})`
+    filter: `blur(${blur.toFixed(2)}px)`,
+    transform: `translateZ(${lift}px) scale(${scale})`,
+    zIndex: Math.round(1e3 - distance)
   };
 }
 function RingCard({
   card,
   index,
   total,
+  rotation,
   hoveredId,
   selectedId,
   onHover,
   onSelect
 }) {
   const baseAngle = FULL_TURN / total * index;
+  const currentAngle = baseAngle + rotation;
   const isHovered = hoveredId === card.id;
   const isSelected = selectedId === card.id;
   const hasFocusCard = hoveredId !== null || selectedId !== null;
   const isMuted = hasFocusCard && !isHovered && !isSelected;
-  const depth = getCardDepth(isMuted, isHovered, isSelected);
+  const depth = getCardDepth(currentAngle, isMuted, isHovered, isSelected);
   const imageSrc = IMAGE_CARDS[card.id];
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
     "button",
@@ -27442,7 +27457,9 @@ function RingCard({
       style: {
         "--card-angle": `${baseAngle}deg`,
         "--card-opacity": depth.opacity,
-        "--card-transform": depth.transform
+        "--card-filter": depth.filter,
+        "--card-transform": depth.transform,
+        zIndex: depth.zIndex
       },
       onMouseEnter: () => onHover(card.id),
       onMouseLeave: () => onHover(null),
@@ -27465,15 +27482,49 @@ function RingCard({
   );
 }
 function RingCarousel() {
+  const [rotation, setRotation] = (0, import_react.useState)(0);
   const [hoveredId, setHoveredId] = (0, import_react.useState)(null);
   const [selectedId, setSelectedId] = (0, import_react.useState)(null);
+  const ringRef = (0, import_react.useRef)(null);
+  const rotationRef = (0, import_react.useRef)(0);
+  const lastFrameRef = (0, import_react.useRef)(null);
+  const pausedRef = (0, import_react.useRef)(false);
+  const selectedIndex = (0, import_react.useMemo)(
+    () => orbitItems_default.findIndex((card) => card.id === selectedId),
+    [selectedId]
+  );
   (0, import_react.useEffect)(() => {
-    if (selectedId === null) return void 0;
+    pausedRef.current = false;
+  }, [hoveredId]);
+  (0, import_react.useEffect)(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) return void 0;
+    let frameId;
+    const degreesPerMs = FULL_TURN / (ROTATION_SECONDS * 1e3);
+    const tick = (time) => {
+      if (lastFrameRef.current === null) lastFrameRef.current = time;
+      const delta = time - lastFrameRef.current;
+      lastFrameRef.current = time;
+      if (!pausedRef.current) {
+        rotationRef.current = rotationRef.current + delta * degreesPerMs;
+        ringRef.current?.style.setProperty("--ring-rotation", `${rotationRef.current}deg`);
+      }
+      frameId = requestAnimationFrame(tick);
+    };
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
+  }, []);
+  (0, import_react.useEffect)(() => {
+    if (selectedIndex < 0) return;
+    const targetRotation = normalizeAngle(-selectedIndex * (FULL_TURN / orbitItems_default.length));
+    rotationRef.current = targetRotation;
+    setRotation(targetRotation);
+    ringRef.current?.style.setProperty("--ring-rotation", `${targetRotation}deg`);
     const clearSelection = window.setTimeout(() => {
       setSelectedId(null);
     }, 900);
     return () => window.clearTimeout(clearSelection);
-  }, [selectedId]);
+  }, [selectedIndex]);
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
     "div",
     {
@@ -27488,19 +27539,28 @@ function RingCarousel() {
             } }),
             /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u6797" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "orbit-ring", children: orbitItems_default.map((card, index) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            RingCard,
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            "div",
             {
-              card,
-              index,
-              total: orbitItems_default.length,
-              hoveredId,
-              selectedId,
-              onHover: setHoveredId,
-              onSelect: setSelectedId
-            },
-            card.id
-          )) })
+              ref: ringRef,
+              className: "orbit-ring",
+              style: { "--ring-rotation": `${rotation}deg` },
+              children: orbitItems_default.map((card, index) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+                RingCard,
+                {
+                  card,
+                  index,
+                  total: orbitItems_default.length,
+                  rotation,
+                  hoveredId,
+                  selectedId,
+                  onHover: setHoveredId,
+                  onSelect: setSelectedId
+                },
+                card.id
+              ))
+            }
+          )
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("style", { children: `
         .orbit-ring-container {
@@ -27527,7 +27587,6 @@ function RingCarousel() {
           justify-content: center;
           transform-style: preserve-3d;
           transform: rotateZ(20deg) rotateY(-25deg);
-          contain: layout paint style;
         }
 
         .ring-world::before {
@@ -27581,7 +27640,6 @@ function RingCarousel() {
           -webkit-backdrop-filter: blur(18px);
           transform: translate(-50%, -50%) rotateY(25deg) rotateZ(-20deg);
           pointer-events: none;
-          backface-visibility: hidden;
         }
 
         .orbit-center img {
@@ -27604,15 +27662,8 @@ function RingCarousel() {
           width: var(--ring-size);
           height: var(--ring-size);
           transform-style: preserve-3d;
-          transform: rotateY(0deg);
-          animation: orbitSpin ${ROTATION_SECONDS}s linear infinite;
+          transform: rotateY(var(--ring-rotation));
           will-change: transform;
-          backface-visibility: hidden;
-        }
-
-        @keyframes orbitSpin {
-          from { transform: rotateY(0deg); }
-          to { transform: rotateY(360deg); }
         }
 
         .orbit-card {
@@ -27628,8 +27679,6 @@ function RingCarousel() {
           cursor: pointer;
           transform: translate(-50%, -50%) rotateY(var(--card-angle)) translateZ(var(--ring-radius));
           transform-style: preserve-3d;
-          backface-visibility: hidden;
-          contain: layout paint style;
         }
 
         .orbit-card-surface {
@@ -27646,18 +27695,21 @@ function RingCarousel() {
           background: rgba(255,255,255,0.05);
           box-shadow:
             inset 0 1px 0 rgba(255,255,255,0.12),
-            0 16px 36px rgba(0,0,0,0.28);
+            0 20px 54px rgba(0,0,0,0.34);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
           opacity: var(--card-opacity);
+          filter: var(--card-filter);
           transform: var(--card-transform);
           transform-style: preserve-3d;
           transition:
             opacity var(--dur-base) ease,
+            filter var(--dur-base) ease,
             border-color var(--dur-fast) ease,
             background var(--dur-fast) ease,
             box-shadow var(--dur-base) ease,
             transform var(--dur-base) var(--ease-out);
-          will-change: opacity, transform;
-          backface-visibility: hidden;
+          will-change: opacity, filter, transform;
         }
 
         .orbit-card-surface-image {
@@ -27771,7 +27823,6 @@ function RingCarousel() {
 
         @media (prefers-reduced-motion: reduce) {
           .orbit-ring {
-            animation: none;
             transform: rotateY(0deg);
           }
         }
@@ -28280,11 +28331,11 @@ function Projects() {
     });
     setPhase("extracting");
     setHoveredId(null);
-    openTimers.current.push(window.setTimeout(() => setPhase("opening"), 940));
+    openTimers.current.push(window.setTimeout(() => setPhase("opening"), 1760));
     openTimers.current.push(window.setTimeout(() => {
       setPhase("open");
       setExtractBook(null);
-    }, 1380));
+    }, 2180));
   }
   function closeBook() {
     openTimers.current.forEach((timer) => window.clearTimeout(timer));
@@ -28355,9 +28406,18 @@ function Projects() {
               "--book-accent": extractBook.accent
             },
             children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-book", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-year", children: extractBook.year }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-name", children: extractBook.title }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-index", children: String(extractBook.id).padStart(2, "0") })
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-spine", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-year", children: extractBook.year }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-name", children: extractBook.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-index", children: String(extractBook.id).padStart(2, "0") })
+              ] }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-spread", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-cover extract-cover-left", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: String(extractBook.id).padStart(2, "0") }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-paper extract-paper-left", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("strong", { children: extractBook.title }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-gutter" }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-paper extract-paper-right", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: extractBook.year }) }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-cover extract-cover-right", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("strong", { children: extractBook.title }) })
+              ] })
             ] })
           }
         ) : null,
@@ -28563,9 +28623,11 @@ function Projects() {
           content: '';
           position: absolute;
           inset: 0;
-          background: radial-gradient(circle at 50% 45%, rgba(230,202,145,0.16), transparent 34%);
+          background:
+            radial-gradient(circle at 50% 44%, rgba(230,202,145,0.18), transparent 34%),
+            rgba(4,3,2,0.28);
           opacity: 0;
-          animation: extractLight 940ms cubic-bezier(.16,1,.3,1) both;
+          animation: extractLight 2180ms cubic-bezier(.16,1,.3,1) both;
         }
 
         .extract-book {
@@ -28574,6 +28636,16 @@ function Projects() {
           top: var(--extract-y);
           width: var(--extract-w);
           height: var(--extract-h);
+          transform: translate(-50%, -50%);
+          transform-origin: center center;
+          transform-style: preserve-3d;
+          animation: extractBookFlight 2180ms cubic-bezier(.16,1,.3,1) both;
+          will-change: transform, width, height, opacity;
+        }
+
+        .extract-spine {
+          position: absolute;
+          inset: 0;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -28592,8 +28664,131 @@ function Projects() {
             0 28px 68px rgba(0,0,0,0.46);
           transform: translate(-50%, -50%);
           transform-origin: center center;
-          animation: extractBook 1380ms cubic-bezier(.16,1,.3,1) both;
-          will-change: transform, width, height, border-radius, opacity;
+          animation: extractSpineFade 2180ms ease both;
+        }
+
+        .extract-spread {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          width: min(82vw, 850px);
+          height: min(66vh, 560px);
+          opacity: 0;
+          transform: translate(-50%, -50%) scaleX(0.14) rotateY(-11deg);
+          transform-origin: center center;
+          transform-style: preserve-3d;
+          animation: extractSpreadBody 2180ms cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .extract-cover,
+        .extract-paper {
+          position: absolute;
+          top: 0;
+          width: 50%;
+          height: 100%;
+          overflow: hidden;
+          backface-visibility: hidden;
+          border: 1px solid rgba(255,255,255,0.12);
+          box-shadow: 0 24px 54px rgba(0,0,0,0.42);
+        }
+
+        .extract-cover {
+          z-index: 3;
+          color: #f6ead1;
+          background:
+            linear-gradient(90deg, rgba(255,255,255,0.16), transparent 22%, rgba(0,0,0,0.38)),
+            linear-gradient(180deg, var(--book-color), #15100b);
+        }
+
+        .extract-cover-left {
+          left: 0;
+          border-radius: 9px 2px 2px 9px;
+          transform-origin: right center;
+          animation: extractLeftCover 2180ms cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .extract-cover-right {
+          right: 0;
+          border-radius: 2px 9px 9px 2px;
+          transform-origin: left center;
+          animation: extractRightCover 2180ms cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .extract-cover-left span {
+          position: absolute;
+          left: 10%;
+          bottom: 8%;
+          color: rgba(244,232,204,0.62);
+          font-family: var(--font-mono);
+          font-size: 0.76rem;
+        }
+
+        .extract-cover-right strong {
+          position: absolute;
+          left: 12%;
+          right: 12%;
+          top: 16%;
+          color: var(--book-accent);
+          font-size: clamp(1.2rem, 3.2vw, 2.6rem);
+          font-weight: 650;
+          letter-spacing: 0.02em;
+          line-height: 1;
+        }
+
+        .extract-paper {
+          z-index: 2;
+          background:
+            linear-gradient(90deg, rgba(0,0,0,0.08), transparent 16%, transparent 84%, rgba(0,0,0,0.08)),
+            #f5efe2;
+          border-color: rgba(50,38,22,0.14);
+        }
+
+        .extract-paper-left {
+          left: 0;
+          border-radius: 7px 1px 1px 7px;
+          transform-origin: right center;
+          animation: extractLeftPaper 2180ms cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .extract-paper-right {
+          right: 0;
+          border-radius: 1px 7px 7px 1px;
+          transform-origin: left center;
+          animation: extractRightPaper 2180ms cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .extract-paper strong,
+        .extract-paper span {
+          position: absolute;
+          left: 12%;
+          top: 14%;
+          color: rgba(44,36,24,0.66);
+          font-family: var(--font-serif);
+          font-size: clamp(1rem, 2.6vw, 2rem);
+          font-weight: 500;
+          letter-spacing: 0;
+        }
+
+        .extract-paper span {
+          top: auto;
+          right: 12%;
+          bottom: 10%;
+          left: auto;
+          font-family: var(--font-mono);
+          font-size: 0.8rem;
+        }
+
+        .extract-gutter {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: calc(50% - 12px);
+          z-index: 4;
+          width: 24px;
+          background: linear-gradient(90deg, rgba(0,0,0,0.22), rgba(255,255,255,0.08), rgba(0,0,0,0.18));
+          opacity: 0;
+          filter: blur(0.2px);
+          animation: extractGutter 2180ms ease both;
         }
 
         .extract-name {
@@ -28615,31 +28810,77 @@ function Projects() {
 
         @keyframes extractLight {
           0% { opacity: 0; }
-          35% { opacity: 1; }
-          100% { opacity: 0.92; }
+          22% { opacity: 1; }
+          86% { opacity: 1; }
+          100% { opacity: 0; }
         }
 
-        @keyframes extractBook {
+        @keyframes extractBookFlight {
           0% {
             opacity: 1;
+            width: var(--extract-w);
+            height: var(--extract-h);
             transform: translate(-50%, -50%) translateY(0) translateZ(0) rotateY(0) scale(1);
           }
           22% {
+            width: var(--extract-w);
+            height: var(--extract-h);
             transform: translate(-50%, -50%) translateY(-22px) translateZ(90px) rotateY(-10deg) scale(1.08);
           }
-          62% {
+          48% {
             width: 188px;
             height: 276px;
-            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(49vh - var(--extract-y))) translateZ(420px) rotateZ(-3deg) rotateY(-18deg) scale(1.34);
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(49vh - var(--extract-y))) translateZ(420px) rotateZ(-3deg) rotateY(-12deg) scale(1.26);
+          }
+          78% {
+            width: min(82vw, 850px);
+            height: min(66vh, 560px);
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(480px) rotateZ(0deg) rotateY(0deg) scale(1);
           }
           100% {
             opacity: 0;
-            width: min(40vw, 310px);
-            height: min(56vh, 430px);
-            border-radius: 8px;
-            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(47vh - var(--extract-y))) translateZ(520px) rotateZ(0deg) rotateY(-82deg) scale(1.42);
+            width: min(82vw, 850px);
+            height: min(66vh, 560px);
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(480px) rotateZ(0deg) rotateY(0deg) scale(1.02);
           }
         }
+
+        @keyframes extractSpineFade {
+          0%, 42% { opacity: 1; transform: none; }
+          52%, 100% { opacity: 0; transform: scaleX(2.2); }
+        }
+
+        @keyframes extractSpreadBody {
+          0%, 42% { opacity: 0; transform: translate(-50%, -50%) scaleX(0.12) rotateY(-12deg); }
+          52% { opacity: 1; transform: translate(-50%, -50%) scaleX(0.34) rotateY(-8deg); }
+          78% { opacity: 1; transform: translate(-50%, -50%) scaleX(1) rotateY(0deg); }
+          100% { opacity: 0; transform: translate(-50%, -50%) scaleX(1.02) rotateY(0deg); }
+        }
+
+        @keyframes extractLeftCover {
+          0%, 54% { transform: rotateY(0deg); }
+          78%, 100% { transform: rotateY(-178deg); }
+        }
+
+        @keyframes extractRightCover {
+          0%, 54% { transform: rotateY(0deg); }
+          78%, 100% { transform: rotateY(178deg); }
+        }
+
+        @keyframes extractLeftPaper {
+          0%, 56% { transform: rotateY(0deg); }
+          80%, 100% { transform: rotateY(-4deg); }
+        }
+
+        @keyframes extractRightPaper {
+          0%, 56% { transform: rotateY(0deg); }
+          80%, 100% { transform: rotateY(4deg); }
+        }
+
+        @keyframes extractGutter {
+          0%, 54% { opacity: 0; }
+          72%, 100% { opacity: 1; }
+          }
 
         @media (max-width: 640px) {
           .project-library {
