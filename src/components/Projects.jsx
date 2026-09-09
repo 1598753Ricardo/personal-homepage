@@ -235,12 +235,12 @@ export default function Projects() {
               <span className="extract-name">{extractBook.title}</span>
               <span className="extract-index">{String(extractBook.id).padStart(2, '0')}</span>
             </div>
-            <div className="extract-cover-face">
-              <h2>{extractBook.title}</h2>
-              <p>PROJECT PHOTOBOOK</p>
-              {extractBook.image ? <figure><img src={extractBook.image} alt="" /></figure> : null}
-              <span>{extractBook.year} / {String(extractBook.id).padStart(2, '0')}</span>
-            </div>
+            <article className="book-page art-page cloth recto extract-cover-face" data-density="hard">
+              <h2 className="cover-title">{extractBook.title}</h2>
+              <p className="cover-subtitle">PROJECT PHOTOBOOK</p>
+              {extractBook.image ? <figure className="cover-plate"><img src={extractBook.image} alt="" /></figure> : null}
+              <span className="cover-foot">{extractBook.year} / {String(extractBook.id).padStart(2, '0')}</span>
+            </article>
           </div>
         </div>
       ) : null}
@@ -467,11 +467,15 @@ export default function Projects() {
           will-change: transform, width, height, opacity;
         }
 
-        .extract-spine,
-        .extract-cover-face {
+        .extract-spine {
           position: absolute;
           inset: 0;
           overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          padding: 18px 8px;
           color: #f6ead1;
           background:
             linear-gradient(90deg, rgba(255,255,255,0.16), transparent 22%, rgba(0,0,0,0.38)),
@@ -483,77 +487,21 @@ export default function Projects() {
             inset -12px 0 18px rgba(0,0,0,0.3),
             0 28px 68px rgba(0,0,0,0.46);
           backface-visibility: hidden;
-        }
-
-        .extract-spine {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: space-between;
-          padding: 18px 8px;
           border-radius: 5px 5px 2px 2px;
           animation: extractSpineToCover 1420ms ease both;
         }
 
         .extract-cover-face {
+          position: absolute;
+          inset: 0;
           opacity: 0;
           border-radius: 10px;
           transform: rotateY(82deg) scaleX(0.18);
           transform-origin: left center;
           animation: extractCoverFace 1420ms cubic-bezier(.16,1,.3,1) both;
+          backface-visibility: hidden;
+          box-shadow: 0 28px 68px rgba(0,0,0,0.46);
         }
-
-        .extract-cover-face h2 {
-          position: absolute;
-          left: 13.5%;
-          right: 10%;
-          top: 15%;
-          margin: 0;
-          color: #f2efdf;
-          font-family: var(--font-serif);
-          font-size: clamp(1.7rem, 4.8vw, 3.8rem);
-          font-weight: 400;
-          letter-spacing: 0;
-          line-height: 1.08;
-        }
-
-        .extract-cover-face p {
-          position: absolute;
-          left: 13.5%;
-          top: 33%;
-          margin: 0;
-          color: rgba(242,239,223,0.82);
-          font-family: var(--font-serif);
-          font-size: clamp(0.76rem, 1.35vw, 1.05rem);
-          letter-spacing: 0.025em;
-        }
-
-        .extract-cover-face figure {
-          position: absolute;
-          left: 13.5%;
-          bottom: 18%;
-          width: 52%;
-          margin: 0;
-          box-shadow: 0 1px 1px rgba(24,33,20,0.18);
-        }
-
-        .extract-cover-face img {
-          display: block;
-          width: 100%;
-          height: auto;
-          object-fit: contain;
-        }
-
-        .extract-cover-face > span {
-          position: absolute;
-          bottom: 7%;
-          left: 13.5%;
-          color: rgba(242,239,223,0.78);
-          font-family: var(--font-mono);
-          font-size: clamp(0.62rem, 1vw, 0.82rem);
-          letter-spacing: 0.13em;
-        }
-
         .extract-name {
           writing-mode: vertical-rl;
           transform: rotate(180deg);
@@ -656,4 +604,5 @@ export default function Projects() {
     </section>
   )
 }
+
 

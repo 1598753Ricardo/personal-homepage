@@ -99,7 +99,6 @@ export default function RingCarousel() {
   const [hoveredId, setHoveredId] = useState(null)
   const [selectedId, setSelectedId] = useState(null)
   const ringRef = useRef(null)
-  const animationRef = useRef(null)
   const rotationRef = useRef(0)
 
   const selectedIndex = useMemo(
@@ -112,25 +111,10 @@ export default function RingCarousel() {
     if (reduceMotion) return undefined
 
     const ring = ringRef.current
-    if (!ring) return undefined
-
-    const animation = ring.animate(
-      [
-        { transform: 'rotateY(0deg)' },
-        { transform: 'rotateY(360deg)' },
-      ],
-      {
-        duration: ROTATION_SECONDS * 1000,
-        iterations: Infinity,
-        easing: 'linear',
-      }
-    )
-
-    animationRef.current = animation
+    ring?.classList.add('is-spinning')
 
     return () => {
-      animation.cancel()
-      animationRef.current = null
+      ring?.classList.remove('is-spinning')
     }
   }, [])
 
@@ -141,9 +125,6 @@ export default function RingCarousel() {
     rotationRef.current = targetRotation
     setRotation(targetRotation)
     ringRef.current?.style.setProperty('--ring-rotation', `${targetRotation}deg`)
-    if (animationRef.current) {
-      animationRef.current.currentTime = (targetRotation / FULL_TURN) * ROTATION_SECONDS * 1000
-    }
 
     const clearSelection = window.setTimeout(() => {
       setSelectedId(null)
@@ -287,6 +268,15 @@ export default function RingCarousel() {
           transform-style: preserve-3d;
           transform: rotateY(var(--ring-rotation));
           will-change: transform;
+        }
+
+        .orbit-ring.is-spinning {
+          animation: ringRotate ${ROTATION_SECONDS}s linear infinite;
+        }
+
+        @keyframes ringRotate {
+          from { transform: rotateY(var(--ring-rotation)); }
+          to { transform: rotateY(calc(var(--ring-rotation) + 360deg)); }
         }
 
         .orbit-card {
@@ -446,6 +436,7 @@ export default function RingCarousel() {
 
         @media (prefers-reduced-motion: reduce) {
           .orbit-ring {
+            animation: none;
             transform: rotateY(0deg);
           }
         }

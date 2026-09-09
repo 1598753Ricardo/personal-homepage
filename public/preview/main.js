@@ -27486,7 +27486,6 @@ function RingCarousel() {
   const [hoveredId, setHoveredId] = (0, import_react.useState)(null);
   const [selectedId, setSelectedId] = (0, import_react.useState)(null);
   const ringRef = (0, import_react.useRef)(null);
-  const animationRef = (0, import_react.useRef)(null);
   const rotationRef = (0, import_react.useRef)(0);
   const selectedIndex = (0, import_react.useMemo)(
     () => orbitItems_default.findIndex((card) => card.id === selectedId),
@@ -27496,22 +27495,9 @@ function RingCarousel() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) return void 0;
     const ring = ringRef.current;
-    if (!ring) return void 0;
-    const animation = ring.animate(
-      [
-        { transform: "rotateY(0deg)" },
-        { transform: "rotateY(360deg)" }
-      ],
-      {
-        duration: ROTATION_SECONDS * 1e3,
-        iterations: Infinity,
-        easing: "linear"
-      }
-    );
-    animationRef.current = animation;
+    ring?.classList.add("is-spinning");
     return () => {
-      animation.cancel();
-      animationRef.current = null;
+      ring?.classList.remove("is-spinning");
     };
   }, []);
   (0, import_react.useEffect)(() => {
@@ -27520,9 +27506,6 @@ function RingCarousel() {
     rotationRef.current = targetRotation;
     setRotation(targetRotation);
     ringRef.current?.style.setProperty("--ring-rotation", `${targetRotation}deg`);
-    if (animationRef.current) {
-      animationRef.current.currentTime = targetRotation / FULL_TURN * ROTATION_SECONDS * 1e3;
-    }
     const clearSelection = window.setTimeout(() => {
       setSelectedId(null);
     }, 900);
@@ -27667,6 +27650,15 @@ function RingCarousel() {
           transform-style: preserve-3d;
           transform: rotateY(var(--ring-rotation));
           will-change: transform;
+        }
+
+        .orbit-ring.is-spinning {
+          animation: ringRotate ${ROTATION_SECONDS}s linear infinite;
+        }
+
+        @keyframes ringRotate {
+          from { transform: rotateY(var(--ring-rotation)); }
+          to { transform: rotateY(calc(var(--ring-rotation) + 360deg)); }
         }
 
         .orbit-card {
@@ -27826,6 +27818,7 @@ function RingCarousel() {
 
         @media (prefers-reduced-motion: reduce) {
           .orbit-ring {
+            animation: none;
             transform: rotateY(0deg);
           }
         }
@@ -28414,11 +28407,11 @@ function Projects() {
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-name", children: extractBook.title }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-index", children: String(extractBook.id).padStart(2, "0") })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-cover-face", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h2", { children: extractBook.title }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { children: "PROJECT PHOTOBOOK" }),
-                extractBook.image ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("figure", { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("img", { src: extractBook.image, alt: "" }) }) : null,
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("article", { className: "book-page art-page cloth recto extract-cover-face", "data-density": "hard", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h2", { className: "cover-title", children: extractBook.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "cover-subtitle", children: "PROJECT PHOTOBOOK" }),
+                extractBook.image ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("figure", { className: "cover-plate", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("img", { src: extractBook.image, alt: "" }) }) : null,
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "cover-foot", children: [
                   extractBook.year,
                   " / ",
                   String(extractBook.id).padStart(2, "0")
@@ -28649,11 +28642,15 @@ function Projects() {
           will-change: transform, width, height, opacity;
         }
 
-        .extract-spine,
-        .extract-cover-face {
+        .extract-spine {
           position: absolute;
           inset: 0;
           overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          padding: 18px 8px;
           color: #f6ead1;
           background:
             linear-gradient(90deg, rgba(255,255,255,0.16), transparent 22%, rgba(0,0,0,0.38)),
@@ -28665,77 +28662,21 @@ function Projects() {
             inset -12px 0 18px rgba(0,0,0,0.3),
             0 28px 68px rgba(0,0,0,0.46);
           backface-visibility: hidden;
-        }
-
-        .extract-spine {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: space-between;
-          padding: 18px 8px;
           border-radius: 5px 5px 2px 2px;
           animation: extractSpineToCover 1420ms ease both;
         }
 
         .extract-cover-face {
+          position: absolute;
+          inset: 0;
           opacity: 0;
           border-radius: 10px;
           transform: rotateY(82deg) scaleX(0.18);
           transform-origin: left center;
           animation: extractCoverFace 1420ms cubic-bezier(.16,1,.3,1) both;
+          backface-visibility: hidden;
+          box-shadow: 0 28px 68px rgba(0,0,0,0.46);
         }
-
-        .extract-cover-face h2 {
-          position: absolute;
-          left: 13.5%;
-          right: 10%;
-          top: 15%;
-          margin: 0;
-          color: #f2efdf;
-          font-family: var(--font-serif);
-          font-size: clamp(1.7rem, 4.8vw, 3.8rem);
-          font-weight: 400;
-          letter-spacing: 0;
-          line-height: 1.08;
-        }
-
-        .extract-cover-face p {
-          position: absolute;
-          left: 13.5%;
-          top: 33%;
-          margin: 0;
-          color: rgba(242,239,223,0.82);
-          font-family: var(--font-serif);
-          font-size: clamp(0.76rem, 1.35vw, 1.05rem);
-          letter-spacing: 0.025em;
-        }
-
-        .extract-cover-face figure {
-          position: absolute;
-          left: 13.5%;
-          bottom: 18%;
-          width: 52%;
-          margin: 0;
-          box-shadow: 0 1px 1px rgba(24,33,20,0.18);
-        }
-
-        .extract-cover-face img {
-          display: block;
-          width: 100%;
-          height: auto;
-          object-fit: contain;
-        }
-
-        .extract-cover-face > span {
-          position: absolute;
-          bottom: 7%;
-          left: 13.5%;
-          color: rgba(242,239,223,0.78);
-          font-family: var(--font-mono);
-          font-size: clamp(0.62rem, 1vw, 0.82rem);
-          letter-spacing: 0.13em;
-        }
-
         .extract-name {
           writing-mode: vertical-rl;
           transform: rotate(180deg);
