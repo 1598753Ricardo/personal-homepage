@@ -27486,33 +27486,33 @@ function RingCarousel() {
   const [hoveredId, setHoveredId] = (0, import_react.useState)(null);
   const [selectedId, setSelectedId] = (0, import_react.useState)(null);
   const ringRef = (0, import_react.useRef)(null);
+  const animationRef = (0, import_react.useRef)(null);
   const rotationRef = (0, import_react.useRef)(0);
-  const lastFrameRef = (0, import_react.useRef)(null);
-  const pausedRef = (0, import_react.useRef)(false);
   const selectedIndex = (0, import_react.useMemo)(
     () => orbitItems_default.findIndex((card) => card.id === selectedId),
     [selectedId]
   );
   (0, import_react.useEffect)(() => {
-    pausedRef.current = false;
-  }, [hoveredId]);
-  (0, import_react.useEffect)(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) return void 0;
-    let frameId;
-    const degreesPerMs = FULL_TURN / (ROTATION_SECONDS * 1e3);
-    const tick = (time) => {
-      if (lastFrameRef.current === null) lastFrameRef.current = time;
-      const delta = time - lastFrameRef.current;
-      lastFrameRef.current = time;
-      if (!pausedRef.current) {
-        rotationRef.current = rotationRef.current + delta * degreesPerMs;
-        ringRef.current?.style.setProperty("--ring-rotation", `${rotationRef.current}deg`);
+    const ring = ringRef.current;
+    if (!ring) return void 0;
+    const animation = ring.animate(
+      [
+        { transform: "rotateY(0deg)" },
+        { transform: "rotateY(360deg)" }
+      ],
+      {
+        duration: ROTATION_SECONDS * 1e3,
+        iterations: Infinity,
+        easing: "linear"
       }
-      frameId = requestAnimationFrame(tick);
+    );
+    animationRef.current = animation;
+    return () => {
+      animation.cancel();
+      animationRef.current = null;
     };
-    frameId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frameId);
   }, []);
   (0, import_react.useEffect)(() => {
     if (selectedIndex < 0) return;
@@ -27520,6 +27520,9 @@ function RingCarousel() {
     rotationRef.current = targetRotation;
     setRotation(targetRotation);
     ringRef.current?.style.setProperty("--ring-rotation", `${targetRotation}deg`);
+    if (animationRef.current) {
+      animationRef.current.currentTime = targetRotation / FULL_TURN * ROTATION_SECONDS * 1e3;
+    }
     const clearSelection = window.setTimeout(() => {
       setSelectedId(null);
     }, 900);
@@ -28331,11 +28334,11 @@ function Projects() {
     });
     setPhase("extracting");
     setHoveredId(null);
-    openTimers.current.push(window.setTimeout(() => setPhase("opening"), 1760));
+    openTimers.current.push(window.setTimeout(() => setPhase("opening"), 1120));
     openTimers.current.push(window.setTimeout(() => {
       setPhase("open");
       setExtractBook(null);
-    }, 2180));
+    }, 1420));
   }
   function closeBook() {
     openTimers.current.forEach((timer) => window.clearTimeout(timer));
@@ -28406,17 +28409,20 @@ function Projects() {
               "--book-accent": extractBook.accent
             },
             children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-book", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-spine", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-spine", "aria-hidden": "true", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-year", children: extractBook.year }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-name", children: extractBook.title }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-index", children: String(extractBook.id).padStart(2, "0") })
               ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-spread", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-cover extract-cover-left", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: String(extractBook.id).padStart(2, "0") }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-paper extract-paper-left", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("strong", { children: extractBook.title }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-gutter" }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-paper extract-paper-right", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: extractBook.year }) }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-cover extract-cover-right", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("strong", { children: extractBook.title }) })
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-cover-face", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h2", { children: extractBook.title }),
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { children: "PROJECT PHOTOBOOK" }),
+                extractBook.image ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("figure", { children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("img", { src: extractBook.image, alt: "" }) }) : null,
+                /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { children: [
+                  extractBook.year,
+                  " / ",
+                  String(extractBook.id).padStart(2, "0")
+                ] })
               ] })
             ] })
           }
@@ -28625,9 +28631,9 @@ function Projects() {
           inset: 0;
           background:
             radial-gradient(circle at 50% 44%, rgba(230,202,145,0.18), transparent 34%),
-            rgba(4,3,2,0.28);
+            rgba(4,3,2,0.22);
           opacity: 0;
-          animation: extractLight 2180ms cubic-bezier(.16,1,.3,1) both;
+          animation: extractLight 1420ms cubic-bezier(.16,1,.3,1) both;
         }
 
         .extract-book {
@@ -28639,156 +28645,95 @@ function Projects() {
           transform: translate(-50%, -50%);
           transform-origin: center center;
           transform-style: preserve-3d;
-          animation: extractBookFlight 2180ms cubic-bezier(.16,1,.3,1) both;
+          animation: extractBookToCover 1420ms cubic-bezier(.16,1,.3,1) both;
           will-change: transform, width, height, opacity;
         }
 
-        .extract-spine {
+        .extract-spine,
+        .extract-cover-face {
           position: absolute;
           inset: 0;
+          overflow: hidden;
+          color: #f6ead1;
+          background:
+            linear-gradient(90deg, rgba(255,255,255,0.16), transparent 22%, rgba(0,0,0,0.38)),
+            linear-gradient(180deg, var(--book-color), #15100b);
+          border-left: 1px solid rgba(255,255,255,0.16);
+          border-right: 1px solid rgba(0,0,0,0.46);
+          box-shadow:
+            inset 8px 0 16px rgba(255,255,255,0.06),
+            inset -12px 0 18px rgba(0,0,0,0.3),
+            0 28px 68px rgba(0,0,0,0.46);
+          backface-visibility: hidden;
+        }
+
+        .extract-spine {
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: space-between;
           padding: 18px 8px;
-          color: #f6ead1;
-          background:
-            linear-gradient(90deg, rgba(255,255,255,0.18), transparent 20%, rgba(0,0,0,0.42) 86%),
-            linear-gradient(180deg, var(--book-color), #15100b);
-          border-left: 1px solid rgba(255,255,255,0.16);
-          border-right: 1px solid rgba(0,0,0,0.46);
           border-radius: 5px 5px 2px 2px;
-          box-shadow:
-            inset 8px 0 16px rgba(255,255,255,0.06),
-            inset -12px 0 18px rgba(0,0,0,0.3),
-            0 28px 68px rgba(0,0,0,0.46);
-          transform: translate(-50%, -50%);
-          transform-origin: center center;
-          animation: extractSpineFade 2180ms ease both;
+          animation: extractSpineToCover 1420ms ease both;
         }
 
-        .extract-spread {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          width: min(82vw, 850px);
-          height: min(66vh, 560px);
+        .extract-cover-face {
           opacity: 0;
-          transform: translate(-50%, -50%) scaleX(0.14) rotateY(-11deg);
-          transform-origin: center center;
-          transform-style: preserve-3d;
-          animation: extractSpreadBody 2180ms cubic-bezier(.16,1,.3,1) both;
-        }
-
-        .extract-cover,
-        .extract-paper {
-          position: absolute;
-          top: 0;
-          width: 50%;
-          height: 100%;
-          overflow: hidden;
-          backface-visibility: hidden;
-          border: 1px solid rgba(255,255,255,0.12);
-          box-shadow: 0 24px 54px rgba(0,0,0,0.42);
-        }
-
-        .extract-cover {
-          z-index: 3;
-          color: #f6ead1;
-          background:
-            linear-gradient(90deg, rgba(255,255,255,0.16), transparent 22%, rgba(0,0,0,0.38)),
-            linear-gradient(180deg, var(--book-color), #15100b);
-        }
-
-        .extract-cover-left {
-          left: 0;
-          border-radius: 9px 2px 2px 9px;
-          transform-origin: right center;
-          animation: extractLeftCover 2180ms cubic-bezier(.16,1,.3,1) both;
-        }
-
-        .extract-cover-right {
-          right: 0;
-          border-radius: 2px 9px 9px 2px;
+          border-radius: 10px;
+          transform: rotateY(82deg) scaleX(0.18);
           transform-origin: left center;
-          animation: extractRightCover 2180ms cubic-bezier(.16,1,.3,1) both;
+          animation: extractCoverFace 1420ms cubic-bezier(.16,1,.3,1) both;
         }
 
-        .extract-cover-left span {
+        .extract-cover-face h2 {
           position: absolute;
-          left: 10%;
-          bottom: 8%;
-          color: rgba(244,232,204,0.62);
-          font-family: var(--font-mono);
-          font-size: 0.76rem;
-        }
-
-        .extract-cover-right strong {
-          position: absolute;
-          left: 12%;
-          right: 12%;
-          top: 16%;
-          color: var(--book-accent);
-          font-size: clamp(1.2rem, 3.2vw, 2.6rem);
-          font-weight: 650;
-          letter-spacing: 0.02em;
-          line-height: 1;
-        }
-
-        .extract-paper {
-          z-index: 2;
-          background:
-            linear-gradient(90deg, rgba(0,0,0,0.08), transparent 16%, transparent 84%, rgba(0,0,0,0.08)),
-            #f5efe2;
-          border-color: rgba(50,38,22,0.14);
-        }
-
-        .extract-paper-left {
-          left: 0;
-          border-radius: 7px 1px 1px 7px;
-          transform-origin: right center;
-          animation: extractLeftPaper 2180ms cubic-bezier(.16,1,.3,1) both;
-        }
-
-        .extract-paper-right {
-          right: 0;
-          border-radius: 1px 7px 7px 1px;
-          transform-origin: left center;
-          animation: extractRightPaper 2180ms cubic-bezier(.16,1,.3,1) both;
-        }
-
-        .extract-paper strong,
-        .extract-paper span {
-          position: absolute;
-          left: 12%;
-          top: 14%;
-          color: rgba(44,36,24,0.66);
+          left: 13.5%;
+          right: 10%;
+          top: 15%;
+          margin: 0;
+          color: #f2efdf;
           font-family: var(--font-serif);
-          font-size: clamp(1rem, 2.6vw, 2rem);
-          font-weight: 500;
+          font-size: clamp(1.7rem, 4.8vw, 3.8rem);
+          font-weight: 400;
           letter-spacing: 0;
+          line-height: 1.08;
         }
 
-        .extract-paper span {
-          top: auto;
-          right: 12%;
-          bottom: 10%;
-          left: auto;
-          font-family: var(--font-mono);
-          font-size: 0.8rem;
-        }
-
-        .extract-gutter {
+        .extract-cover-face p {
           position: absolute;
-          top: 0;
-          bottom: 0;
-          left: calc(50% - 12px);
-          z-index: 4;
-          width: 24px;
-          background: linear-gradient(90deg, rgba(0,0,0,0.22), rgba(255,255,255,0.08), rgba(0,0,0,0.18));
-          opacity: 0;
-          filter: blur(0.2px);
-          animation: extractGutter 2180ms ease both;
+          left: 13.5%;
+          top: 33%;
+          margin: 0;
+          color: rgba(242,239,223,0.82);
+          font-family: var(--font-serif);
+          font-size: clamp(0.76rem, 1.35vw, 1.05rem);
+          letter-spacing: 0.025em;
+        }
+
+        .extract-cover-face figure {
+          position: absolute;
+          left: 13.5%;
+          bottom: 18%;
+          width: 52%;
+          margin: 0;
+          box-shadow: 0 1px 1px rgba(24,33,20,0.18);
+        }
+
+        .extract-cover-face img {
+          display: block;
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+        }
+
+        .extract-cover-face > span {
+          position: absolute;
+          bottom: 7%;
+          left: 13.5%;
+          color: rgba(242,239,223,0.78);
+          font-family: var(--font-mono);
+          font-size: clamp(0.62rem, 1vw, 0.82rem);
+          letter-spacing: 0.13em;
         }
 
         .extract-name {
@@ -28811,77 +28756,52 @@ function Projects() {
         @keyframes extractLight {
           0% { opacity: 0; }
           22% { opacity: 1; }
-          86% { opacity: 1; }
+          78% { opacity: 1; }
           100% { opacity: 0; }
         }
 
-        @keyframes extractBookFlight {
+        @keyframes extractBookToCover {
           0% {
             opacity: 1;
             width: var(--extract-w);
             height: var(--extract-h);
             transform: translate(-50%, -50%) translateY(0) translateZ(0) rotateY(0) scale(1);
           }
-          22% {
+          26% {
             width: var(--extract-w);
             height: var(--extract-h);
             transform: translate(-50%, -50%) translateY(-22px) translateZ(90px) rotateY(-10deg) scale(1.08);
           }
-          48% {
-            width: 188px;
-            height: 276px;
-            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(49vh - var(--extract-y))) translateZ(420px) rotateZ(-3deg) rotateY(-12deg) scale(1.26);
+          64% {
+            opacity: 1;
+            width: min(80vw, 410px);
+            height: min(70vh, 512px);
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(420px) rotateZ(-2deg) rotateY(-8deg) scale(1);
           }
-          78% {
-            width: min(82vw, 850px);
-            height: min(66vh, 560px);
-            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(480px) rotateZ(0deg) rotateY(0deg) scale(1);
+          86% {
+            opacity: 1;
+            width: min(80vw, 410px);
+            height: min(70vh, 512px);
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(430px) rotateZ(0deg) rotateY(0deg) scale(1);
           }
           100% {
             opacity: 0;
-            width: min(82vw, 850px);
-            height: min(66vh, 560px);
-            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(480px) rotateZ(0deg) rotateY(0deg) scale(1.02);
+            width: min(80vw, 410px);
+            height: min(70vh, 512px);
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(430px) rotateZ(0deg) rotateY(0deg) scale(1.01);
           }
         }
 
-        @keyframes extractSpineFade {
-          0%, 42% { opacity: 1; transform: none; }
-          52%, 100% { opacity: 0; transform: scaleX(2.2); }
+        @keyframes extractSpineToCover {
+          0%, 45% { opacity: 1; transform: scaleX(1); }
+          65%, 100% { opacity: 0; transform: scaleX(5.6); }
         }
 
-        @keyframes extractSpreadBody {
-          0%, 42% { opacity: 0; transform: translate(-50%, -50%) scaleX(0.12) rotateY(-12deg); }
-          52% { opacity: 1; transform: translate(-50%, -50%) scaleX(0.34) rotateY(-8deg); }
-          78% { opacity: 1; transform: translate(-50%, -50%) scaleX(1) rotateY(0deg); }
-          100% { opacity: 0; transform: translate(-50%, -50%) scaleX(1.02) rotateY(0deg); }
+        @keyframes extractCoverFace {
+          0%, 42% { opacity: 0; transform: rotateY(82deg) scaleX(0.18); }
+          66% { opacity: 1; transform: rotateY(8deg) scaleX(1); }
+          86%, 100% { opacity: 1; transform: rotateY(0deg) scaleX(1); }
         }
-
-        @keyframes extractLeftCover {
-          0%, 54% { transform: rotateY(0deg); }
-          78%, 100% { transform: rotateY(-178deg); }
-        }
-
-        @keyframes extractRightCover {
-          0%, 54% { transform: rotateY(0deg); }
-          78%, 100% { transform: rotateY(178deg); }
-        }
-
-        @keyframes extractLeftPaper {
-          0%, 56% { transform: rotateY(0deg); }
-          80%, 100% { transform: rotateY(-4deg); }
-        }
-
-        @keyframes extractRightPaper {
-          0%, 56% { transform: rotateY(0deg); }
-          80%, 100% { transform: rotateY(4deg); }
-        }
-
-        @keyframes extractGutter {
-          0%, 54% { opacity: 0; }
-          72%, 100% { opacity: 1; }
-          }
-
         @media (max-width: 640px) {
           .project-library {
             min-height: 100svh;

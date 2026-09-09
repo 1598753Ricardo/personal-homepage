@@ -99,9 +99,8 @@ export default function RingCarousel() {
   const [hoveredId, setHoveredId] = useState(null)
   const [selectedId, setSelectedId] = useState(null)
   const ringRef = useRef(null)
+  const animationRef = useRef(null)
   const rotationRef = useRef(0)
-  const lastFrameRef = useRef(null)
-  const pausedRef = useRef(false)
 
   const selectedIndex = useMemo(
     () => orbitItems.findIndex(card => card.id === selectedId),
@@ -109,31 +108,30 @@ export default function RingCarousel() {
   )
 
   useEffect(() => {
-    pausedRef.current = false
-  }, [hoveredId])
-
-  useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduceMotion) return undefined
 
-    let frameId
-    const degreesPerMs = FULL_TURN / (ROTATION_SECONDS * 1000)
+    const ring = ringRef.current
+    if (!ring) return undefined
 
-    const tick = time => {
-      if (lastFrameRef.current === null) lastFrameRef.current = time
-      const delta = time - lastFrameRef.current
-      lastFrameRef.current = time
-
-      if (!pausedRef.current) {
-        rotationRef.current = rotationRef.current + delta * degreesPerMs
-        ringRef.current?.style.setProperty('--ring-rotation', `${rotationRef.current}deg`)
+    const animation = ring.animate(
+      [
+        { transform: 'rotateY(0deg)' },
+        { transform: 'rotateY(360deg)' },
+      ],
+      {
+        duration: ROTATION_SECONDS * 1000,
+        iterations: Infinity,
+        easing: 'linear',
       }
+    )
 
-      frameId = requestAnimationFrame(tick)
+    animationRef.current = animation
+
+    return () => {
+      animation.cancel()
+      animationRef.current = null
     }
-
-    frameId = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frameId)
   }, [])
 
   useEffect(() => {
@@ -143,6 +141,9 @@ export default function RingCarousel() {
     rotationRef.current = targetRotation
     setRotation(targetRotation)
     ringRef.current?.style.setProperty('--ring-rotation', `${targetRotation}deg`)
+    if (animationRef.current) {
+      animationRef.current.currentTime = (targetRotation / FULL_TURN) * ROTATION_SECONDS * 1000
+    }
 
     const clearSelection = window.setTimeout(() => {
       setSelectedId(null)
