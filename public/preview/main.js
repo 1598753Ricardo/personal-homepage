@@ -1095,7 +1095,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useRef(initialValue);
         }
-        function useEffect10(create, deps) {
+        function useEffect11(create, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useEffect(create, deps);
         }
@@ -1111,7 +1111,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useCallback(callback, deps);
         }
-        function useMemo8(create, deps) {
+        function useMemo7(create, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useMemo(create, deps);
         }
@@ -1878,12 +1878,12 @@ var require_react_development = __commonJS({
         exports.useContext = useContext6;
         exports.useDebugValue = useDebugValue;
         exports.useDeferredValue = useDeferredValue;
-        exports.useEffect = useEffect10;
+        exports.useEffect = useEffect11;
         exports.useId = useId2;
         exports.useImperativeHandle = useImperativeHandle;
         exports.useInsertionEffect = useInsertionEffect;
         exports.useLayoutEffect = useLayoutEffect4;
-        exports.useMemo = useMemo8;
+        exports.useMemo = useMemo7;
         exports.useReducer = useReducer;
         exports.useRef = useRef8;
         exports.useState = useState9;
@@ -27409,45 +27409,30 @@ var IMAGE_CARDS = {
   4: "/orbit-fund-intelligence.png",
   7: "/orbit-social-impact.png"
 };
-function normalizeAngle(angle) {
-  return (angle % FULL_TURN + FULL_TURN) % FULL_TURN;
-}
-function distanceFromFront(angle) {
-  const normalized = normalizeAngle(angle);
-  return Math.min(normalized, FULL_TURN - normalized);
-}
-function getCardDepth(angle, isMuted, isHovered, isSelected) {
-  const distance = distanceFromFront(angle);
-  const frontness = 1 - Math.min(distance / 180, 1);
-  const baseOpacity = 0.32 + frontness * 0.68;
-  const opacity = isMuted ? 0.2 : baseOpacity;
-  const blur = isHovered || isSelected ? 0 : (1 - frontness) * 2.2;
+function getCardDepth(isMuted, isHovered, isSelected) {
+  const opacity = isMuted ? 0.28 : 0.94;
   const scale = isSelected ? 1.35 : isHovered ? 1.15 : 1;
   const lift = isSelected ? 120 : isHovered ? 80 : 0;
   return {
     opacity,
-    filter: `blur(${blur.toFixed(2)}px)`,
-    transform: `translateZ(${lift}px) scale(${scale})`,
-    zIndex: Math.round(1e3 - distance)
+    transform: `translateZ(${lift}px) scale(${scale})`
   };
 }
 function RingCard({
   card,
   index,
   total,
-  rotation,
   hoveredId,
   selectedId,
   onHover,
   onSelect
 }) {
   const baseAngle = FULL_TURN / total * index;
-  const currentAngle = baseAngle + rotation;
   const isHovered = hoveredId === card.id;
   const isSelected = selectedId === card.id;
   const hasFocusCard = hoveredId !== null || selectedId !== null;
   const isMuted = hasFocusCard && !isHovered && !isSelected;
-  const depth = getCardDepth(currentAngle, isMuted, isHovered, isSelected);
+  const depth = getCardDepth(isMuted, isHovered, isSelected);
   const imageSrc = IMAGE_CARDS[card.id];
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
     "button",
@@ -27457,9 +27442,7 @@ function RingCard({
       style: {
         "--card-angle": `${baseAngle}deg`,
         "--card-opacity": depth.opacity,
-        "--card-filter": depth.filter,
-        "--card-transform": depth.transform,
-        zIndex: depth.zIndex
+        "--card-transform": depth.transform
       },
       onMouseEnter: () => onHover(card.id),
       onMouseLeave: () => onHover(null),
@@ -27482,49 +27465,15 @@ function RingCard({
   );
 }
 function RingCarousel() {
-  const [rotation, setRotation] = (0, import_react.useState)(0);
   const [hoveredId, setHoveredId] = (0, import_react.useState)(null);
   const [selectedId, setSelectedId] = (0, import_react.useState)(null);
-  const ringRef = (0, import_react.useRef)(null);
-  const rotationRef = (0, import_react.useRef)(0);
-  const lastFrameRef = (0, import_react.useRef)(null);
-  const pausedRef = (0, import_react.useRef)(false);
-  const selectedIndex = (0, import_react.useMemo)(
-    () => orbitItems_default.findIndex((card) => card.id === selectedId),
-    [selectedId]
-  );
   (0, import_react.useEffect)(() => {
-    pausedRef.current = false;
-  }, [hoveredId]);
-  (0, import_react.useEffect)(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) return void 0;
-    let frameId;
-    const degreesPerMs = FULL_TURN / (ROTATION_SECONDS * 1e3);
-    const tick = (time) => {
-      if (lastFrameRef.current === null) lastFrameRef.current = time;
-      const delta = time - lastFrameRef.current;
-      lastFrameRef.current = time;
-      if (!pausedRef.current) {
-        rotationRef.current = rotationRef.current + delta * degreesPerMs;
-        ringRef.current?.style.setProperty("--ring-rotation", `${rotationRef.current}deg`);
-      }
-      frameId = requestAnimationFrame(tick);
-    };
-    frameId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(frameId);
-  }, []);
-  (0, import_react.useEffect)(() => {
-    if (selectedIndex < 0) return;
-    const targetRotation = normalizeAngle(-selectedIndex * (FULL_TURN / orbitItems_default.length));
-    rotationRef.current = targetRotation;
-    setRotation(targetRotation);
-    ringRef.current?.style.setProperty("--ring-rotation", `${targetRotation}deg`);
+    if (selectedId === null) return void 0;
     const clearSelection = window.setTimeout(() => {
       setSelectedId(null);
     }, 900);
     return () => window.clearTimeout(clearSelection);
-  }, [selectedIndex]);
+  }, [selectedId]);
   return /* @__PURE__ */ (0, import_jsx_runtime2.jsxs)(
     "div",
     {
@@ -27539,28 +27488,19 @@ function RingCarousel() {
             } }),
             /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("span", { children: "\u6797" })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-            "div",
+          /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("div", { className: "orbit-ring", children: orbitItems_default.map((card, index) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
+            RingCard,
             {
-              ref: ringRef,
-              className: "orbit-ring",
-              style: { "--ring-rotation": `${rotation}deg` },
-              children: orbitItems_default.map((card, index) => /* @__PURE__ */ (0, import_jsx_runtime2.jsx)(
-                RingCard,
-                {
-                  card,
-                  index,
-                  total: orbitItems_default.length,
-                  rotation,
-                  hoveredId,
-                  selectedId,
-                  onHover: setHoveredId,
-                  onSelect: setSelectedId
-                },
-                card.id
-              ))
-            }
-          )
+              card,
+              index,
+              total: orbitItems_default.length,
+              hoveredId,
+              selectedId,
+              onHover: setHoveredId,
+              onSelect: setSelectedId
+            },
+            card.id
+          )) })
         ] }),
         /* @__PURE__ */ (0, import_jsx_runtime2.jsx)("style", { children: `
         .orbit-ring-container {
@@ -27587,6 +27527,7 @@ function RingCarousel() {
           justify-content: center;
           transform-style: preserve-3d;
           transform: rotateZ(20deg) rotateY(-25deg);
+          contain: layout paint style;
         }
 
         .ring-world::before {
@@ -27640,6 +27581,7 @@ function RingCarousel() {
           -webkit-backdrop-filter: blur(18px);
           transform: translate(-50%, -50%) rotateY(25deg) rotateZ(-20deg);
           pointer-events: none;
+          backface-visibility: hidden;
         }
 
         .orbit-center img {
@@ -27662,8 +27604,15 @@ function RingCarousel() {
           width: var(--ring-size);
           height: var(--ring-size);
           transform-style: preserve-3d;
-          transform: rotateY(var(--ring-rotation));
+          transform: rotateY(0deg);
+          animation: orbitSpin ${ROTATION_SECONDS}s linear infinite;
           will-change: transform;
+          backface-visibility: hidden;
+        }
+
+        @keyframes orbitSpin {
+          from { transform: rotateY(0deg); }
+          to { transform: rotateY(360deg); }
         }
 
         .orbit-card {
@@ -27679,6 +27628,8 @@ function RingCarousel() {
           cursor: pointer;
           transform: translate(-50%, -50%) rotateY(var(--card-angle)) translateZ(var(--ring-radius));
           transform-style: preserve-3d;
+          backface-visibility: hidden;
+          contain: layout paint style;
         }
 
         .orbit-card-surface {
@@ -27695,21 +27646,18 @@ function RingCarousel() {
           background: rgba(255,255,255,0.05);
           box-shadow:
             inset 0 1px 0 rgba(255,255,255,0.12),
-            0 20px 54px rgba(0,0,0,0.34);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+            0 16px 36px rgba(0,0,0,0.28);
           opacity: var(--card-opacity);
-          filter: var(--card-filter);
           transform: var(--card-transform);
           transform-style: preserve-3d;
           transition:
             opacity var(--dur-base) ease,
-            filter var(--dur-base) ease,
             border-color var(--dur-fast) ease,
             background var(--dur-fast) ease,
             box-shadow var(--dur-base) ease,
             transform var(--dur-base) var(--ease-out);
-          will-change: opacity, filter, transform;
+          will-change: opacity, transform;
+          backface-visibility: hidden;
         }
 
         .orbit-card-surface-image {
@@ -27823,6 +27771,7 @@ function RingCarousel() {
 
         @media (prefers-reduced-motion: reduce) {
           .orbit-ring {
+            animation: none;
             transform: rotateY(0deg);
           }
         }
@@ -28300,8 +28249,16 @@ function Projects() {
   const [activeId, setActiveId] = (0, import_react3.useState)(null);
   const [phase, setPhase] = (0, import_react3.useState)("shelf");
   const [light, setLight] = (0, import_react3.useState)({ x: 0, y: 0 });
+  const [extractBook, setExtractBook] = (0, import_react3.useState)(null);
+  const openTimers = (0, import_react3.useRef)([]);
   const activeBook = (0, import_react3.useMemo)(() => books.find((book) => book.id === activeId), [activeId]);
   const reading = activeBook && phase !== "shelf";
+  const showingReader = activeBook && phase !== "shelf" && phase !== "extracting";
+  (0, import_react3.useEffect)(() => {
+    return () => {
+      openTimers.current.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, []);
   function moveLight(event) {
     const rect = event.currentTarget.getBoundingClientRect();
     setLight({
@@ -28309,17 +28266,35 @@ function Projects() {
       y: ((event.clientY - rect.top) / rect.height - 0.5).toFixed(3)
     });
   }
-  function openBook(book) {
+  function openBook(book, event) {
+    openTimers.current.forEach((timer) => window.clearTimeout(timer));
+    openTimers.current = [];
+    const rect = event.currentTarget.getBoundingClientRect();
     setActiveId(book.id);
-    setPhase("opening");
-    window.setTimeout(() => setPhase("open"), 980);
+    setExtractBook({
+      ...book,
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+      width: rect.width,
+      height: rect.height
+    });
+    setPhase("extracting");
+    setHoveredId(null);
+    openTimers.current.push(window.setTimeout(() => setPhase("opening"), 940));
+    openTimers.current.push(window.setTimeout(() => {
+      setPhase("open");
+      setExtractBook(null);
+    }, 1380));
   }
   function closeBook() {
+    openTimers.current.forEach((timer) => window.clearTimeout(timer));
+    openTimers.current = [];
+    setExtractBook(null);
     setPhase("closing");
-    window.setTimeout(() => {
+    openTimers.current.push(window.setTimeout(() => {
       setPhase("shelf");
       setActiveId(null);
-    }, 900);
+    }, 900));
   }
   return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
     "section",
@@ -28356,7 +28331,7 @@ function Projects() {
               onPointerLeave: () => setHoveredId(null),
               onFocus: () => setHoveredId(book.id),
               onBlur: () => setHoveredId(null),
-              onClick: () => openBook(book),
+              onClick: (event) => openBook(book, event),
               children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "book-spine-face", children: [
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "book-year", children: book.year }),
                 /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "book-name", children: book.title }),
@@ -28366,7 +28341,27 @@ function Projects() {
             book.slug
           )) })
         ] }) }),
-        reading ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+        extractBook ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+          "div",
+          {
+            className: "book-extract-overlay",
+            "aria-hidden": "true",
+            style: {
+              "--extract-x": `${extractBook.x}px`,
+              "--extract-y": `${extractBook.y}px`,
+              "--extract-w": `${extractBook.width}px`,
+              "--extract-h": `${extractBook.height}px`,
+              "--book-color": extractBook.color,
+              "--book-accent": extractBook.accent
+            },
+            children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-book", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-year", children: extractBook.year }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-name", children: extractBook.title }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-index", children: String(extractBook.id).padStart(2, "0") })
+            ] })
+          }
+        ) : null,
+        showingReader ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
           Book3D,
           {
             book: activeBook,
@@ -28551,6 +28546,99 @@ function Projects() {
           color: rgba(244,232,204,0.62);
           font-family: var(--font-mono);
           font-size: 0.72rem;
+        }
+
+        .book-extract-overlay {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 11;
+          width: 100vw;
+          height: 100vh;
+          pointer-events: none;
+          perspective: 1500px;
+        }
+
+        .book-extract-overlay::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 50% 45%, rgba(230,202,145,0.16), transparent 34%);
+          opacity: 0;
+          animation: extractLight 940ms cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .extract-book {
+          position: absolute;
+          left: var(--extract-x);
+          top: var(--extract-y);
+          width: var(--extract-w);
+          height: var(--extract-h);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          padding: 18px 8px;
+          color: #f6ead1;
+          background:
+            linear-gradient(90deg, rgba(255,255,255,0.18), transparent 20%, rgba(0,0,0,0.42) 86%),
+            linear-gradient(180deg, var(--book-color), #15100b);
+          border-left: 1px solid rgba(255,255,255,0.16);
+          border-right: 1px solid rgba(0,0,0,0.46);
+          border-radius: 5px 5px 2px 2px;
+          box-shadow:
+            inset 8px 0 16px rgba(255,255,255,0.06),
+            inset -12px 0 18px rgba(0,0,0,0.3),
+            0 28px 68px rgba(0,0,0,0.46);
+          transform: translate(-50%, -50%);
+          transform-origin: center center;
+          animation: extractBook 1380ms cubic-bezier(.16,1,.3,1) both;
+          will-change: transform, width, height, border-radius, opacity;
+        }
+
+        .extract-name {
+          writing-mode: vertical-rl;
+          transform: rotate(180deg);
+          color: var(--book-accent);
+          font-size: clamp(0.72rem, 1vw, 0.92rem);
+          font-weight: 650;
+          letter-spacing: 0.08em;
+          line-height: 1;
+        }
+
+        .extract-year,
+        .extract-index {
+          color: rgba(244,232,204,0.62);
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+        }
+
+        @keyframes extractLight {
+          0% { opacity: 0; }
+          35% { opacity: 1; }
+          100% { opacity: 0.92; }
+        }
+
+        @keyframes extractBook {
+          0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) translateY(0) translateZ(0) rotateY(0) scale(1);
+          }
+          22% {
+            transform: translate(-50%, -50%) translateY(-22px) translateZ(90px) rotateY(-10deg) scale(1.08);
+          }
+          62% {
+            width: 188px;
+            height: 276px;
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(49vh - var(--extract-y))) translateZ(420px) rotateZ(-3deg) rotateY(-18deg) scale(1.34);
+          }
+          100% {
+            opacity: 0;
+            width: min(40vw, 310px);
+            height: min(56vh, 430px);
+            border-radius: 8px;
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(47vh - var(--extract-y))) translateZ(520px) rotateZ(0deg) rotateY(-82deg) scale(1.42);
+          }
         }
 
         @media (max-width: 640px) {

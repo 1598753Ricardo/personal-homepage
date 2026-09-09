@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import orbitItems from '../data/orbitItems'
 
 const ROTATION_SECONDS = 35
@@ -10,29 +10,14 @@ const IMAGE_CARDS = {
   7: '/orbit-social-impact.png',
 }
 
-function normalizeAngle(angle) {
-  return ((angle % FULL_TURN) + FULL_TURN) % FULL_TURN
-}
-
-function distanceFromFront(angle) {
-  const normalized = normalizeAngle(angle)
-  return Math.min(normalized, FULL_TURN - normalized)
-}
-
-function getCardDepth(angle, isMuted, isHovered, isSelected) {
-  const distance = distanceFromFront(angle)
-  const frontness = 1 - Math.min(distance / 180, 1)
-  const baseOpacity = 0.32 + frontness * 0.68
-  const opacity = isMuted ? 0.2 : baseOpacity
-  const blur = isHovered || isSelected ? 0 : (1 - frontness) * 2.2
+function getCardDepth(isMuted, isHovered, isSelected) {
+  const opacity = isMuted ? 0.28 : 0.94
   const scale = isSelected ? 1.35 : isHovered ? 1.15 : 1
   const lift = isSelected ? 120 : isHovered ? 80 : 0
 
   return {
     opacity,
-    filter: `blur(${blur.toFixed(2)}px)`,
     transform: `translateZ(${lift}px) scale(${scale})`,
-    zIndex: Math.round(1000 - distance),
   }
 }
 
@@ -40,19 +25,17 @@ function RingCard({
   card,
   index,
   total,
-  rotation,
   hoveredId,
   selectedId,
   onHover,
   onSelect,
 }) {
   const baseAngle = (FULL_TURN / total) * index
-  const currentAngle = baseAngle + rotation
   const isHovered = hoveredId === card.id
   const isSelected = selectedId === card.id
   const hasFocusCard = hoveredId !== null || selectedId !== null
   const isMuted = hasFocusCard && !isHovered && !isSelected
-  const depth = getCardDepth(currentAngle, isMuted, isHovered, isSelected)
+  const depth = getCardDepth(isMuted, isHovered, isSelected)
   const imageSrc = IMAGE_CARDS[card.id]
 
   return (
@@ -62,9 +45,7 @@ function RingCard({
       style={{
         '--card-angle': `${baseAngle}deg`,
         '--card-opacity': depth.opacity,
-        '--card-filter': depth.filter,
         '--card-transform': depth.transform,
-        zIndex: depth.zIndex,
       }}
       onMouseEnter={() => onHover(card.id)}
       onMouseLeave={() => onHover(null)}
@@ -95,61 +76,18 @@ function RingCard({
 }
 
 export default function RingCarousel() {
-  const [rotation, setRotation] = useState(0)
   const [hoveredId, setHoveredId] = useState(null)
   const [selectedId, setSelectedId] = useState(null)
-  const ringRef = useRef(null)
-  const rotationRef = useRef(0)
-  const lastFrameRef = useRef(null)
-  const pausedRef = useRef(false)
-
-  const selectedIndex = useMemo(
-    () => orbitItems.findIndex(card => card.id === selectedId),
-    [selectedId]
-  )
 
   useEffect(() => {
-    pausedRef.current = false
-  }, [hoveredId])
-
-  useEffect(() => {
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduceMotion) return undefined
-
-    let frameId
-    const degreesPerMs = FULL_TURN / (ROTATION_SECONDS * 1000)
-
-    const tick = time => {
-      if (lastFrameRef.current === null) lastFrameRef.current = time
-      const delta = time - lastFrameRef.current
-      lastFrameRef.current = time
-
-      if (!pausedRef.current) {
-        rotationRef.current = rotationRef.current + delta * degreesPerMs
-        ringRef.current?.style.setProperty('--ring-rotation', `${rotationRef.current}deg`)
-      }
-
-      frameId = requestAnimationFrame(tick)
-    }
-
-    frameId = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frameId)
-  }, [])
-
-  useEffect(() => {
-    if (selectedIndex < 0) return
-
-    const targetRotation = normalizeAngle(-selectedIndex * (FULL_TURN / orbitItems.length))
-    rotationRef.current = targetRotation
-    setRotation(targetRotation)
-    ringRef.current?.style.setProperty('--ring-rotation', `${targetRotation}deg`)
+    if (selectedId === null) return undefined
 
     const clearSelection = window.setTimeout(() => {
       setSelectedId(null)
     }, 900)
 
     return () => window.clearTimeout(clearSelection)
-  }, [selectedIndex])
+  }, [selectedId])
 
   return (
     <div
@@ -163,18 +101,13 @@ export default function RingCarousel() {
           <span>林</span>
         </div>
 
-        <div
-          ref={ringRef}
-          className="orbit-ring"
-          style={{ '--ring-rotation': `${rotation}deg` }}
-        >
+        <div className="orbit-ring">
           {orbitItems.map((card, index) => (
             <RingCard
               key={card.id}
               card={card}
               index={index}
               total={orbitItems.length}
-              rotation={rotation}
               hoveredId={hoveredId}
               selectedId={selectedId}
               onHover={setHoveredId}
@@ -209,6 +142,7 @@ export default function RingCarousel() {
           justify-content: center;
           transform-style: preserve-3d;
           transform: rotateZ(20deg) rotateY(-25deg);
+          contain: layout paint style;
         }
 
         .ring-world::before {
@@ -262,6 +196,7 @@ export default function RingCarousel() {
           -webkit-backdrop-filter: blur(18px);
           transform: translate(-50%, -50%) rotateY(25deg) rotateZ(-20deg);
           pointer-events: none;
+          backface-visibility: hidden;
         }
 
         .orbit-center img {
@@ -284,8 +219,15 @@ export default function RingCarousel() {
           width: var(--ring-size);
           height: var(--ring-size);
           transform-style: preserve-3d;
-          transform: rotateY(var(--ring-rotation));
+          transform: rotateY(0deg);
+          animation: orbitSpin ${ROTATION_SECONDS}s linear infinite;
           will-change: transform;
+          backface-visibility: hidden;
+        }
+
+        @keyframes orbitSpin {
+          from { transform: rotateY(0deg); }
+          to { transform: rotateY(360deg); }
         }
 
         .orbit-card {
@@ -301,6 +243,8 @@ export default function RingCarousel() {
           cursor: pointer;
           transform: translate(-50%, -50%) rotateY(var(--card-angle)) translateZ(var(--ring-radius));
           transform-style: preserve-3d;
+          backface-visibility: hidden;
+          contain: layout paint style;
         }
 
         .orbit-card-surface {
@@ -317,21 +261,18 @@ export default function RingCarousel() {
           background: rgba(255,255,255,0.05);
           box-shadow:
             inset 0 1px 0 rgba(255,255,255,0.12),
-            0 20px 54px rgba(0,0,0,0.34);
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+            0 16px 36px rgba(0,0,0,0.28);
           opacity: var(--card-opacity);
-          filter: var(--card-filter);
           transform: var(--card-transform);
           transform-style: preserve-3d;
           transition:
             opacity var(--dur-base) ease,
-            filter var(--dur-base) ease,
             border-color var(--dur-fast) ease,
             background var(--dur-fast) ease,
             box-shadow var(--dur-base) ease,
             transform var(--dur-base) var(--ease-out);
-          will-change: opacity, filter, transform;
+          will-change: opacity, transform;
+          backface-visibility: hidden;
         }
 
         .orbit-card-surface-image {
@@ -445,6 +386,7 @@ export default function RingCarousel() {
 
         @media (prefers-reduced-motion: reduce) {
           .orbit-ring {
+            animation: none;
             transform: rotateY(0deg);
           }
         }

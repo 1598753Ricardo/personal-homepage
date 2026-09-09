@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Book3D from './Book3D'
 
 const books = [
@@ -111,9 +111,18 @@ export default function Projects() {
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('shelf')
   const [light, setLight] = useState({ x: 0, y: 0 })
+  const [extractBook, setExtractBook] = useState(null)
+  const openTimers = useRef([])
 
   const activeBook = useMemo(() => books.find(book => book.id === activeId), [activeId])
   const reading = activeBook && phase !== 'shelf'
+  const showingReader = activeBook && phase !== 'shelf' && phase !== 'extracting'
+
+  useEffect(() => {
+    return () => {
+      openTimers.current.forEach(timer => window.clearTimeout(timer))
+    }
+  }, [])
 
   function moveLight(event) {
     const rect = event.currentTarget.getBoundingClientRect()
@@ -123,18 +132,38 @@ export default function Projects() {
     })
   }
 
-  function openBook(book) {
+  function openBook(book, event) {
+    openTimers.current.forEach(timer => window.clearTimeout(timer))
+    openTimers.current = []
+
+    const rect = event.currentTarget.getBoundingClientRect()
     setActiveId(book.id)
-    setPhase('opening')
-    window.setTimeout(() => setPhase('open'), 980)
+    setExtractBook({
+      ...book,
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+      width: rect.width,
+      height: rect.height,
+    })
+    setPhase('extracting')
+    setHoveredId(null)
+
+    openTimers.current.push(window.setTimeout(() => setPhase('opening'), 940))
+    openTimers.current.push(window.setTimeout(() => {
+      setPhase('open')
+      setExtractBook(null)
+    }, 1380))
   }
 
   function closeBook() {
+    openTimers.current.forEach(timer => window.clearTimeout(timer))
+    openTimers.current = []
+    setExtractBook(null)
     setPhase('closing')
-    window.setTimeout(() => {
+    openTimers.current.push(window.setTimeout(() => {
       setPhase('shelf')
       setActiveId(null)
-    }, 900)
+    }, 900))
   }
 
   return (
@@ -174,7 +203,7 @@ export default function Projects() {
                 onPointerLeave={() => setHoveredId(null)}
                 onFocus={() => setHoveredId(book.id)}
                 onBlur={() => setHoveredId(null)}
-                onClick={() => openBook(book)}
+                onClick={(event) => openBook(book, event)}
               >
                 <span className="book-spine-face">
                   <span className="book-year">{book.year}</span>
@@ -187,7 +216,28 @@ export default function Projects() {
         </div>
       </div>
 
-      {reading ? (
+      {extractBook ? (
+        <div
+          className="book-extract-overlay"
+          aria-hidden="true"
+          style={{
+            '--extract-x': `${extractBook.x}px`,
+            '--extract-y': `${extractBook.y}px`,
+            '--extract-w': `${extractBook.width}px`,
+            '--extract-h': `${extractBook.height}px`,
+            '--book-color': extractBook.color,
+            '--book-accent': extractBook.accent,
+          }}
+        >
+          <div className="extract-book">
+            <span className="extract-year">{extractBook.year}</span>
+            <span className="extract-name">{extractBook.title}</span>
+            <span className="extract-index">{String(extractBook.id).padStart(2, '0')}</span>
+          </div>
+        </div>
+      ) : null}
+
+      {showingReader ? (
         <Book3D
           book={activeBook}
           phase={phase}
@@ -372,6 +422,99 @@ export default function Projects() {
           color: rgba(244,232,204,0.62);
           font-family: var(--font-mono);
           font-size: 0.72rem;
+        }
+
+        .book-extract-overlay {
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 11;
+          width: 100vw;
+          height: 100vh;
+          pointer-events: none;
+          perspective: 1500px;
+        }
+
+        .book-extract-overlay::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: radial-gradient(circle at 50% 45%, rgba(230,202,145,0.16), transparent 34%);
+          opacity: 0;
+          animation: extractLight 940ms cubic-bezier(.16,1,.3,1) both;
+        }
+
+        .extract-book {
+          position: absolute;
+          left: var(--extract-x);
+          top: var(--extract-y);
+          width: var(--extract-w);
+          height: var(--extract-h);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          padding: 18px 8px;
+          color: #f6ead1;
+          background:
+            linear-gradient(90deg, rgba(255,255,255,0.18), transparent 20%, rgba(0,0,0,0.42) 86%),
+            linear-gradient(180deg, var(--book-color), #15100b);
+          border-left: 1px solid rgba(255,255,255,0.16);
+          border-right: 1px solid rgba(0,0,0,0.46);
+          border-radius: 5px 5px 2px 2px;
+          box-shadow:
+            inset 8px 0 16px rgba(255,255,255,0.06),
+            inset -12px 0 18px rgba(0,0,0,0.3),
+            0 28px 68px rgba(0,0,0,0.46);
+          transform: translate(-50%, -50%);
+          transform-origin: center center;
+          animation: extractBook 1380ms cubic-bezier(.16,1,.3,1) both;
+          will-change: transform, width, height, border-radius, opacity;
+        }
+
+        .extract-name {
+          writing-mode: vertical-rl;
+          transform: rotate(180deg);
+          color: var(--book-accent);
+          font-size: clamp(0.72rem, 1vw, 0.92rem);
+          font-weight: 650;
+          letter-spacing: 0.08em;
+          line-height: 1;
+        }
+
+        .extract-year,
+        .extract-index {
+          color: rgba(244,232,204,0.62);
+          font-family: var(--font-mono);
+          font-size: 0.72rem;
+        }
+
+        @keyframes extractLight {
+          0% { opacity: 0; }
+          35% { opacity: 1; }
+          100% { opacity: 0.92; }
+        }
+
+        @keyframes extractBook {
+          0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) translateY(0) translateZ(0) rotateY(0) scale(1);
+          }
+          22% {
+            transform: translate(-50%, -50%) translateY(-22px) translateZ(90px) rotateY(-10deg) scale(1.08);
+          }
+          62% {
+            width: 188px;
+            height: 276px;
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(49vh - var(--extract-y))) translateZ(420px) rotateZ(-3deg) rotateY(-18deg) scale(1.34);
+          }
+          100% {
+            opacity: 0;
+            width: min(40vw, 310px);
+            height: min(56vh, 430px);
+            border-radius: 8px;
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(47vh - var(--extract-y))) translateZ(520px) rotateZ(0deg) rotateY(-82deg) scale(1.42);
+          }
         }
 
         @media (max-width: 640px) {
