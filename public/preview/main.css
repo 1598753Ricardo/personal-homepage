@@ -1147,10 +1147,10 @@ body::before {
   place-items: center;
   min-height: 0;
   padding: 10px 0;
-  animation: book3dExtract 420ms ease both;
+  animation: none;
 }
 .photobook-stage.is-open .photobook-reader {
-  animation: book3dSettle 620ms cubic-bezier(.16, 1, .3, 1) both;
+  animation: none;
 }
 .photobook-stage.is-closing .photobook-reader {
   animation: book3dReturn 900ms cubic-bezier(.16, 1, .3, 1) both;

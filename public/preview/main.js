@@ -28327,11 +28327,11 @@ function Projects() {
     });
     setPhase("extracting");
     setHoveredId(null);
-    openTimers.current.push(window.setTimeout(() => setPhase("opening"), 1120));
+    openTimers.current.push(window.setTimeout(() => setPhase("opening"), 620));
     openTimers.current.push(window.setTimeout(() => {
       setPhase("open");
       setExtractBook(null);
-    }, 1420));
+    }, 680));
   }
   function closeBook() {
     openTimers.current.forEach((timer) => window.clearTimeout(timer));
@@ -28401,23 +28401,11 @@ function Projects() {
               "--book-color": extractBook.color,
               "--book-accent": extractBook.accent
             },
-            children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-book", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-spine", "aria-hidden": "true", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-year", children: extractBook.year }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-name", children: extractBook.title }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-index", children: String(extractBook.id).padStart(2, "0") })
-              ] }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("article", { className: "book-page art-page cloth recto extract-cover-face", "data-density": "hard", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("h2", { className: "cover-title", children: extractBook.title }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { className: "cover-subtitle", children: "PROJECT PHOTOBOOK" }),
-                extractBook.image ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("figure", { className: "cover-plate", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("img", { src: extractBook.image, alt: "" }) }) : null,
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "cover-foot", children: [
-                  extractBook.year,
-                  " / ",
-                  String(extractBook.id).padStart(2, "0")
-                ] })
-              ] })
-            ] })
+            children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-book", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-spine", "aria-hidden": "true", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-year", children: extractBook.year }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-name", children: extractBook.title }),
+              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-index", children: String(extractBook.id).padStart(2, "0") })
+            ] }) })
           }
         ) : null,
         showingReader ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
@@ -28622,11 +28610,9 @@ function Projects() {
           content: '';
           position: absolute;
           inset: 0;
-          background:
-            radial-gradient(circle at 50% 44%, rgba(230,202,145,0.18), transparent 34%),
-            rgba(4,3,2,0.22);
+          background: radial-gradient(circle at 50% 44%, rgba(230,202,145,0.14), transparent 34%);
           opacity: 0;
-          animation: extractLight 1420ms cubic-bezier(.16,1,.3,1) both;
+          animation: extractLight 680ms cubic-bezier(.16,1,.3,1) both;
         }
 
         .extract-book {
@@ -28638,8 +28624,8 @@ function Projects() {
           transform: translate(-50%, -50%);
           transform-origin: center center;
           transform-style: preserve-3d;
-          animation: extractBookToCover 1420ms cubic-bezier(.16,1,.3,1) both;
-          will-change: transform, width, height, opacity;
+          animation: extractBookToReader 680ms cubic-bezier(.16,1,.3,1) both;
+          will-change: transform, opacity;
         }
 
         .extract-spine {
@@ -28657,26 +28643,14 @@ function Projects() {
             linear-gradient(180deg, var(--book-color), #15100b);
           border-left: 1px solid rgba(255,255,255,0.16);
           border-right: 1px solid rgba(0,0,0,0.46);
+          border-radius: 5px 5px 2px 2px;
           box-shadow:
             inset 8px 0 16px rgba(255,255,255,0.06),
             inset -12px 0 18px rgba(0,0,0,0.3),
             0 28px 68px rgba(0,0,0,0.46);
           backface-visibility: hidden;
-          border-radius: 5px 5px 2px 2px;
-          animation: extractSpineToCover 1420ms ease both;
         }
 
-        .extract-cover-face {
-          position: absolute;
-          inset: 0;
-          opacity: 0;
-          border-radius: 10px;
-          transform: rotateY(82deg) scaleX(0.18);
-          transform-origin: left center;
-          animation: extractCoverFace 1420ms cubic-bezier(.16,1,.3,1) both;
-          backface-visibility: hidden;
-          box-shadow: 0 28px 68px rgba(0,0,0,0.46);
-        }
         .extract-name {
           writing-mode: vertical-rl;
           transform: rotate(180deg);
@@ -28696,52 +28670,23 @@ function Projects() {
 
         @keyframes extractLight {
           0% { opacity: 0; }
-          22% { opacity: 1; }
-          78% { opacity: 1; }
+          35% { opacity: 1; }
           100% { opacity: 0; }
         }
 
-        @keyframes extractBookToCover {
+        @keyframes extractBookToReader {
           0% {
             opacity: 1;
-            width: var(--extract-w);
-            height: var(--extract-h);
             transform: translate(-50%, -50%) translateY(0) translateZ(0) rotateY(0) scale(1);
           }
-          26% {
-            width: var(--extract-w);
-            height: var(--extract-h);
-            transform: translate(-50%, -50%) translateY(-22px) translateZ(90px) rotateY(-10deg) scale(1.08);
-          }
-          64% {
+          38% {
             opacity: 1;
-            width: min(80vw, 410px);
-            height: min(70vh, 512px);
-            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(420px) rotateZ(-2deg) rotateY(-8deg) scale(1);
-          }
-          86% {
-            opacity: 1;
-            width: min(80vw, 410px);
-            height: min(70vh, 512px);
-            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(430px) rotateZ(0deg) rotateY(0deg) scale(1);
+            transform: translate(-50%, -50%) translateY(-24px) translateZ(100px) rotateY(-10deg) scale(1.08);
           }
           100% {
             opacity: 0;
-            width: min(80vw, 410px);
-            height: min(70vh, 512px);
-            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(430px) rotateZ(0deg) rotateY(0deg) scale(1.01);
+            transform: translate(-50%, -50%) translate(calc(50vw - var(--extract-x)), calc(48vh - var(--extract-y))) translateZ(430px) rotateY(-14deg) scale(1.7);
           }
-        }
-
-        @keyframes extractSpineToCover {
-          0%, 45% { opacity: 1; transform: scaleX(1); }
-          65%, 100% { opacity: 0; transform: scaleX(5.6); }
-        }
-
-        @keyframes extractCoverFace {
-          0%, 42% { opacity: 0; transform: rotateY(82deg) scaleX(0.18); }
-          66% { opacity: 1; transform: rotateY(8deg) scaleX(1); }
-          86%, 100% { opacity: 1; transform: rotateY(0deg) scaleX(1); }
         }
         @media (max-width: 640px) {
           .project-library {
