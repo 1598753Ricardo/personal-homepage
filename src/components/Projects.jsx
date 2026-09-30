@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Book3D from './Book3D'
+import ProjectGateway from './ProjectGateway'
 
 const books = [
   {
@@ -110,13 +111,20 @@ export default function Projects() {
   const [hoveredId, setHoveredId] = useState(null)
   const [activeId, setActiveId] = useState(null)
   const [phase, setPhase] = useState('shelf')
+  const [doorOpened, setDoorOpened] = useState(false)
+  const [doorReady, setDoorReady] = useState(false)
   const [light, setLight] = useState({ x: 0, y: 0 })
   const [extractBook, setExtractBook] = useState(null)
   const openTimers = useRef([])
+  const shelfRef = useRef(null)
 
   const activeBook = useMemo(() => books.find(book => book.id === activeId), [activeId])
   const reading = activeBook && phase !== 'shelf'
   const showingReader = activeBook && phase !== 'shelf' && phase !== 'extracting'
+
+  useEffect(() => {
+    if (doorReady) shelfRef.current?.focus({ preventScroll: true })
+  }, [doorReady])
 
   useEffect(() => {
     return () => {
@@ -168,7 +176,7 @@ export default function Projects() {
 
   return (
     <section
-      className={`project-library${reading ? ' is-reading' : ''}`}
+      className={`project-library${reading ? ' is-reading' : ''}${doorOpened ? ' is-gateway-open' : ''}${doorReady ? ' is-gateway-ready' : ''}`}
       onPointerMove={moveLight}
       onPointerLeave={() => {
         setHoveredId(null)
@@ -176,12 +184,22 @@ export default function Projects() {
       }}
       style={{ '--light-x': light.x, '--light-y': light.y }}
     >
-      <div className="library-title" aria-hidden={reading}>
+      <ProjectGateway open={doorOpened} onOpen={() => setDoorOpened(true)} onEntered={() => setDoorReady(true)} />
+
+      <div className="library-title" aria-hidden={!doorOpened || Boolean(reading)}>
         <span>PROJECT BOOKSHELF</span>
         <p>每一本书都是一段法律学习、实践与工具探索。</p>
       </div>
 
-      <div className="shelf-room" aria-hidden={reading}>
+      <div
+        className="shelf-room"
+        id="project-bookshelf"
+        ref={shelfRef}
+        tabIndex={-1}
+        aria-label="个人作品集书架"
+        aria-hidden={!doorReady || Boolean(reading)}
+        inert={!doorReady || reading ? '' : undefined}
+      >
         <div className="shelf-wall">
           <div className="shelf-plank plank-top" />
           <div className="shelf-plank plank-mid" />
@@ -251,6 +269,8 @@ export default function Projects() {
         .project-library {
           min-height: 100vh;
           height: 100vh;
+          min-height: 100dvh;
+          height: 100dvh;
           position: relative;
           overflow: hidden;
           color: #f3ead8;
@@ -268,6 +288,16 @@ export default function Projects() {
           background:
             linear-gradient(90deg, rgba(255,255,255,0.04), transparent 18%, transparent 82%, rgba(255,255,255,0.025)),
             repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 118px);
+        }
+
+        .project-library:not(.is-gateway-open) .library-title,
+        .project-library:not(.is-gateway-open) .shelf-room {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .project-library:not(.is-gateway-open) .shelf-room {
+          transform: scale(.91);
         }
 
         .library-title {
@@ -308,6 +338,7 @@ export default function Projects() {
           align-items: center;
           justify-content: center;
           perspective: 1400px;
+          outline: none;
           transition: opacity 620ms ease, filter 620ms ease, transform 720ms var(--ease-out);
         }
 
@@ -549,6 +580,13 @@ export default function Projects() {
 
           .book-name {
             font-size: 0.58rem;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .library-title,
+          .shelf-room {
+            transition: none;
           }
         }
       `}</style>

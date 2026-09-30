@@ -4,10 +4,10 @@ import orbitItems from '../data/orbitItems'
 const ROTATION_SECONDS = 35
 const FULL_TURN = 360
 const IMAGE_CARDS = {
-  2: '/orbit-legal-ai.png',
-  3: '/orbit-legal-internship.png',
-  4: '/orbit-fund-intelligence.png',
-  7: '/orbit-social-impact.png',
+  2: '/orbit-ring/orbit-legal-ai.png',
+  3: '/orbit-ring/orbit-legal-internship.png',
+  4: '/orbit-ring/orbit-fund-intelligence.png',
+  7: '/orbit-ring/orbit-social-impact.png',
 }
 
 function normalizeAngle(angle) {
@@ -100,6 +100,7 @@ export default function RingCarousel() {
   const [selectedId, setSelectedId] = useState(null)
   const ringRef = useRef(null)
   const rotationRef = useRef(0)
+  const lastFrameRef = useRef(null)
 
   const selectedIndex = useMemo(
     () => orbitItems.findIndex(card => card.id === selectedId),
@@ -110,16 +111,27 @@ export default function RingCarousel() {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduceMotion) return undefined
 
-    const ring = ringRef.current
-    ring?.classList.add('is-spinning')
+    let frameId
+    const degreesPerMs = FULL_TURN / (ROTATION_SECONDS * 1000)
 
-    return () => {
-      ring?.classList.remove('is-spinning')
+    const tick = time => {
+      if (lastFrameRef.current === null) lastFrameRef.current = time
+      const delta = Math.min(time - lastFrameRef.current, 34)
+      lastFrameRef.current = time
+
+      rotationRef.current = normalizeAngle(rotationRef.current + delta * degreesPerMs)
+      setRotation(rotationRef.current)
+      ringRef.current?.style.setProperty('--ring-rotation', `${rotationRef.current}deg`)
+
+      frameId = requestAnimationFrame(tick)
     }
+
+    frameId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(frameId)
   }, [])
 
   useEffect(() => {
-    if (selectedIndex < 0) return
+    if (selectedIndex < 0) return undefined
 
     const targetRotation = normalizeAngle(-selectedIndex * (FULL_TURN / orbitItems.length))
     rotationRef.current = targetRotation
@@ -268,15 +280,6 @@ export default function RingCarousel() {
           transform-style: preserve-3d;
           transform: rotateY(var(--ring-rotation));
           will-change: transform;
-        }
-
-        .orbit-ring.is-spinning {
-          animation: ringRotate ${ROTATION_SECONDS}s linear infinite;
-        }
-
-        @keyframes ringRotate {
-          from { transform: rotateY(var(--ring-rotation)); }
-          to { transform: rotateY(calc(var(--ring-rotation) + 360deg)); }
         }
 
         .orbit-card {
@@ -436,7 +439,6 @@ export default function RingCarousel() {
 
         @media (prefers-reduced-motion: reduce) {
           .orbit-ring {
-            animation: none;
             transform: rotateY(0deg);
           }
         }

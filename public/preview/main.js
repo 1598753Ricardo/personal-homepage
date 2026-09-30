@@ -24,9 +24,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// node_modules/react/cjs/react.development.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/cjs/react.development.js
 var require_react_development = __commonJS({
-  "node_modules/react/cjs/react.development.js"(exports, module) {
+  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/cjs/react.development.js"(exports, module) {
     "use strict";
     if (true) {
       (function() {
@@ -1083,7 +1083,7 @@ var require_react_development = __commonJS({
           }
           return dispatcher.useContext(Context);
         }
-        function useState9(initialState) {
+        function useState10(initialState) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useState(initialState);
         }
@@ -1091,11 +1091,11 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useReducer(reducer, initialArg, init);
         }
-        function useRef9(initialValue) {
+        function useRef10(initialValue) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useRef(initialValue);
         }
-        function useEffect11(create, deps) {
+        function useEffect12(create, deps) {
           var dispatcher = resolveDispatcher();
           return dispatcher.useEffect(create, deps);
         }
@@ -1133,7 +1133,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useDeferredValue(value);
         }
-        function useId2() {
+        function useId3() {
           var dispatcher = resolveDispatcher();
           return dispatcher.useId();
         }
@@ -1878,15 +1878,15 @@ var require_react_development = __commonJS({
         exports.useContext = useContext6;
         exports.useDebugValue = useDebugValue;
         exports.useDeferredValue = useDeferredValue;
-        exports.useEffect = useEffect11;
-        exports.useId = useId2;
+        exports.useEffect = useEffect12;
+        exports.useId = useId3;
         exports.useImperativeHandle = useImperativeHandle;
         exports.useInsertionEffect = useInsertionEffect;
         exports.useLayoutEffect = useLayoutEffect4;
         exports.useMemo = useMemo8;
         exports.useReducer = useReducer;
-        exports.useRef = useRef9;
-        exports.useState = useState9;
+        exports.useRef = useRef10;
+        exports.useState = useState10;
         exports.useSyncExternalStore = useSyncExternalStore;
         exports.useTransition = useTransition;
         exports.version = ReactVersion;
@@ -1898,9 +1898,9 @@ var require_react_development = __commonJS({
   }
 });
 
-// node_modules/react/index.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/index.js
 var require_react = __commonJS({
-  "node_modules/react/index.js"(exports, module) {
+  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/index.js"(exports, module) {
     "use strict";
     if (false) {
       module.exports = null;
@@ -1910,9 +1910,9 @@ var require_react = __commonJS({
   }
 });
 
-// node_modules/scheduler/cjs/scheduler.development.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/scheduler/cjs/scheduler.development.js
 var require_scheduler_development = __commonJS({
-  "node_modules/scheduler/cjs/scheduler.development.js"(exports) {
+  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/scheduler/cjs/scheduler.development.js"(exports) {
     "use strict";
     if (true) {
       (function() {
@@ -2360,9 +2360,9 @@ var require_scheduler_development = __commonJS({
   }
 });
 
-// node_modules/scheduler/index.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/scheduler/index.js
 var require_scheduler = __commonJS({
-  "node_modules/scheduler/index.js"(exports, module) {
+  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/scheduler/index.js"(exports, module) {
     "use strict";
     if (false) {
       module.exports = null;
@@ -2372,9 +2372,9 @@ var require_scheduler = __commonJS({
   }
 });
 
-// node_modules/react-dom/cjs/react-dom.development.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/cjs/react-dom.development.js
 var require_react_dom_development = __commonJS({
-  "node_modules/react-dom/cjs/react-dom.development.js"(exports) {
+  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/cjs/react-dom.development.js"(exports) {
     "use strict";
     if (true) {
       (function() {
@@ -23536,9 +23536,9 @@ var require_react_dom_development = __commonJS({
   }
 });
 
-// node_modules/react-dom/index.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/index.js
 var require_react_dom = __commonJS({
-  "node_modules/react-dom/index.js"(exports, module) {
+  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/index.js"(exports, module) {
     "use strict";
     if (false) {
       checkDCE();
@@ -23549,9 +23549,9 @@ var require_react_dom = __commonJS({
   }
 });
 
-// node_modules/react-dom/client.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/client.js
 var require_client = __commonJS({
-  "node_modules/react-dom/client.js"(exports) {
+  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/client.js"(exports) {
     "use strict";
     var m = require_react_dom();
     if (false) {
@@ -23580,9 +23580,9 @@ var require_client = __commonJS({
   }
 });
 
-// node_modules/react/cjs/react-jsx-runtime.development.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/cjs/react-jsx-runtime.development.js
 var require_react_jsx_runtime_development = __commonJS({
-  "node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
+  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
     "use strict";
     if (true) {
       (function() {
@@ -24463,19 +24463,19 @@ var require_react_jsx_runtime_development = __commonJS({
             return jsxWithValidation(type, props, key, false);
           }
         }
-        var jsx18 = jsxWithValidationDynamic;
-        var jsxs12 = jsxWithValidationStatic;
+        var jsx19 = jsxWithValidationDynamic;
+        var jsxs13 = jsxWithValidationStatic;
         exports.Fragment = REACT_FRAGMENT_TYPE;
-        exports.jsx = jsx18;
-        exports.jsxs = jsxs12;
+        exports.jsx = jsx19;
+        exports.jsxs = jsxs13;
       })();
     }
   }
 });
 
-// node_modules/react/jsx-runtime.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/jsx-runtime.js
 var require_jsx_runtime = __commonJS({
-  "node_modules/react/jsx-runtime.js"(exports, module) {
+  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/jsx-runtime.js"(exports, module) {
     "use strict";
     if (false) {
       module.exports = null;
@@ -24485,14 +24485,14 @@ var require_jsx_runtime = __commonJS({
   }
 });
 
-// src/main.jsx
-var import_react6 = __toESM(require_react(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/main.jsx
+var import_react7 = __toESM(require_react(), 1);
 var import_client = __toESM(require_client(), 1);
 
-// src/App.jsx
-var import_react5 = __toESM(require_react(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/App.jsx
+var import_react6 = __toESM(require_react(), 1);
 
-// node_modules/react-router/dist/development/chunk-KS7C4IRE.mjs
+// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-router/dist/development/chunk-KS7C4IRE.mjs
 var React = __toESM(require_react(), 1);
 var React2 = __toESM(require_react(), 1);
 var React3 = __toESM(require_react(), 1);
@@ -27308,7 +27308,7 @@ function useViewTransitionState(to, { relative } = {}) {
   return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
 }
 
-// src/components/Navbar.jsx
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Navbar.jsx
 var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
 var links = [
   { label: "\u5173\u4E8E", path: "/about" },
@@ -27343,10 +27343,10 @@ function Navbar() {
   ] });
 }
 
-// src/components/RingCarousel.jsx
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/RingCarousel.jsx
 var import_react = __toESM(require_react(), 1);
 
-// src/data/orbitItems.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/data/orbitItems.js
 var orbitItems = [
   {
     id: 1,
@@ -27399,15 +27399,15 @@ var orbitItems = [
 ];
 var orbitItems_default = orbitItems;
 
-// src/components/RingCarousel.jsx
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/RingCarousel.jsx
 var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
 var ROTATION_SECONDS = 35;
 var FULL_TURN = 360;
 var IMAGE_CARDS = {
-  2: "/orbit-legal-ai.png",
-  3: "/orbit-legal-internship.png",
-  4: "/orbit-fund-intelligence.png",
-  7: "/orbit-social-impact.png"
+  2: "/orbit-ring/orbit-legal-ai.png",
+  3: "/orbit-ring/orbit-legal-internship.png",
+  4: "/orbit-ring/orbit-fund-intelligence.png",
+  7: "/orbit-ring/orbit-social-impact.png"
 };
 function normalizeAngle(angle) {
   return (angle % FULL_TURN + FULL_TURN) % FULL_TURN;
@@ -27487,6 +27487,7 @@ function RingCarousel() {
   const [selectedId, setSelectedId] = (0, import_react.useState)(null);
   const ringRef = (0, import_react.useRef)(null);
   const rotationRef = (0, import_react.useRef)(0);
+  const lastFrameRef = (0, import_react.useRef)(null);
   const selectedIndex = (0, import_react.useMemo)(
     () => orbitItems_default.findIndex((card) => card.id === selectedId),
     [selectedId]
@@ -27494,14 +27495,22 @@ function RingCarousel() {
   (0, import_react.useEffect)(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) return void 0;
-    const ring = ringRef.current;
-    ring?.classList.add("is-spinning");
-    return () => {
-      ring?.classList.remove("is-spinning");
+    let frameId;
+    const degreesPerMs = FULL_TURN / (ROTATION_SECONDS * 1e3);
+    const tick = (time) => {
+      if (lastFrameRef.current === null) lastFrameRef.current = time;
+      const delta = Math.min(time - lastFrameRef.current, 34);
+      lastFrameRef.current = time;
+      rotationRef.current = normalizeAngle(rotationRef.current + delta * degreesPerMs);
+      setRotation(rotationRef.current);
+      ringRef.current?.style.setProperty("--ring-rotation", `${rotationRef.current}deg`);
+      frameId = requestAnimationFrame(tick);
     };
+    frameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frameId);
   }, []);
   (0, import_react.useEffect)(() => {
-    if (selectedIndex < 0) return;
+    if (selectedIndex < 0) return void 0;
     const targetRotation = normalizeAngle(-selectedIndex * (FULL_TURN / orbitItems_default.length));
     rotationRef.current = targetRotation;
     setRotation(targetRotation);
@@ -27650,15 +27659,6 @@ function RingCarousel() {
           transform-style: preserve-3d;
           transform: rotateY(var(--ring-rotation));
           will-change: transform;
-        }
-
-        .orbit-ring.is-spinning {
-          animation: ringRotate ${ROTATION_SECONDS}s linear infinite;
-        }
-
-        @keyframes ringRotate {
-          from { transform: rotateY(var(--ring-rotation)); }
-          to { transform: rotateY(calc(var(--ring-rotation) + 360deg)); }
         }
 
         .orbit-card {
@@ -27818,7 +27818,6 @@ function RingCarousel() {
 
         @media (prefers-reduced-motion: reduce) {
           .orbit-ring {
-            animation: none;
             transform: rotateY(0deg);
           }
         }
@@ -27828,7 +27827,7 @@ function RingCarousel() {
   );
 }
 
-// src/components/Hero.jsx
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Hero.jsx
 var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
 function Hero() {
   return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("section", { style: {
@@ -27855,78 +27854,91 @@ function Hero() {
   ] });
 }
 
-// src/pages/HomePage.jsx
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/HomePage.jsx
 var import_jsx_runtime4 = __toESM(require_jsx_runtime(), 1);
 function HomePage() {
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Hero, {});
 }
 
-// src/pages/AboutPage.jsx
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/AboutPage.jsx
 var import_jsx_runtime5 = __toESM(require_jsx_runtime(), 1);
-var currentInterests = [
+var focusItems = [
   {
-    title: "Legal Analysis",
-    text: "\u5173\u6CE8\u4E8B\u5B9E\u95EE\u9898\u62C6\u89E3\u4E0E\u6CD5\u5F8B\u63A8\u7406\u3002"
+    title: "\u4E8B\u5B9E\u62C6\u89E3",
+    text: "\u4ECE\u6750\u6599\u3001\u884C\u4E3A\u548C\u65F6\u95F4\u7EBF\u91CC\u627E\u5230\u95EE\u9898\u771F\u6B63\u53D1\u751F\u7684\u4F4D\u7F6E\u3002"
   },
   {
-    title: "Legal Practice",
-    text: "\u5173\u6CE8\u6CD5\u5F8B\u5982\u4F55\u8FDB\u5165\u771F\u5B9E\u573A\u666F\u3002"
+    title: "\u6CD5\u5F8B\u5B9E\u52A1",
+    text: "\u628A\u89C4\u5219\u653E\u56DE\u6848\u4EF6\u3001\u8BC1\u636E\u3001\u6587\u4E66\u548C\u6C9F\u901A\u573A\u666F\u4E2D\u7406\u89E3\u3002"
   },
   {
-    title: "Technology",
-    text: "\u5173\u6CE8\u5DE5\u5177\u5982\u4F55\u8F85\u52A9\u6CD5\u5F8B\u5B66\u4E60\u548C\u7814\u7A76\u3002"
+    title: "AI \u5DE5\u5177",
+    text: "\u7528\u5DE5\u5177\u8F85\u52A9\u6574\u7406\u4FE1\u606F\u3001\u6821\u5BF9\u601D\u8DEF\u548C\u63A8\u8FDB\u4E2A\u4EBA\u9879\u76EE\u3002"
   }
 ];
-var profileRows = [
+var introPoints = [
   {
-    label: "BACKGROUND",
-    value: "Law Undergraduate"
+    title: "\u6211\u600E\u4E48\u770B\u6CD5\u5F8B",
+    text: "\u6211\u5BF9\u6CD5\u5F8B\u7684\u5174\u8DA3\uFF0C\u9996\u5148\u6765\u81EA\u4E8B\u5B9E\u672C\u8EAB\u3002\u4E00\u4E2A\u4E89\u8BAE\u4E3A\u4EC0\u4E48\u53D1\u751F\uFF0C\u5F53\u4E8B\u4EBA\u4E3A\u4EC0\u4E48\u4F5C\u51FA\u67D0\u79CD\u9009\u62E9\uFF0C\u89C4\u5219\u53C8\u5982\u4F55\u4ECB\u5165\u8FD9\u4E9B\u5177\u4F53\u5904\u5883\uFF0C\u8FD9\u4E9B\u95EE\u9898\u6BD4\u5355\u7EAF\u80CC\u8BF5\u7ED3\u8BBA\u66F4\u5438\u5F15\u6211\u3002"
   },
   {
-    label: "INTERESTS",
-    value: ["Legal Analysis", "Legal Practice", "AI Application"]
+    title: "\u6211\u600E\u4E48\u8BAD\u7EC3\u81EA\u5DF1",
+    text: "\u6211\u66F4\u613F\u610F\u628A\u6CD5\u5F8B\u653E\u56DE\u771F\u5B9E\u573A\u666F\u91CC\u7406\u89E3\uFF1A\u4ECE\u6848\u4F8B\u5206\u6790\u3001\u6587\u4E66\u8BAD\u7EC3\u3001\u5F8B\u6240\u5B9E\u4E60\u5230\u6A21\u62DF\u6CD5\u5EAD\uFF0C\u6162\u6162\u5EFA\u7ACB\u4E8B\u5B9E\u3001\u8BC1\u636E\u3001\u8BF7\u6C42\u548C\u8868\u8FBE\u4E4B\u95F4\u7684\u8FDE\u63A5\u3002"
   },
   {
-    label: "DIRECTION",
-    value: "Interdisciplinary Development"
+    title: "\u6211\u600E\u4E48\u4F7F\u7528\u5DE5\u5177",
+    text: "\u5728\u6CD5\u5F8B\u5B66\u4E60\u4E4B\u5916\uFF0C\u6211\u4E5F\u5C1D\u8BD5\u7528 AI \u8F85\u52A9\u8D44\u6599\u6574\u7406\u3001\u7814\u7A76\u5206\u6790\u548C\u4E2A\u4EBA\u9879\u76EE\u5F00\u53D1\u3002\u5B83\u4E0D\u662F\u66FF\u4EE3\u5224\u65AD\u7684\u7B54\u6848\u673A\u5668\uFF0C\u800C\u662F\u5E2E\u52A9\u6211\u66F4\u5FEB\u68B3\u7406\u4FE1\u606F\u3001\u6821\u5BF9\u601D\u8DEF\u3001\u63A8\u8FDB\u6267\u884C\u7684\u5DE5\u5177\u3002"
+  }
+];
+var profileItems = [
+  {
+    label: "\u5F53\u524D\u8EAB\u4EFD",
+    value: "\u4E1C\u839E\u7406\u5DE5\u5B66\u9662\u6CD5\u5B66\u672C\u79D1\u5728\u8BFB"
+  },
+  {
+    label: "\u5173\u6CE8\u65B9\u5411",
+    value: "\u6C11\u5546\u4E8B\u4E89\u8BAE\u89E3\u51B3\u3001\u4FDD\u9669\u7EA0\u7EB7\u3001\u6CD5\u5F8B\u79D1\u6280"
+  },
+  {
+    label: "\u6B63\u5728\u79EF\u7D2F",
+    value: "\u6848\u4F8B\u5206\u6790\u3001\u6587\u4E66\u8BAD\u7EC3\u3001\u5B9E\u52A1\u6750\u6599\u6574\u7406\u4E0E AI \u534F\u4F5C\u5F00\u53D1"
   }
 ];
 function AboutPage() {
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("main", { className: "about-page", style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("section", { className: "section about-section", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "container about-container", children: [
     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("hr", { className: "divider about-divider" }),
     /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "about-layout", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("aside", { className: "about-label about-reveal", "data-animate": true, children: "ABOUT" }),
+      /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("aside", { className: "about-label about-reveal", "data-animate": true, children: "\u5173\u4E8E" }),
       /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("article", { className: "about-main", children: [
         /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("header", { className: "about-hero about-reveal", "data-animate": true, children: [
           /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h1", { children: "\u6797\u6C47\u5DDD" }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { children: "\u6CD5\u5B66\u672C\u79D1\u751F\uFF0C\u559C\u6B22\u4ECE\u4E8B\u5B9E\u95EE\u9898\u51FA\u53D1\u5206\u6790\u6CD5\u5F8B\u95EE\u9898\uFF0C\u5173\u6CE8\u89C4\u5219\u3001\u4EBA\u7684\u884C\u4E3A\u4EE5\u53CA\u73B0\u5B9E\u573A\u666F\u4E4B\u95F4\u7684\u5173\u7CFB\u3002 \u4E5F\u5C1D\u8BD5\u63A2\u7D22\u6280\u672F\u5DE5\u5177\u5982\u4F55\u6539\u53D8\u5B66\u4E60\u4E0E\u5B9E\u8DF5\u65B9\u5F0F\u3002" })
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { children: "\u6CD5\u5B66\u672C\u79D1\u751F\uFF0C\u6B63\u5728\u63A2\u7D22\u6CD5\u5F8B\u5B9E\u52A1\u3001\u7ED3\u6784\u5316\u8868\u8FBE\u4E0E AI \u5DE5\u5177\u7684\u4EA4\u53C9\u65B9\u5411\u3002" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("section", { className: "about-introduction", "aria-label": "Personal Introduction", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "about-reveal", "data-animate": true, children: "\u6211\u5BF9\u6CD5\u5F8B\u7684\u5174\u8DA3\uFF0C\u5F88\u591A\u65F6\u5019\u6765\u81EA\u5BF9\u4E8B\u5B9E\u95EE\u9898\u7684\u5206\u6790\u3002\u4E00\u4E2A\u4E89\u8BAE\u4E3A\u4EC0\u4E48\u4F1A\u53D1\u751F\uFF0C\u5F53\u4E8B\u4EBA\u4E3A\u4EC0\u4E48\u4F5C\u51FA\u67D0\u79CD\u9009\u62E9\uFF0C\u89C4\u5219\u53C8\u5982\u4F55\u4ECB\u5165\u8FD9\u4E9B\u5177\u4F53\u5904\u5883\uFF0C\u8FD9\u4E9B\u95EE\u9898\u6BD4\u5355\u7EAF\u80CC\u8BF5\u7ED3\u8BBA\u66F4\u5438\u5F15\u6211\u3002" }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "about-reveal", "data-animate": true, children: "\u5728\u6211\u7684\u7406\u89E3\u91CC\uFF0C\u6CD5\u5F8B\u4E0D\u4EC5\u662F\u89C4\u5219\u672C\u8EAB\uFF0C\u4E5F\u5305\u542B\u4EBA\u7684\u9009\u62E9\u3001\u5229\u76CA\u5173\u7CFB\u548C\u5236\u5EA6\u903B\u8F91\u3002\u5B66\u4E60\u6CD5\u5F8B\u7684\u8FC7\u7A0B\uFF0C\u662F\u4E0D\u65AD\u628A\u62BD\u8C61\u89C4\u5219\u653E\u56DE\u73B0\u5B9E\u573A\u666F\u4E2D\uFF0C\u770B\u5B83\u5982\u4F55\u89E3\u91CA\u4E8B\u5B9E\u3001\u7EA6\u675F\u884C\u4E3A\uFF0C\u4E5F\u5982\u4F55\u7559\u4E0B\u9700\u8981\u5224\u65AD\u7684\u7A7A\u95F4\u3002" }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "about-reveal", "data-animate": true, children: "\u6240\u4EE5\u6211\u4E0D\u5E0C\u671B\u6CD5\u5F8B\u5B66\u4E60\u53EA\u505C\u7559\u5728\u4E66\u672C\u3002\u901A\u8FC7\u6848\u4F8B\u5206\u6790\u3001\u5F8B\u6240\u5B9E\u4E60\u3001\u6A21\u62DF\u6CD5\u5EAD\u3001\u6A21\u62DF\u4EF2\u88C1\u548C\u6587\u4E66\u8BAD\u7EC3\uFF0C\u6211\u6162\u6162\u7406\u89E3\u6CD5\u5F8B\u5982\u4F55\u8FDB\u5165\u771F\u5B9E\u5DE5\u4F5C\uFF1A\u4ECE\u4E8B\u5B9E\u6574\u7406\u3001\u8BC1\u636E\u5224\u65AD\uFF0C\u5230\u8868\u8FBE\u8BF7\u6C42\u548C\u56DE\u5E94\u4E89\u8BAE\u3002" }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { className: "about-reveal", "data-animate": true, children: "\u5728\u6CD5\u5F8B\u5B66\u4E60\u4E4B\u5916\uFF0C\u6211\u4E5F\u4F1A\u5C1D\u8BD5\u4F7F\u7528\u667A\u80FD\u5DE5\u5177\u8F85\u52A9\u8D44\u6599\u6574\u7406\u3001\u6CD5\u5F8B\u6587\u4E66\u5199\u4F5C\u3001\u7814\u7A76\u5206\u6790\u4EE5\u53CA\u4E2A\u4EBA\u9879\u76EE\u5F00\u53D1\u3002AI \u5BF9\u6211\u6765\u8BF4\u4E0D\u662F\u66FF\u4EE3\u6CD5\u5F8B\u5224\u65AD\u7684\u7B54\u6848\u673A\u5668\uFF0C\u800C\u662F\u5E2E\u52A9\u6211\u66F4\u5FEB\u6574\u7406\u4FE1\u606F\u3001\u6821\u5BF9\u601D\u8DEF\u3001\u63D0\u9AD8\u6548\u7387\u7684\u5DE5\u5177\u3002" })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("section", { className: "about-interests about-reveal", "aria-labelledby": "about-interests-title", "data-animate": true, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { id: "about-interests-title", children: "CURRENT INTERESTS" }),
-          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { children: currentInterests.map((item) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "about-interest-row", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("section", { className: "about-introduction", "aria-label": "Personal Introduction", children: introPoints.map((item, index) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "about-intro-point about-reveal", "data-animate": true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: String(index + 1).padStart(2, "0") }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { children: item.title }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { children: item.text })
+        ] }, item.title)) }),
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("section", { className: "about-focus about-reveal", "aria-labelledby": "about-focus-title", "data-animate": true, children: [
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h2", { id: "about-focus-title", children: "\u6211\u73B0\u5728\u66F4\u5173\u5FC3" }),
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { children: focusItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "about-focus-row", children: [
             /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("h3", { children: item.title }),
             /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { children: item.text })
           ] }, item.title)) })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("section", { className: "about-profile about-reveal", "aria-label": "Profile", "data-animate": true, children: profileRows.map((item) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "about-profile-row", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("section", { className: "about-profile about-reveal", "aria-label": "Profile", "data-animate": true, children: profileItems.map((item) => /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)("div", { className: "about-profile-row", children: [
           /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: item.label }),
-          Array.isArray(item.value) ? /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { children: item.value.map((line) => /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("span", { children: line }, line)) }) : /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { children: item.value })
+          /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("p", { children: item.value })
         ] }, item.label)) })
       ] })
     ] })
   ] }) }) });
 }
 
-// src/components/Projects.jsx
-var import_react3 = __toESM(require_react(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Projects.jsx
+var import_react4 = __toESM(require_react(), 1);
 
-// src/components/Book3D.jsx
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Book3D.jsx
 var import_react2 = __toESM(require_react(), 1);
 var import_react_dom = __toESM(require_react_dom(), 1);
 var import_jsx_runtime6 = __toESM(require_jsx_runtime(), 1);
@@ -28185,8 +28197,190 @@ function Book3D({ book, phase = "open", onClose }) {
   return (0, import_react_dom.createPortal)(stage, document.body);
 }
 
-// src/components/Projects.jsx
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/ProjectGateway.jsx
+var import_react3 = __toESM(require_react(), 1);
 var import_jsx_runtime7 = __toESM(require_jsx_runtime(), 1);
+var ARTWORK = "/project-gate-refined-v2.png";
+var SCALE = "/project-gate.png";
+var ARTWORK_BOUNDS = { x: 136, width: 1400, height: 941 };
+var CENTER = { x: 836, y: 260 };
+var ANCHORS = { left: { x: 690, y: 277 }, right: { x: 982, y: 277 } };
+var OPEN_DURATION = 2200;
+function DoorArtwork({ ready }) {
+  const id = (0, import_react3.useId)().replace(/:/g, "");
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("svg", { className: "gateway-artwork", viewBox: `${ARTWORK_BOUNDS.x} 0 ${ARTWORK_BOUNDS.width} ${ARTWORK_BOUNDS.height}`, preserveAspectRatio: "xMidYMid slice", "aria-hidden": "true", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("defs", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { id: `${id}-beam-outline`, d: "M 818 244 C 797 230 769 238 742 250 C 720 260 706 264 689 257 C 676 251 665 249 659 257 C 652 266 658 274 667 274 C 679 274 681 262 671 261 C 680 263 683 271 698 275 C 724 281 747 266 773 263 C 791 260 805 265 818 276 Z" }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("g", { id: `${id}-pan-outline`, fill: "white", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("ellipse", { cx: "690", cy: "279", rx: "7.5", ry: "5.5" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M 690 283 C 681 287 686 293 690 295 C 697 291 696 286 690 283" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M 689 291 L 626 423 M 692 291 L 756 423", fill: "none", stroke: "white", strokeWidth: "7", strokeLinecap: "round" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M 690 291 L 690 424", fill: "none", stroke: "white", strokeWidth: "6", strokeLinecap: "round" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M 613 422 L 771 422 L 770 432 C 751 453 724 461 691 461 C 659 461 631 452 616 436 Z" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("clipPath", { id: `${id}-beam`, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("use", { href: `#${id}-beam-outline` }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("use", { href: `#${id}-beam-outline`, transform: "translate(1672 0) scale(-1 1)" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("rect", { x: "685", y: "257", width: "10", height: "22" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("rect", { x: "977", y: "257", width: "10", height: "22" })
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("mask", { id: `${id}-left`, maskUnits: "userSpaceOnUse", x: "590", y: "260", width: "215", height: "220", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("use", { href: `#${id}-pan-outline` }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("mask", { id: `${id}-right`, maskUnits: "userSpaceOnUse", x: "868", y: "260", width: "215", height: "220", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("use", { href: `#${id}-pan-outline`, transform: "translate(1672 0) scale(-1 1)" }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("clipPath", { id: `${id}-stand`, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M826 179 C824 185 824 190 820 195 C817 196 815 198 816 202 L820 205 L820 209 C811 210 810 214 814 219 C817 223 823 225 827 226 L823 229 C815 230 809 232 807 234 Q804 237 812 240 L812 281 L824 283 L807 285 Q800 286 801 290 Q802 294 810 297 L813 299 L813 302 L812 304 L810 425 L807 426 L808 432 L803 434 Q799 437 804 441 L809 444 L809 449 L812 451 C810 461 803 470 790 475 L790 478 Q790 480 798 481 L780 482 L779 485 L768 486 L767 491 L760 493 L758 495 L749 496 L749 505 L923 505 L923 496 L914 495 L912 493 L905 491 L904 486 L893 485 L892 482 L874 481 Q882 480 882 478 L882 475 C869 470 862 461 860 451 L863 449 L863 444 L868 441 Q873 437 869 434 L864 432 L865 426 L862 425 L860 304 L859 302 L859 299 L862 297 Q870 294 871 290 Q872 286 865 285 L848 283 L860 281 L860 240 Q868 237 865 234 C863 232 857 230 849 229 L845 226 C849 225 855 223 858 219 C862 214 861 210 852 209 L852 205 L856 202 C857 198 855 196 852 195 C848 190 848 185 846 179 Z" }) })
+    ] }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: ready ? ARTWORK : SCALE, width: "1672", height: "941" }),
+    ready && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("g", { className: "gateway-scale-art", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: SCALE, width: "1672", height: "941", clipPath: `url(#${id}-stand)` }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("g", { "data-scale-part": "beam", className: "gateway-scale-part", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: SCALE, width: "1672", height: "941", clipPath: `url(#${id}-beam)` }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("g", { "data-scale-part": "left", className: "gateway-scale-part", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: SCALE, width: "1672", height: "941", mask: `url(#${id}-left)` }) }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("g", { "data-scale-part": "right", className: "gateway-scale-part", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: SCALE, width: "1672", height: "941", mask: `url(#${id}-right)` }) })
+    ] })
+  ] });
+}
+function ProjectGateway({ open, onOpen, onEntered }) {
+  const gateRef = (0, import_react3.useRef)(null);
+  const pose = (0, import_react3.useRef)({ angle: 0, sway: 0 });
+  const interaction = (0, import_react3.useRef)({ hovered: false, settling: null });
+  const onOpenRef = (0, import_react3.useRef)(onOpen);
+  const onEnteredRef = (0, import_react3.useRef)(onEntered);
+  const [ready, setReady] = (0, import_react3.useState)(false);
+  const [hovered, setHovered] = (0, import_react3.useState)(false);
+  const [settling, setSettling] = (0, import_react3.useState)(false);
+  const [reducedMotion, setReducedMotion] = (0, import_react3.useState)(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  onOpenRef.current = onOpen;
+  onEnteredRef.current = onEntered;
+  (0, import_react3.useEffect)(() => {
+    if (!open) return void 0;
+    const timer = window.setTimeout(() => onEnteredRef.current?.(), reducedMotion ? 0 : OPEN_DURATION);
+    return () => window.clearTimeout(timer);
+  }, [open, reducedMotion]);
+  (0, import_react3.useEffect)(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(media.matches);
+    media.addEventListener("change", update);
+    let disposed = false;
+    Promise.all([ARTWORK, SCALE].map((src) => {
+      const image = new Image();
+      image.src = src;
+      return image.decode();
+    })).then(() => {
+      if (!disposed) setReady(true);
+    }).catch(() => {
+    });
+    return () => {
+      disposed = true;
+      media.removeEventListener("change", update);
+    };
+  }, []);
+  (0, import_react3.useEffect)(() => {
+    if (!ready) return void 0;
+    const parts = [...gateRef.current.querySelectorAll("[data-scale-part]")];
+    function paint(angle, sway) {
+      pose.current = { angle, sway };
+      const radians = angle * Math.PI / 180;
+      for (const part of parts) {
+        const name = part.dataset.scalePart;
+        if (name === "beam") {
+          part.setAttribute("transform", `rotate(${angle} ${CENTER.x} ${CENTER.y})`);
+          continue;
+        }
+        const anchor = ANCHORS[name];
+        const x = anchor.x - CENTER.x;
+        const y = anchor.y - CENTER.y;
+        const dx = x * Math.cos(radians) - y * Math.sin(radians) - x;
+        const dy = x * Math.sin(radians) + y * Math.cos(radians) - y;
+        part.setAttribute("transform", `translate(${dx} ${dy}) rotate(${sway} ${anchor.x} ${anchor.y})`);
+      }
+    }
+    if (open || reducedMotion) {
+      paint(0, 0);
+      if (!open && interaction.current.settling) {
+        interaction.current.settling = null;
+        onOpenRef.current();
+      }
+      return void 0;
+    }
+    let frame;
+    let previous = performance.now();
+    const started = previous;
+    function animate(now) {
+      const dt = Math.min(now - previous, 50);
+      previous = now;
+      const pending = interaction.current.settling;
+      if (pending) {
+        const progress = Math.min((now - pending.time) / 360, 1);
+        const remaining = (1 - progress) ** 3;
+        paint(pending.angle * remaining, pending.sway * remaining);
+        if (progress === 1) {
+          interaction.current.settling = null;
+          onOpenRef.current();
+          return;
+        }
+      } else {
+        const phase = (now - started) / 4800 * Math.PI * 2;
+        const amplitude = interaction.current.hovered ? 9 : 7;
+        const target = Math.sin(phase) * amplitude;
+        const sway = Math.sin(phase - 0.8) * 1.1;
+        const smoothing = 1 - Math.exp(-dt / 110);
+        paint(pose.current.angle + (target - pose.current.angle) * smoothing, pose.current.sway + (sway - pose.current.sway) * smoothing);
+      }
+      frame = requestAnimationFrame(animate);
+    }
+    frame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(frame);
+  }, [ready, open, reducedMotion]);
+  function highlight(value) {
+    interaction.current.hovered = value;
+    setHovered(value);
+  }
+  function movePointer(event) {
+    if (event.pointerType !== "mouse" || settling) return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const scale = Math.max(rect.width / ARTWORK_BOUNDS.width, rect.height / ARTWORK_BOUNDS.height);
+    const x = ARTWORK_BOUNDS.x + (event.clientX - rect.left - (rect.width - ARTWORK_BOUNDS.width * scale) / 2) / scale;
+    const y = (event.clientY - rect.top - (rect.height - ARTWORK_BOUNDS.height * scale) / 2) / scale;
+    const near = x > 580 && x < 1090 && y > 150 && y < 540;
+    if (near !== interaction.current.hovered) highlight(near);
+  }
+  function requestOpen() {
+    if (open || interaction.current.settling) return;
+    if (reducedMotion || !ready) {
+      onOpenRef.current();
+      return;
+    }
+    interaction.current.settling = { ...pose.current, time: performance.now() };
+    setSettling(true);
+    highlight(false);
+  }
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+    "button",
+    {
+      ref: gateRef,
+      type: "button",
+      className: `project-gateway${hovered ? " is-hovered" : ""}${settling ? " is-settling" : ""}`,
+      style: { "--gateway-open-duration": `${OPEN_DURATION}ms` },
+      "aria-label": "\u63A8\u5F00\u5927\u95E8\u8FDB\u5165\u9879\u76EE\u4E66\u67B6",
+      "aria-controls": "project-bookshelf",
+      "aria-expanded": open,
+      "aria-hidden": open,
+      "aria-busy": settling && !open,
+      inert: open ? "" : void 0,
+      onPointerMove: movePointer,
+      onPointerLeave: () => highlight(false),
+      onFocus: () => highlight(true),
+      onBlur: () => highlight(false),
+      onClick: requestOpen,
+      children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "gateway-scene", "aria-hidden": "true", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door gateway-door-left", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-face", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DoorArtwork, { ready }) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door gateway-door-right", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-face", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DoorArtwork, { ready }) }) }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-seam" })
+      ] })
+    }
+  );
+}
+
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Projects.jsx
+var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
 var books = [
   {
     id: 1,
@@ -28292,16 +28486,22 @@ var books = [
   }
 ];
 function Projects() {
-  const [hoveredId, setHoveredId] = (0, import_react3.useState)(null);
-  const [activeId, setActiveId] = (0, import_react3.useState)(null);
-  const [phase, setPhase] = (0, import_react3.useState)("shelf");
-  const [light, setLight] = (0, import_react3.useState)({ x: 0, y: 0 });
-  const [extractBook, setExtractBook] = (0, import_react3.useState)(null);
-  const openTimers = (0, import_react3.useRef)([]);
-  const activeBook = (0, import_react3.useMemo)(() => books.find((book) => book.id === activeId), [activeId]);
+  const [hoveredId, setHoveredId] = (0, import_react4.useState)(null);
+  const [activeId, setActiveId] = (0, import_react4.useState)(null);
+  const [phase, setPhase] = (0, import_react4.useState)("shelf");
+  const [doorOpened, setDoorOpened] = (0, import_react4.useState)(false);
+  const [doorReady, setDoorReady] = (0, import_react4.useState)(false);
+  const [light, setLight] = (0, import_react4.useState)({ x: 0, y: 0 });
+  const [extractBook, setExtractBook] = (0, import_react4.useState)(null);
+  const openTimers = (0, import_react4.useRef)([]);
+  const shelfRef = (0, import_react4.useRef)(null);
+  const activeBook = (0, import_react4.useMemo)(() => books.find((book) => book.id === activeId), [activeId]);
   const reading = activeBook && phase !== "shelf";
   const showingReader = activeBook && phase !== "shelf" && phase !== "extracting";
-  (0, import_react3.useEffect)(() => {
+  (0, import_react4.useEffect)(() => {
+    if (doorReady) shelfRef.current?.focus({ preventScroll: true });
+  }, [doorReady]);
+  (0, import_react4.useEffect)(() => {
     return () => {
       openTimers.current.forEach((timer) => window.clearTimeout(timer));
     };
@@ -28343,10 +28543,10 @@ function Projects() {
       setActiveId(null);
     }, 900));
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)(
     "section",
     {
-      className: `project-library${reading ? " is-reading" : ""}`,
+      className: `project-library${reading ? " is-reading" : ""}${doorOpened ? " is-gateway-open" : ""}${doorReady ? " is-gateway-ready" : ""}`,
       onPointerMove: moveLight,
       onPointerLeave: () => {
         setHoveredId(null);
@@ -28354,41 +28554,54 @@ function Projects() {
       },
       style: { "--light-x": light.x, "--light-y": light.y },
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "library-title", "aria-hidden": reading, children: [
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { children: "PROJECT BOOKSHELF" }),
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("p", { children: "\u6BCF\u4E00\u672C\u4E66\u90FD\u662F\u4E00\u6BB5\u6CD5\u5F8B\u5B66\u4E60\u3001\u5B9E\u8DF5\u4E0E\u5DE5\u5177\u63A2\u7D22\u3002" })
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(ProjectGateway, { open: doorOpened, onOpen: () => setDoorOpened(true), onEntered: () => setDoorReady(true) }),
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "library-title", "aria-hidden": !doorOpened || Boolean(reading), children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: "PROJECT BOOKSHELF" }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { children: "\u6BCF\u4E00\u672C\u4E66\u90FD\u662F\u4E00\u6BB5\u6CD5\u5F8B\u5B66\u4E60\u3001\u5B9E\u8DF5\u4E0E\u5DE5\u5177\u63A2\u7D22\u3002" })
         ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "shelf-room", "aria-hidden": reading, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "shelf-wall", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "shelf-plank plank-top" }),
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "shelf-plank plank-mid" }),
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "shelf-plank plank-bottom" }),
-          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "book-line", "aria-label": "\u4E2A\u4EBA\u4F5C\u54C1\u96C6\u4E66\u67B6", children: books.map((book, index) => /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-            "button",
-            {
-              type: "button",
-              className: `shelf-book${hoveredId === book.id ? " is-hovered" : ""}`,
-              style: {
-                "--book-color": book.color,
-                "--book-accent": book.accent,
-                "--book-height": `${315 + index % 4 * 26}px`,
-                "--book-width": `${72 + index % 2 * 10}px`,
-                "--book-lean": `${(index - 3) * 0.7}deg`
-              },
-              onPointerEnter: () => setHoveredId(book.id),
-              onPointerLeave: () => setHoveredId(null),
-              onFocus: () => setHoveredId(book.id),
-              onBlur: () => setHoveredId(null),
-              onClick: (event) => openBook(book, event),
-              children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "book-spine-face", children: [
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "book-year", children: book.year }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "book-name", children: book.title }),
-                /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "book-index", children: String(book.id).padStart(2, "0") })
-              ] })
-            },
-            book.slug
-          )) })
-        ] }) }),
-        extractBook ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+          "div",
+          {
+            className: "shelf-room",
+            id: "project-bookshelf",
+            ref: shelfRef,
+            tabIndex: -1,
+            "aria-label": "\u4E2A\u4EBA\u4F5C\u54C1\u96C6\u4E66\u67B6",
+            "aria-hidden": !doorReady || Boolean(reading),
+            inert: !doorReady || reading ? "" : void 0,
+            children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "shelf-wall", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "shelf-plank plank-top" }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "shelf-plank plank-mid" }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "shelf-plank plank-bottom" }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "book-line", "aria-label": "\u4E2A\u4EBA\u4F5C\u54C1\u96C6\u4E66\u67B6", children: books.map((book, index) => /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                "button",
+                {
+                  type: "button",
+                  className: `shelf-book${hoveredId === book.id ? " is-hovered" : ""}`,
+                  style: {
+                    "--book-color": book.color,
+                    "--book-accent": book.accent,
+                    "--book-height": `${315 + index % 4 * 26}px`,
+                    "--book-width": `${72 + index % 2 * 10}px`,
+                    "--book-lean": `${(index - 3) * 0.7}deg`
+                  },
+                  onPointerEnter: () => setHoveredId(book.id),
+                  onPointerLeave: () => setHoveredId(null),
+                  onFocus: () => setHoveredId(book.id),
+                  onBlur: () => setHoveredId(null),
+                  onClick: (event) => openBook(book, event),
+                  children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "book-spine-face", children: [
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "book-year", children: book.year }),
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "book-name", children: book.title }),
+                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "book-index", children: String(book.id).padStart(2, "0") })
+                  ] })
+                },
+                book.slug
+              )) })
+            ] })
+          }
+        ),
+        extractBook ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
           "div",
           {
             className: "book-extract-overlay",
@@ -28401,14 +28614,14 @@ function Projects() {
               "--book-color": extractBook.color,
               "--book-accent": extractBook.accent
             },
-            children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "extract-book", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "extract-spine", "aria-hidden": "true", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-year", children: extractBook.year }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-name", children: extractBook.title }),
-              /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "extract-index", children: String(extractBook.id).padStart(2, "0") })
+            children: /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "extract-book", children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "extract-spine", "aria-hidden": "true", children: [
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "extract-year", children: extractBook.year }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "extract-name", children: extractBook.title }),
+              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "extract-index", children: String(extractBook.id).padStart(2, "0") })
             ] }) })
           }
         ) : null,
-        showingReader ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+        showingReader ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
           Book3D,
           {
             book: activeBook,
@@ -28416,10 +28629,12 @@ function Projects() {
             onClose: closeBook
           }
         ) : null,
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("style", { children: `
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("style", { children: `
         .project-library {
           min-height: 100vh;
           height: 100vh;
+          min-height: 100dvh;
+          height: 100dvh;
           position: relative;
           overflow: hidden;
           color: #f3ead8;
@@ -28437,6 +28652,16 @@ function Projects() {
           background:
             linear-gradient(90deg, rgba(255,255,255,0.04), transparent 18%, transparent 82%, rgba(255,255,255,0.025)),
             repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 118px);
+        }
+
+        .project-library:not(.is-gateway-open) .library-title,
+        .project-library:not(.is-gateway-open) .shelf-room {
+          opacity: 0;
+          pointer-events: none;
+        }
+
+        .project-library:not(.is-gateway-open) .shelf-room {
+          transform: scale(.91);
         }
 
         .library-title {
@@ -28477,6 +28702,7 @@ function Projects() {
           align-items: center;
           justify-content: center;
           perspective: 1400px;
+          outline: none;
           transition: opacity 620ms ease, filter 620ms ease, transform 720ms var(--ease-out);
         }
 
@@ -28720,19 +28946,26 @@ function Projects() {
             font-size: 0.58rem;
           }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+          .library-title,
+          .shelf-room {
+            transition: none;
+          }
+        }
       ` })
       ]
     }
   );
 }
 
-// src/pages/ProjectsPage.jsx
-var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/ProjectsPage.jsx
+var import_jsx_runtime9 = __toESM(require_jsx_runtime(), 1);
 function ProjectsPage() {
-  return /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(Projects, {});
+  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Projects, {});
 }
 
-// src/data/siteData.js
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/data/siteData.js
 var siteData = {
   nav: {
     name: "\u6797\u6C47\u5DDD"
@@ -28875,15 +29108,15 @@ var siteData = {
 };
 var siteData_default = siteData;
 
-// src/components/Strengths.jsx
-var import_react4 = __toESM(require_react(), 1);
-var import_jsx_runtime9 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Strengths.jsx
+var import_react5 = __toESM(require_react(), 1);
+var import_jsx_runtime10 = __toESM(require_jsx_runtime(), 1);
 function Strengths() {
-  const [activeCertificate, setActiveCertificate] = (0, import_react4.useState)(null);
-  const [isPreviewing, setIsPreviewing] = (0, import_react4.useState)(false);
-  const stageRef = (0, import_react4.useRef)(null);
-  const hideTimerRef = (0, import_react4.useRef)(null);
-  (0, import_react4.useEffect)(() => {
+  const [activeCertificate, setActiveCertificate] = (0, import_react5.useState)(null);
+  const [isPreviewing, setIsPreviewing] = (0, import_react5.useState)(false);
+  const stageRef = (0, import_react5.useRef)(null);
+  const hideTimerRef = (0, import_react5.useRef)(null);
+  (0, import_react5.useEffect)(() => {
     return () => clearTimeout(hideTimerRef.current);
   }, []);
   const showCertificate = (item, event) => {
@@ -28909,14 +29142,14 @@ function Strengths() {
       setActiveCertificate(null);
     }, 360);
   };
-  return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("section", { className: "section certificate-section", style: { background: "var(--bg)" }, children: /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "container", children: /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)(
+  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("section", { className: "section certificate-section", style: { background: "var(--bg)" }, children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "container", children: /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)(
     "div",
     {
       ref: stageRef,
       className: `certificate-stage ${isPreviewing ? "is-previewing" : ""}`,
       children: [
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("h1", { className: "text-gradient certificate-title", children: "\u8BC1\u4E66" }),
-        /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "certificate-name-list", children: siteData_default.strengths.credentials.map((item) => /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("h1", { className: "text-gradient certificate-title", children: "\u8BC1\u4E66" }),
+        /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "certificate-name-list", children: siteData_default.strengths.credentials.map((item) => /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(
           "button",
           {
             className: "certificate-name",
@@ -28929,25 +29162,25 @@ function Strengths() {
           },
           item.slug
         )) }),
-        activeCertificate && /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("div", { className: "glass certificate-preview", "aria-live": "polite", children: activeCertificate.image ? /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("img", { src: activeCertificate.image, alt: activeCertificate.title }) : /* @__PURE__ */ (0, import_jsx_runtime9.jsxs)("div", { className: "certificate-placeholder", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("span", { children: activeCertificate.title }),
-          /* @__PURE__ */ (0, import_jsx_runtime9.jsx)("small", { children: "\u628A\u8BC1\u4E66\u56FE\u7247\u8DEF\u5F84\u586B\u5230 siteData.js \u7684 image \u5B57\u6BB5" })
+        activeCertificate && /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { className: "glass certificate-preview", "aria-live": "polite", children: activeCertificate.image ? /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("img", { src: activeCertificate.image, alt: activeCertificate.title }) : /* @__PURE__ */ (0, import_jsx_runtime10.jsxs)("div", { className: "certificate-placeholder", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("span", { children: activeCertificate.title }),
+          /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("small", { children: "\u628A\u8BC1\u4E66\u56FE\u7247\u8DEF\u5F84\u586B\u5230 siteData.js \u7684 image \u5B57\u6BB5" })
         ] }) })
       ]
     }
   ) }) });
 }
 
-// src/pages/StrengthsPage.jsx
-var import_jsx_runtime10 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/StrengthsPage.jsx
+var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
 function StrengthsPage() {
-  return /* @__PURE__ */ (0, import_jsx_runtime10.jsx)("div", { style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime10.jsx)(Strengths, {}) });
+  return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Strengths, {}) });
 }
 
-// src/components/Footer.jsx
-var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Footer.jsx
+var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
 function Footer() {
-  return /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("footer", { style: {
+  return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("footer", { style: {
     background: "var(--bg)",
     display: "flex",
     flexDirection: "column",
@@ -28957,88 +29190,88 @@ function Footer() {
     paddingBottom: 120,
     textAlign: "center"
   }, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("hr", { className: "divider" }),
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsxs)("div", { "data-animate": true, style: { maxWidth: 520 }, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { className: "tag", style: { marginBottom: "var(--sp-xl)" }, children: "04 \xB7 \u8054\u7CFB" }),
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("h2", { style: { fontWeight: 590, fontSize: "var(--h2)", color: "var(--text-heading)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "var(--sp-md)" }, children: "\u4FDD\u6301\u8054\u7CFB" }),
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("p", { style: { fontSize: "var(--body)", color: "var(--text-muted)", marginBottom: "var(--sp-2xl)" }, children: "\u6B63\u5728\u63A2\u7D22\u6CD5\u5F8B\u4E0E\u5DE5\u5177\u7684\u4EA4\u53C9\u5730\u5E26\uFF0C\u6B22\u8FCE\u4EA4\u6D41" }),
-      /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("a", { href: "mailto:206955934@qq.com", className: "accent-link", style: { fontWeight: 590, fontSize: "var(--h3)", color: "var(--text-heading)", letterSpacing: "-0.02em" }, children: "206955934@qq.com" })
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("hr", { className: "divider" }),
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("div", { "data-animate": true, style: { maxWidth: 520 }, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { className: "tag", style: { marginBottom: "var(--sp-xl)" }, children: "04 \xB7 \u8054\u7CFB" }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("h2", { style: { fontWeight: 590, fontSize: "var(--h2)", color: "var(--text-heading)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: "var(--sp-md)" }, children: "\u4FDD\u6301\u8054\u7CFB" }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("p", { style: { fontSize: "var(--body)", color: "var(--text-muted)", marginBottom: "var(--sp-2xl)" }, children: "\u6B63\u5728\u63A2\u7D22\u6CD5\u5F8B\u4E0E\u5DE5\u5177\u7684\u4EA4\u53C9\u5730\u5E26\uFF0C\u6B22\u8FCE\u4EA4\u6D41" }),
+      /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("a", { href: "mailto:206955934@qq.com", className: "accent-link", style: { fontWeight: 590, fontSize: "var(--h3)", color: "var(--text-heading)", letterSpacing: "-0.02em" }, children: "206955934@qq.com" })
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("nav", { style: { display: "flex", alignItems: "center", gap: "var(--sp-sm)", fontSize: "var(--body-sm)", color: "var(--text-muted)" }, children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("span", { children: "\xA9 2026 \u6797\u6C47\u5DDD" }) })
+    /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("nav", { style: { display: "flex", alignItems: "center", gap: "var(--sp-sm)", fontSize: "var(--body-sm)", color: "var(--text-muted)" }, children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("span", { children: "\xA9 2026 \u6797\u6C47\u5DDD" }) })
   ] });
 }
 
-// src/pages/ContactPage.jsx
-var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/ContactPage.jsx
+var import_jsx_runtime13 = __toESM(require_jsx_runtime(), 1);
 function ContactPage() {
-  return /* @__PURE__ */ (0, import_jsx_runtime12.jsx)("div", { style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime12.jsx)(Footer, {}) });
+  return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Footer, {}) });
 }
 
-// src/components/Resume.jsx
-var import_jsx_runtime13 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Resume.jsx
+var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
 function Resume() {
-  return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("section", { className: "section", style: { background: "var(--bg)" }, children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "container timeline-container", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("hr", { className: "divider", style: { marginBottom: "var(--sp-4xl)" } }),
-    /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "timeline-layout", children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("div", { className: "timeline-list", "data-animate": true, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("svg", { className: "timeline-road", viewBox: "0 0 100 100", "aria-hidden": "true", preserveAspectRatio: "none", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("defs", { children: /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("linearGradient", { id: "timelineRoadGradient", x1: "20", y1: "80", x2: "80", y2: "20", gradientUnits: "userSpaceOnUse", children: [
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("stop", { offset: "0%", stopColor: "rgba(255,70,80,.28)" }),
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("stop", { offset: "42%", stopColor: "#FF4650" }),
-          /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("stop", { offset: "100%", stopColor: "rgba(255,255,255,.62)" })
+  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("section", { className: "section", style: { background: "var(--bg)" }, children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "container timeline-container", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("hr", { className: "divider", style: { marginBottom: "var(--sp-4xl)" } }),
+    /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "timeline-layout", children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "timeline-list", "data-animate": true, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("svg", { className: "timeline-road", viewBox: "0 0 100 100", "aria-hidden": "true", preserveAspectRatio: "none", children: [
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("defs", { children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("linearGradient", { id: "timelineRoadGradient", x1: "20", y1: "80", x2: "80", y2: "20", gradientUnits: "userSpaceOnUse", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("stop", { offset: "0%", stopColor: "rgba(255,70,80,.28)" }),
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("stop", { offset: "42%", stopColor: "#FF4650" }),
+          /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("stop", { offset: "100%", stopColor: "rgba(255,255,255,.62)" })
         ] }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("path", { className: "timeline-road-glow", d: "M14 86 C6 76 24 69 32 64 C48 55 38 48 50 44 C66 39 58 28 70 24 C80 20 77 12 88 10" }),
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("path", { className: "timeline-road-line", d: "M14 86 C6 76 24 69 32 64 C48 55 38 48 50 44 C66 39 58 28 70 24 C80 20 77 12 88 10" })
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("path", { className: "timeline-road-glow", d: "M14 86 C6 76 24 69 32 64 C48 55 38 48 50 44 C66 39 58 28 70 24 C80 20 77 12 88 10" }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("path", { className: "timeline-road-line", d: "M14 86 C6 76 24 69 32 64 C48 55 38 48 50 44 C66 39 58 28 70 24 C80 20 77 12 88 10" })
       ] }),
-      siteData_default.experience.items.map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime13.jsxs)("article", { className: "glass timeline-card", tabIndex: 0, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { className: "timeline-dot" }),
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("p", { className: "tag", style: { marginBottom: "var(--sp-xs)" }, children: item.time }),
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("h3", { children: item.title }),
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("ul", { className: "timeline-detail", children: item.points.map((point) => /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("li", { children: point }, point)) }),
-        /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("span", { className: "timeline-number", children: `0${i + 1}` })
+      siteData_default.experience.items.map((item, i) => /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("article", { className: "glass timeline-card", tabIndex: 0, children: [
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { className: "timeline-dot" }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("p", { className: "tag", style: { marginBottom: "var(--sp-xs)" }, children: item.time }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("h3", { children: item.title }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("ul", { className: "timeline-detail", children: item.points.map((point) => /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("li", { children: point }, point)) }),
+        /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("span", { className: "timeline-number", children: `0${i + 1}` })
       ] }, item.title))
     ] }) })
   ] }) });
 }
 
-// src/pages/ResumePage.jsx
-var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/ResumePage.jsx
+var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
 function ResumePage() {
-  return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("div", { style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime14.jsx)(Resume, {}) });
+  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Resume, {}) });
 }
 
-// src/pages/CertificatePage.jsx
-var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/CertificatePage.jsx
+var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
 function CertificatePage() {
   const { slug } = useParams();
   const certificate = siteData_default.strengths.credentials.find((item) => item.slug === slug);
-  return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("section", { className: "section certificate-page", style: { paddingTop: "calc(var(--nav-h) + var(--sp-4xl))" }, children: /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "container", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("hr", { className: "divider", style: { marginBottom: "var(--sp-4xl)" } }),
-    /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Link, { to: "/strengths", className: "accent-link certificate-back", children: "\u8FD4\u56DE\u4F18\u52BF" }),
-    /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { className: "certificate-layout", "data-animate": true, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime15.jsxs)("div", { children: [
-        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("p", { className: "tag", style: { marginBottom: "var(--sp-sm)" }, children: "\u8BC1\u4E66" }),
-        /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("h1", { className: "text-gradient", children: certificate?.title || "\u8BC1\u4E66" })
+  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("section", { className: "section certificate-page", style: { paddingTop: "calc(var(--nav-h) + var(--sp-4xl))" }, children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "container", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("hr", { className: "divider", style: { marginBottom: "var(--sp-4xl)" } }),
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Link, { to: "/strengths", className: "accent-link certificate-back", children: "\u8FD4\u56DE\u4F18\u52BF" }),
+    /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { className: "certificate-layout", "data-animate": true, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)("div", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { className: "tag", style: { marginBottom: "var(--sp-sm)" }, children: "\u8BC1\u4E66" }),
+        /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("h1", { className: "text-gradient", children: certificate?.title || "\u8BC1\u4E66" })
       ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { className: "glass certificate-frame", children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("p", { children: "\u8BC1\u4E66\u672C\u4F53\u5F85\u653E\u5165" }) })
+      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("div", { className: "glass certificate-frame", children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("p", { children: "\u8BC1\u4E66\u672C\u4F53\u5F85\u653E\u5165" }) })
     ] })
   ] }) });
 }
 
-// src/App.jsx
-var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/App.jsx
+var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
 function App() {
   const Router2 = window.location.protocol === "file:" ? HashRouter : BrowserRouter;
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Router2, { children: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(AnimatedApp, {}) });
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Router2, { children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(AnimatedApp, {}) });
 }
 function AnimatedApp() {
   const location = useLocation();
-  (0, import_react5.useEffect)(() => {
+  (0, import_react6.useEffect)(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual";
     }
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
   }, [location.pathname]);
-  (0, import_react5.useEffect)(() => {
+  (0, import_react6.useEffect)(() => {
     const obs = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -29054,24 +29287,24 @@ function AnimatedApp() {
     });
     return () => obs.disconnect();
   }, [location.pathname]);
-  return /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(import_jsx_runtime16.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Navbar, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime16.jsx)("main", { className: "page-enter", children: /* @__PURE__ */ (0, import_jsx_runtime16.jsxs)(Routes, { location, children: [
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Route, { path: "/", element: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(HomePage, {}) }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Route, { path: "/about", element: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(AboutPage, {}) }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Route, { path: "/projects", element: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(ProjectsPage, {}) }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Route, { path: "/strengths", element: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(StrengthsPage, {}) }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Route, { path: "/certificates/:slug", element: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(CertificatePage, {}) }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Route, { path: "/contact", element: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(ContactPage, {}) }),
-      /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(Route, { path: "/resume", element: /* @__PURE__ */ (0, import_jsx_runtime16.jsx)(ResumePage, {}) })
+  return /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(import_jsx_runtime17.Fragment, { children: [
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Navbar, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime17.jsx)("main", { className: "page-enter", children: /* @__PURE__ */ (0, import_jsx_runtime17.jsxs)(Routes, { location, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Route, { path: "/", element: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(HomePage, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Route, { path: "/about", element: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(AboutPage, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Route, { path: "/projects", element: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(ProjectsPage, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Route, { path: "/strengths", element: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(StrengthsPage, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Route, { path: "/certificates/:slug", element: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(CertificatePage, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Route, { path: "/contact", element: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(ContactPage, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(Route, { path: "/resume", element: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(ResumePage, {}) })
     ] }) }, location.pathname)
   ] });
 }
 
-// src/main.jsx
-var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
+// D:/Codex/2026-07-27/hai/work/personal-homepage/src/main.jsx
+var import_jsx_runtime18 = __toESM(require_jsx_runtime(), 1);
 import_client.default.createRoot(document.getElementById("root")).render(
-  /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(import_react6.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime17.jsx)(App, {}) })
+  /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_react7.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(App, {}) })
 );
 /*! Bundled license information:
 

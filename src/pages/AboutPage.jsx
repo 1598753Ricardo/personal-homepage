@@ -1,30 +1,45 @@
-const currentInterests = [
+const focusItems = [
   {
-    title: 'Legal Analysis',
-    text: '关注事实问题拆解与法律推理。',
+    title: '事实拆解',
+    text: '从材料、行为和时间线里找到问题真正发生的位置。',
   },
   {
-    title: 'Legal Practice',
-    text: '关注法律如何进入真实场景。',
+    title: '法律实务',
+    text: '把规则放回案件、证据、文书和沟通场景中理解。',
   },
   {
-    title: 'Technology',
-    text: '关注工具如何辅助法律学习和研究。',
+    title: 'AI 工具',
+    text: '用工具辅助整理信息、校对思路和推进个人项目。',
   },
 ]
 
-const profileRows = [
+const introPoints = [
   {
-    label: 'BACKGROUND',
-    value: 'Law Undergraduate',
+    title: '我怎么看法律',
+    text: '我对法律的兴趣，首先来自事实本身。一个争议为什么发生，当事人为什么作出某种选择，规则又如何介入这些具体处境，这些问题比单纯背诵结论更吸引我。',
   },
   {
-    label: 'INTERESTS',
-    value: ['Legal Analysis', 'Legal Practice', 'AI Application'],
+    title: '我怎么训练自己',
+    text: '我更愿意把法律放回真实场景里理解：从案例分析、文书训练、律所实习到模拟法庭，慢慢建立事实、证据、请求和表达之间的连接。',
   },
   {
-    label: 'DIRECTION',
-    value: 'Interdisciplinary Development',
+    title: '我怎么使用工具',
+    text: '在法律学习之外，我也尝试用 AI 辅助资料整理、研究分析和个人项目开发。它不是替代判断的答案机器，而是帮助我更快梳理信息、校对思路、推进执行的工具。',
+  },
+]
+
+const profileItems = [
+  {
+    label: '当前身份',
+    value: '东莞理工学院法学本科在读',
+  },
+  {
+    label: '关注方向',
+    value: '民商事争议解决、保险纠纷、法律科技',
+  },
+  {
+    label: '正在积累',
+    value: '案例分析、文书训练、实务材料整理与 AI 协作开发',
   },
 ]
 
@@ -37,38 +52,32 @@ export default function AboutPage() {
 
           <div className="about-layout">
             <aside className="about-label about-reveal" data-animate>
-              ABOUT
+              关于
             </aside>
 
             <article className="about-main">
               <header className="about-hero about-reveal" data-animate>
                 <h1>林汇川</h1>
                 <p>
-                  法学本科生，喜欢从事实问题出发分析法律问题，关注规则、人的行为以及现实场景之间的关系。
-                  也尝试探索技术工具如何改变学习与实践方式。
+                  法学本科生，正在探索法律实务、结构化表达与 AI 工具的交叉方向。
                 </p>
               </header>
 
               <section className="about-introduction" aria-label="Personal Introduction">
-                <p className="about-reveal" data-animate>
-                  我对法律的兴趣，很多时候来自对事实问题的分析。一个争议为什么会发生，当事人为什么作出某种选择，规则又如何介入这些具体处境，这些问题比单纯背诵结论更吸引我。
-                </p>
-                <p className="about-reveal" data-animate>
-                  在我的理解里，法律不仅是规则本身，也包含人的选择、利益关系和制度逻辑。学习法律的过程，是不断把抽象规则放回现实场景中，看它如何解释事实、约束行为，也如何留下需要判断的空间。
-                </p>
-                <p className="about-reveal" data-animate>
-                  所以我不希望法律学习只停留在书本。通过案例分析、律所实习、模拟法庭、模拟仲裁和文书训练，我慢慢理解法律如何进入真实工作：从事实整理、证据判断，到表达请求和回应争议。
-                </p>
-                <p className="about-reveal" data-animate>
-                  在法律学习之外，我也会尝试使用智能工具辅助资料整理、法律文书写作、研究分析以及个人项目开发。AI 对我来说不是替代法律判断的答案机器，而是帮助我更快整理信息、校对思路、提高效率的工具。
-                </p>
+                {introPoints.map((item, index) => (
+                  <div className="about-intro-point about-reveal" data-animate key={item.title}>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <h2>{item.title}</h2>
+                    <p>{item.text}</p>
+                  </div>
+                ))}
               </section>
 
-              <section className="about-interests about-reveal" aria-labelledby="about-interests-title" data-animate>
-                <h2 id="about-interests-title">CURRENT INTERESTS</h2>
+              <section className="about-focus about-reveal" aria-labelledby="about-focus-title" data-animate>
+                <h2 id="about-focus-title">我现在更关心</h2>
                 <div>
-                  {currentInterests.map((item) => (
-                    <div className="about-interest-row" key={item.title}>
+                  {focusItems.map((item) => (
+                    <div className="about-focus-row" key={item.title}>
                       <h3>{item.title}</h3>
                       <p>{item.text}</p>
                     </div>
@@ -77,18 +86,10 @@ export default function AboutPage() {
               </section>
 
               <section className="about-profile about-reveal" aria-label="Profile" data-animate>
-                {profileRows.map((item) => (
+                {profileItems.map((item) => (
                   <div className="about-profile-row" key={item.label}>
                     <span>{item.label}</span>
-                    {Array.isArray(item.value) ? (
-                      <p>
-                        {item.value.map((line) => (
-                          <span key={line}>{line}</span>
-                        ))}
-                      </p>
-                    ) : (
-                      <p>{item.value}</p>
-                    )}
+                    <p>{item.value}</p>
                   </div>
                 ))}
               </section>

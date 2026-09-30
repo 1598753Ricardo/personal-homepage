@@ -142,118 +142,158 @@ body::before {
   margin-bottom:clamp(44px,6vw,76px);
 }
 .about-layout{
-  width:min(960px,100%);
+  width:min(860px,100%);
   margin:0 auto;
   display:grid;
-  grid-template-columns:150px minmax(0,1fr);
-  gap:clamp(36px,6vw,88px);
+  grid-template-columns:1fr;
+  gap:clamp(22px,3vw,34px);
   align-items:start;
+  text-align:center;
 }
 .about-label{
-  position:sticky;
-  top:calc(var(--nav-h) + 42px);
-  color:rgba(255,255,255,.38);
-  font-family:var(--font-mono);
-  font-size:var(--caption);
-  letter-spacing:.06em;
-  text-transform:uppercase;
+  position:static;
+  color:rgba(255,255,255,.44);
+  font-size:var(--body-sm);
+  font-weight:520;
+  line-height:1.5;
+  letter-spacing:0;
 }
 .about-main{
-  max-width:760px;
+  max-width:800px;
+  margin:0 auto;
 }
 .about-hero{
-  margin-bottom:clamp(48px,7vw,82px);
+  margin-bottom:clamp(38px,5vw,64px);
 }
 .about-hero h1{
-  margin-bottom:clamp(20px,3vw,32px);
+  margin-bottom:clamp(18px,2.4vw,26px);
   color:var(--text-heading);
-  font-size:clamp(2.6rem,5.8vw,5.2rem);
+  font-size:clamp(2.8rem,5.7vw,5rem);
   font-weight:590;
   line-height:1;
   letter-spacing:0;
 }
 .about-hero p{
-  color:rgba(255,255,255,.72);
-  font-size:clamp(1.08rem,1.5vw,1.28rem);
-  line-height:1.9;
+  max-width:680px;
+  margin:0 auto;
+  color:rgba(255,255,255,.78);
+  font-size:clamp(1.12rem,1.55vw,1.34rem);
+  line-height:1.82;
   letter-spacing:0;
 }
 .about-introduction{
-  margin-bottom:clamp(62px,8vw,96px);
+  max-width:720px;
+  margin:0 auto clamp(48px,6vw,72px);
+  display:grid;
+  gap:clamp(18px,2.6vw,26px);
 }
-.about-introduction p{
-  margin-bottom:var(--sp-lg);
-  color:rgba(255,255,255,.62);
-  font-size:clamp(1rem,1.32vw,1.12rem);
-  line-height:1.95;
-  letter-spacing:0;
+.about-intro-point{
+  display:grid;
+  justify-items:center;
+  gap:var(--sp-sm);
+  padding:clamp(20px,3vw,28px) clamp(18px,3vw,34px);
+  border-top:1px solid rgba(255,255,255,.08);
 }
-.about-introduction p:first-child{
-  color:rgba(255,255,255,.78);
-  font-size:clamp(1.08rem,1.5vw,1.24rem);
+.about-intro-point:last-child{
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
-.about-introduction p:last-child{
-  margin-bottom:0;
-}
-.about-interests{
-  margin-bottom:clamp(54px,7vw,88px);
-}
-.about-interests h2{
-  margin-bottom:clamp(22px,3vw,32px);
-  color:rgba(255,255,255,.42);
+.about-intro-point span{
+  color:var(--accent);
   font-family:var(--font-mono);
   font-size:var(--caption);
-  font-weight:400;
+  line-height:1;
   letter-spacing:.06em;
 }
-.about-interest-row{
-  display:grid;
-  grid-template-columns:minmax(170px,.38fr) 1fr;
-  gap:clamp(20px,4vw,48px);
-  padding:14px 0;
+.about-intro-point h2{
+  color:rgba(255,255,255,.86);
+  font-size:clamp(1.12rem,1.55vw,1.32rem);
+  font-weight:560;
+  line-height:1.45;
+  letter-spacing:0;
 }
-.about-interest-row h3{
+.about-intro-point p{
+  max-width:640px;
+  color:rgba(255,255,255,.64);
+  font-size:clamp(1rem,1.32vw,1.12rem);
+  line-height:1.9;
+  letter-spacing:0;
+}
+.about-intro-point:first-child p{
+  color:rgba(255,255,255,.74);
+  font-size:clamp(1.04rem,1.4vw,1.18rem);
+}
+.about-focus{
+  margin-bottom:clamp(44px,6vw,68px);
+}
+.about-focus h2{
+  margin-bottom:clamp(18px,2.4vw,26px);
+  color:rgba(255,255,255,.48);
+  font-size:var(--body-sm);
+  font-weight:520;
+  letter-spacing:0;
+}
+.about-focus > div{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.about-focus-row{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:148px;
+  padding:20px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:var(--r-sm);
+  background:rgba(255,255,255,.045);
+  transition:background var(--dur-fast) ease,border-color var(--dur-fast) ease,transform var(--dur-base) var(--ease-out);
+}
+.about-focus-row:hover{
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.14);
+  transform:translateY(-3px);
+}
+.about-focus-row h3{
+  margin-bottom:var(--sp-md);
   color:rgba(255,255,255,.82);
   font-size:var(--body);
   font-weight:540;
-  line-height:1.6;
+  line-height:1.45;
   letter-spacing:0;
 }
-.about-interest-row p{
+.about-focus-row p{
   color:rgba(255,255,255,.56);
   font-size:var(--body-sm);
-  line-height:1.85;
+  line-height:1.75;
 }
 .about-profile{
   width:100%;
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:clamp(22px,4vw,42px);
+  gap:0;
+  border-top:1px solid rgba(255,255,255,.08);
+  border-bottom:1px solid rgba(255,255,255,.08);
 }
 .about-profile-row{
   display:block;
-  padding:0;
+  padding:20px 18px 22px;
+}
+.about-profile-row + .about-profile-row{
+  border-left:1px solid rgba(255,255,255,.08);
 }
 .about-profile-row span{
   display:block;
   margin-bottom:var(--sp-sm);
-  color:rgba(255,255,255,.36);
-  font-family:var(--font-mono);
+  color:rgba(255,255,255,.42);
   font-size:var(--caption);
-  letter-spacing:.06em;
-  text-transform:uppercase;
+  font-weight:520;
+  letter-spacing:0;
 }
 .about-profile-row p{
-  color:rgba(255,255,255,.66);
+  color:rgba(255,255,255,.68);
   font-size:var(--body-sm);
   line-height:1.85;
-}
-.about-profile-row p span{
-  color:rgba(255,255,255,.66);
-  font-family:inherit;
-  font-size:inherit;
-  letter-spacing:0;
-  text-transform:none;
 }
 .about-reveal[data-animate]{
   opacity:0;
@@ -691,8 +731,15 @@ body::before {
   .about-split{grid-template-columns:1fr!important}
   .about-layout{grid-template-columns:1fr;gap:var(--sp-lg)}
   .about-label{position:static}
-  .about-interest-row{grid-template-columns:1fr;gap:var(--sp-xs)}
-  .about-profile{grid-template-columns:1fr;gap:var(--sp-xl)}
+  .about-focus > div{grid-template-columns:1fr}
+  .about-focus-row{min-height:auto}
+  .about-profile{grid-template-columns:1fr}
+  .about-profile-row{padding:18px 0}
+  .about-profile-row + .about-profile-row{
+    padding-left:0;
+    border-left:0;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
   .stats-grid,.fact-grid,.strength-grid,.project-card-grid{grid-template-columns:1fr!important}
   .credential-band{grid-template-columns:1fr}
   .certificate-stage{min-height:620px}
