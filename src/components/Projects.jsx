@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Book3D from './Book3D'
-import ProjectGateway from './ProjectGateway'
+import ProjectGateway, { gatewayTimingStyles } from './ProjectGateway'
 
 const books = [
   {
@@ -182,54 +182,56 @@ export default function Projects() {
         setHoveredId(null)
         setLight({ x: 0, y: 0 })
       }}
-      style={{ '--light-x': light.x, '--light-y': light.y }}
+      style={{ ...gatewayTimingStyles, '--light-x': light.x, '--light-y': light.y }}
     >
       <ProjectGateway open={doorOpened} onOpen={() => setDoorOpened(true)} onEntered={() => setDoorReady(true)} />
 
-      <div className="library-title" aria-hidden={!doorOpened || Boolean(reading)}>
-        <span>PROJECT BOOKSHELF</span>
-        <p>每一本书都是一段法律学习、实践与工具探索。</p>
-      </div>
+      <div className="gateway-room">
+        <div className="library-title" aria-hidden={!doorOpened || Boolean(reading)}>
+          <span>PROJECT BOOKSHELF</span>
+          <p>每一本书都是一段法律学习、实践与工具探索。</p>
+        </div>
 
-      <div
-        className="shelf-room"
-        id="project-bookshelf"
-        ref={shelfRef}
-        tabIndex={-1}
-        aria-label="个人作品集书架"
-        aria-hidden={!doorReady || Boolean(reading)}
-        inert={!doorReady || reading ? '' : undefined}
-      >
-        <div className="shelf-wall">
-          <div className="shelf-plank plank-top" />
-          <div className="shelf-plank plank-mid" />
-          <div className="shelf-plank plank-bottom" />
-          <div className="book-line" aria-label="个人作品集书架">
-            {books.map((book, index) => (
-              <button
-                type="button"
-                key={book.slug}
-                className={`shelf-book${hoveredId === book.id ? ' is-hovered' : ''}`}
-                style={{
-                  '--book-color': book.color,
-                  '--book-accent': book.accent,
-                  '--book-height': `${315 + (index % 4) * 26}px`,
-                  '--book-width': `${72 + (index % 2) * 10}px`,
-                  '--book-lean': `${(index - 3) * 0.7}deg`,
-                }}
-                onPointerEnter={() => setHoveredId(book.id)}
-                onPointerLeave={() => setHoveredId(null)}
-                onFocus={() => setHoveredId(book.id)}
-                onBlur={() => setHoveredId(null)}
-                onClick={(event) => openBook(book, event)}
-              >
-                <span className="book-spine-face">
-                  <span className="book-year">{book.year}</span>
-                  <span className="book-name">{book.title}</span>
-                  <span className="book-index">{String(book.id).padStart(2, '0')}</span>
-                </span>
-              </button>
-            ))}
+        <div
+          className="shelf-room"
+          id="project-bookshelf"
+          ref={shelfRef}
+          tabIndex={-1}
+          aria-label="个人作品集书架"
+          aria-hidden={!doorReady || Boolean(reading)}
+          inert={!doorReady || reading ? '' : undefined}
+        >
+          <div className="shelf-wall">
+            <div className="shelf-plank plank-top" />
+            <div className="shelf-plank plank-mid" />
+            <div className="shelf-plank plank-bottom" />
+            <div className="book-line" aria-label="个人作品集书架">
+              {books.map((book, index) => (
+                <button
+                  type="button"
+                  key={book.slug}
+                  className={`shelf-book${hoveredId === book.id ? ' is-hovered' : ''}`}
+                  style={{
+                    '--book-color': book.color,
+                    '--book-accent': book.accent,
+                    '--book-height': `${315 + (index % 4) * 26}px`,
+                    '--book-width': `${72 + (index % 2) * 10}px`,
+                    '--book-lean': `${(index - 3) * 0.7}deg`,
+                  }}
+                  onPointerEnter={() => setHoveredId(book.id)}
+                  onPointerLeave={() => setHoveredId(null)}
+                  onFocus={() => setHoveredId(book.id)}
+                  onBlur={() => setHoveredId(null)}
+                  onClick={(event) => openBook(book, event)}
+                >
+                  <span className="book-spine-face">
+                    <span className="book-year">{book.year}</span>
+                    <span className="book-name">{book.title}</span>
+                    <span className="book-index">{String(book.id).padStart(2, '0')}</span>
+                  </span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -290,14 +292,15 @@ export default function Projects() {
             repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 118px);
         }
 
-        .project-library:not(.is-gateway-open) .library-title,
-        .project-library:not(.is-gateway-open) .shelf-room {
+        .project-library:not(.is-gateway-open) .library-title {
           opacity: 0;
           pointer-events: none;
         }
 
         .project-library:not(.is-gateway-open) .shelf-room {
-          transform: scale(.91);
+          opacity: .25;
+          filter: blur(8px);
+          pointer-events: none;
         }
 
         .library-title {

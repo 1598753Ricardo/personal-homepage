@@ -1133,7 +1133,7 @@ var require_react_development = __commonJS({
           var dispatcher = resolveDispatcher();
           return dispatcher.useDeferredValue(value);
         }
-        function useId3() {
+        function useId2() {
           var dispatcher = resolveDispatcher();
           return dispatcher.useId();
         }
@@ -1879,7 +1879,7 @@ var require_react_development = __commonJS({
         exports.useDebugValue = useDebugValue;
         exports.useDeferredValue = useDeferredValue;
         exports.useEffect = useEffect12;
-        exports.useId = useId3;
+        exports.useId = useId2;
         exports.useImperativeHandle = useImperativeHandle;
         exports.useInsertionEffect = useInsertionEffect;
         exports.useLayoutEffect = useLayoutEffect4;
@@ -28200,183 +28200,127 @@ function Book3D({ book, phase = "open", onClose }) {
 // D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/ProjectGateway.jsx
 var import_react3 = __toESM(require_react(), 1);
 var import_jsx_runtime7 = __toESM(require_jsx_runtime(), 1);
-var ARTWORK = "/project-gate-refined-v2.png";
-var SCALE = "/project-gate.png";
-var ARTWORK_BOUNDS = { x: 136, width: 1400, height: 941 };
-var CENTER = { x: 836, y: 260 };
-var ANCHORS = { left: { x: 690, y: 277 }, right: { x: 982, y: 277 } };
-var OPEN_DURATION = 2200;
-function DoorArtwork({ ready }) {
-  const id = (0, import_react3.useId)().replace(/:/g, "");
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("svg", { className: "gateway-artwork", viewBox: `${ARTWORK_BOUNDS.x} 0 ${ARTWORK_BOUNDS.width} ${ARTWORK_BOUNDS.height}`, preserveAspectRatio: "xMidYMid slice", "aria-hidden": "true", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("defs", { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { id: `${id}-beam-outline`, d: "M 818 244 C 797 230 769 238 742 250 C 720 260 706 264 689 257 C 676 251 665 249 659 257 C 652 266 658 274 667 274 C 679 274 681 262 671 261 C 680 263 683 271 698 275 C 724 281 747 266 773 263 C 791 260 805 265 818 276 Z" }),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("g", { id: `${id}-pan-outline`, fill: "white", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("ellipse", { cx: "690", cy: "279", rx: "7.5", ry: "5.5" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M 690 283 C 681 287 686 293 690 295 C 697 291 696 286 690 283" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M 689 291 L 626 423 M 692 291 L 756 423", fill: "none", stroke: "white", strokeWidth: "7", strokeLinecap: "round" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M 690 291 L 690 424", fill: "none", stroke: "white", strokeWidth: "6", strokeLinecap: "round" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M 613 422 L 771 422 L 770 432 C 751 453 724 461 691 461 C 659 461 631 452 616 436 Z" })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("clipPath", { id: `${id}-beam`, children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("use", { href: `#${id}-beam-outline` }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("use", { href: `#${id}-beam-outline`, transform: "translate(1672 0) scale(-1 1)" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("rect", { x: "685", y: "257", width: "10", height: "22" }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("rect", { x: "977", y: "257", width: "10", height: "22" })
-      ] }),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("mask", { id: `${id}-left`, maskUnits: "userSpaceOnUse", x: "590", y: "260", width: "215", height: "220", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("use", { href: `#${id}-pan-outline` }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("mask", { id: `${id}-right`, maskUnits: "userSpaceOnUse", x: "868", y: "260", width: "215", height: "220", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("use", { href: `#${id}-pan-outline`, transform: "translate(1672 0) scale(-1 1)" }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("clipPath", { id: `${id}-stand`, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("path", { d: "M826 179 C824 185 824 190 820 195 C817 196 815 198 816 202 L820 205 L820 209 C811 210 810 214 814 219 C817 223 823 225 827 226 L823 229 C815 230 809 232 807 234 Q804 237 812 240 L812 281 L824 283 L807 285 Q800 286 801 290 Q802 294 810 297 L813 299 L813 302 L812 304 L810 425 L807 426 L808 432 L803 434 Q799 437 804 441 L809 444 L809 449 L812 451 C810 461 803 470 790 475 L790 478 Q790 480 798 481 L780 482 L779 485 L768 486 L767 491 L760 493 L758 495 L749 496 L749 505 L923 505 L923 496 L914 495 L912 493 L905 491 L904 486 L893 485 L892 482 L874 481 Q882 480 882 478 L882 475 C869 470 862 461 860 451 L863 449 L863 444 L868 441 Q873 437 869 434 L864 432 L865 426 L862 425 L860 304 L859 302 L859 299 L862 297 Q870 294 871 290 Q872 286 865 285 L848 283 L860 281 L860 240 Q868 237 865 234 C863 232 857 230 849 229 L845 226 C849 225 855 223 858 219 C862 214 861 210 852 209 L852 205 L856 202 C857 198 855 196 852 195 C848 190 848 185 846 179 Z" }) })
-    ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: ready ? ARTWORK : SCALE, width: "1672", height: "941" }),
-    ready && /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("g", { className: "gateway-scale-art", children: [
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: SCALE, width: "1672", height: "941", clipPath: `url(#${id}-stand)` }),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("g", { "data-scale-part": "beam", className: "gateway-scale-part", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: SCALE, width: "1672", height: "941", clipPath: `url(#${id}-beam)` }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("g", { "data-scale-part": "left", className: "gateway-scale-part", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: SCALE, width: "1672", height: "941", mask: `url(#${id}-left)` }) }),
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("g", { "data-scale-part": "right", className: "gateway-scale-part", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("image", { href: SCALE, width: "1672", height: "941", mask: `url(#${id}-right)` }) })
-    ] })
+var ARTWORK = "/project-gate-original.png";
+var PHOTO = { size: 1254, left: 367, middle: 625, right: 882, top: 257, bottom: 1017 };
+var CLICK_DELAY = 300;
+var LEAF_DURATION = 1600;
+var LEAF_STAGGER = 30;
+var HANDOFF_DURATION = 350;
+var OPEN_DURATION = LEAF_DURATION + LEAF_STAGGER + HANDOFF_DURATION;
+var percent = (value) => `${value / PHOTO.size * 100}%`;
+var gatewayTimingStyles = {
+  "--gateway-leaf-duration": `${LEAF_DURATION}ms`,
+  "--gateway-leaf-stagger": `${LEAF_STAGGER}ms`,
+  "--gateway-handoff-delay": `${LEAF_DURATION + LEAF_STAGGER}ms`,
+  "--gateway-handoff-duration": `${HANDOFF_DURATION}ms`,
+  "--gateway-approach-delay": `${LEAF_DURATION * 0.8}ms`,
+  "--gateway-approach-duration": `${OPEN_DURATION - LEAF_DURATION * 0.8}ms`,
+  "--gateway-open-duration": `${OPEN_DURATION}ms`
+};
+var apertureStyle = {
+  left: percent(PHOTO.left),
+  top: percent(PHOTO.top),
+  width: percent(PHOTO.right - PHOTO.left),
+  height: percent(PHOTO.bottom - PHOTO.top)
+};
+var frameClip = `polygon(evenodd, 0 0, 100% 0, 100% 100%, 0 100%, 0 0,
+  ${percent(PHOTO.left)} ${percent(PHOTO.top)},
+  ${percent(PHOTO.left)} ${percent(PHOTO.bottom)},
+  ${percent(PHOTO.right)} ${percent(PHOTO.bottom)},
+  ${percent(PHOTO.right)} ${percent(PHOTO.top)},
+  ${percent(PHOTO.left)} ${percent(PHOTO.top)}, 0 0)`;
+function DoorPanel({ side }) {
+  const x = side === "left" ? PHOTO.left : PHOTO.middle;
+  const width = side === "left" ? PHOTO.middle - PHOTO.left : PHOTO.right - PHOTO.middle;
+  const height = PHOTO.bottom - PHOTO.top;
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: `gateway-door gateway-door-${side}`, style: { width: `${width / (PHOTO.right - PHOTO.left) * 100}%` }, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-back" }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-edge gateway-door-edge-free" }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-edge gateway-door-edge-hinge" }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-cap gateway-door-cap-top" }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-cap gateway-door-cap-bottom" }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-face", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      "img",
+      {
+        className: "gateway-panel-photo",
+        src: ARTWORK,
+        alt: "",
+        draggable: "false",
+        style: {
+          width: `${PHOTO.size / width * 100}%`,
+          height: `${PHOTO.size / height * 100}%`,
+          left: `${-x / width * 100}%`,
+          top: `${-PHOTO.top / height * 100}%`
+        }
+      }
+    ) })
   ] });
 }
 function ProjectGateway({ open, onOpen, onEntered }) {
-  const gateRef = (0, import_react3.useRef)(null);
-  const pose = (0, import_react3.useRef)({ angle: 0, sway: 0 });
-  const interaction = (0, import_react3.useRef)({ hovered: false, settling: null });
+  const requested = (0, import_react3.useRef)(false);
   const onOpenRef = (0, import_react3.useRef)(onOpen);
   const onEnteredRef = (0, import_react3.useRef)(onEntered);
   const [ready, setReady] = (0, import_react3.useState)(false);
-  const [hovered, setHovered] = (0, import_react3.useState)(false);
-  const [settling, setSettling] = (0, import_react3.useState)(false);
+  const [waiting, setWaiting] = (0, import_react3.useState)(false);
   const [reducedMotion, setReducedMotion] = (0, import_react3.useState)(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   onOpenRef.current = onOpen;
   onEnteredRef.current = onEntered;
+  (0, import_react3.useEffect)(() => {
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(media.matches);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+  (0, import_react3.useEffect)(() => {
+    if (!waiting || open) return void 0;
+    const timer = window.setTimeout(() => onOpenRef.current(), reducedMotion ? 0 : CLICK_DELAY);
+    return () => window.clearTimeout(timer);
+  }, [waiting, open, reducedMotion]);
   (0, import_react3.useEffect)(() => {
     if (!open) return void 0;
     const timer = window.setTimeout(() => onEnteredRef.current?.(), reducedMotion ? 0 : OPEN_DURATION);
     return () => window.clearTimeout(timer);
   }, [open, reducedMotion]);
-  (0, import_react3.useEffect)(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReducedMotion(media.matches);
-    media.addEventListener("change", update);
-    let disposed = false;
-    Promise.all([ARTWORK, SCALE].map((src) => {
-      const image = new Image();
-      image.src = src;
-      return image.decode();
-    })).then(() => {
-      if (!disposed) setReady(true);
-    }).catch(() => {
-    });
-    return () => {
-      disposed = true;
-      media.removeEventListener("change", update);
-    };
-  }, []);
-  (0, import_react3.useEffect)(() => {
-    if (!ready) return void 0;
-    const parts = [...gateRef.current.querySelectorAll("[data-scale-part]")];
-    function paint(angle, sway) {
-      pose.current = { angle, sway };
-      const radians = angle * Math.PI / 180;
-      for (const part of parts) {
-        const name = part.dataset.scalePart;
-        if (name === "beam") {
-          part.setAttribute("transform", `rotate(${angle} ${CENTER.x} ${CENTER.y})`);
-          continue;
-        }
-        const anchor = ANCHORS[name];
-        const x = anchor.x - CENTER.x;
-        const y = anchor.y - CENTER.y;
-        const dx = x * Math.cos(radians) - y * Math.sin(radians) - x;
-        const dy = x * Math.sin(radians) + y * Math.cos(radians) - y;
-        part.setAttribute("transform", `translate(${dx} ${dy}) rotate(${sway} ${anchor.x} ${anchor.y})`);
-      }
-    }
-    if (open || reducedMotion) {
-      paint(0, 0);
-      if (!open && interaction.current.settling) {
-        interaction.current.settling = null;
-        onOpenRef.current();
-      }
-      return void 0;
-    }
-    let frame;
-    let previous = performance.now();
-    const started = previous;
-    function animate(now) {
-      const dt = Math.min(now - previous, 50);
-      previous = now;
-      const pending = interaction.current.settling;
-      if (pending) {
-        const progress = Math.min((now - pending.time) / 360, 1);
-        const remaining = (1 - progress) ** 3;
-        paint(pending.angle * remaining, pending.sway * remaining);
-        if (progress === 1) {
-          interaction.current.settling = null;
-          onOpenRef.current();
-          return;
-        }
-      } else {
-        const phase = (now - started) / 4800 * Math.PI * 2;
-        const amplitude = interaction.current.hovered ? 9 : 7;
-        const target = Math.sin(phase) * amplitude;
-        const sway = Math.sin(phase - 0.8) * 1.1;
-        const smoothing = 1 - Math.exp(-dt / 110);
-        paint(pose.current.angle + (target - pose.current.angle) * smoothing, pose.current.sway + (sway - pose.current.sway) * smoothing);
-      }
-      frame = requestAnimationFrame(animate);
-    }
-    frame = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(frame);
-  }, [ready, open, reducedMotion]);
-  function highlight(value) {
-    interaction.current.hovered = value;
-    setHovered(value);
-  }
-  function movePointer(event) {
-    if (event.pointerType !== "mouse" || settling) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const scale = Math.max(rect.width / ARTWORK_BOUNDS.width, rect.height / ARTWORK_BOUNDS.height);
-    const x = ARTWORK_BOUNDS.x + (event.clientX - rect.left - (rect.width - ARTWORK_BOUNDS.width * scale) / 2) / scale;
-    const y = (event.clientY - rect.top - (rect.height - ARTWORK_BOUNDS.height * scale) / 2) / scale;
-    const near = x > 580 && x < 1090 && y > 150 && y < 540;
-    if (near !== interaction.current.hovered) highlight(near);
-  }
   function requestOpen() {
-    if (open || interaction.current.settling) return;
-    if (reducedMotion || !ready) {
-      onOpenRef.current();
-      return;
-    }
-    interaction.current.settling = { ...pose.current, time: performance.now() };
-    setSettling(true);
-    highlight(false);
+    if (open || requested.current || !ready) return;
+    requested.current = true;
+    setWaiting(true);
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
-    "button",
-    {
-      ref: gateRef,
-      type: "button",
-      className: `project-gateway${hovered ? " is-hovered" : ""}${settling ? " is-settling" : ""}`,
-      style: { "--gateway-open-duration": `${OPEN_DURATION}ms` },
-      "aria-label": "\u63A8\u5F00\u5927\u95E8\u8FDB\u5165\u9879\u76EE\u4E66\u67B6",
-      "aria-controls": "project-bookshelf",
-      "aria-expanded": open,
-      "aria-hidden": open,
-      "aria-busy": settling && !open,
-      inert: open ? "" : void 0,
-      onPointerMove: movePointer,
-      onPointerLeave: () => highlight(false),
-      onFocus: () => highlight(true),
-      onBlur: () => highlight(false),
-      onClick: requestOpen,
-      children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "gateway-scene", "aria-hidden": "true", children: [
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door gateway-door-left", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-face", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DoorArtwork, { ready }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door gateway-door-right", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-face", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DoorArtwork, { ready }) }) }),
-        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-seam" })
-      ] })
-    }
-  );
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: `project-gateway${waiting ? " is-waiting" : ""}`, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "gateway-scene", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      "img",
+      {
+        className: "gateway-frame-photo",
+        src: ARTWORK,
+        alt: "",
+        "aria-hidden": "true",
+        draggable: "false",
+        style: { clipPath: open ? frameClip : void 0 },
+        onLoad: () => setReady(true)
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
+      "button",
+      {
+        type: "button",
+        className: "gateway-opening",
+        style: apertureStyle,
+        "aria-label": "\u63A8\u5F00\u5927\u95E8\u8FDB\u5165\u9879\u76EE\u4E66\u67B6",
+        "aria-controls": "project-bookshelf",
+        "aria-expanded": open,
+        "aria-hidden": open,
+        "aria-busy": waiting && !open,
+        inert: open ? "" : void 0,
+        disabled: !ready,
+        onClick: requestOpen,
+        children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: "gateway-panels", "aria-hidden": "true", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DoorPanel, { side: "left" }),
+          /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DoorPanel, { side: "right" })
+        ] })
+      }
+    ),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-photo-feedback", "aria-hidden": "true" })
+  ] }) });
 }
 
 // D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Projects.jsx
@@ -28552,55 +28496,57 @@ function Projects() {
         setHoveredId(null);
         setLight({ x: 0, y: 0 });
       },
-      style: { "--light-x": light.x, "--light-y": light.y },
+      style: { ...gatewayTimingStyles, "--light-x": light.x, "--light-y": light.y },
       children: [
         /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(ProjectGateway, { open: doorOpened, onOpen: () => setDoorOpened(true), onEntered: () => setDoorReady(true) }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "library-title", "aria-hidden": !doorOpened || Boolean(reading), children: [
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: "PROJECT BOOKSHELF" }),
-          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { children: "\u6BCF\u4E00\u672C\u4E66\u90FD\u662F\u4E00\u6BB5\u6CD5\u5F8B\u5B66\u4E60\u3001\u5B9E\u8DF5\u4E0E\u5DE5\u5177\u63A2\u7D22\u3002" })
-        ] }),
-        /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-          "div",
-          {
-            className: "shelf-room",
-            id: "project-bookshelf",
-            ref: shelfRef,
-            tabIndex: -1,
-            "aria-label": "\u4E2A\u4EBA\u4F5C\u54C1\u96C6\u4E66\u67B6",
-            "aria-hidden": !doorReady || Boolean(reading),
-            inert: !doorReady || reading ? "" : void 0,
-            children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "shelf-wall", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "shelf-plank plank-top" }),
-              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "shelf-plank plank-mid" }),
-              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "shelf-plank plank-bottom" }),
-              /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "book-line", "aria-label": "\u4E2A\u4EBA\u4F5C\u54C1\u96C6\u4E66\u67B6", children: books.map((book, index) => /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
-                "button",
-                {
-                  type: "button",
-                  className: `shelf-book${hoveredId === book.id ? " is-hovered" : ""}`,
-                  style: {
-                    "--book-color": book.color,
-                    "--book-accent": book.accent,
-                    "--book-height": `${315 + index % 4 * 26}px`,
-                    "--book-width": `${72 + index % 2 * 10}px`,
-                    "--book-lean": `${(index - 3) * 0.7}deg`
+        /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "gateway-room", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "library-title", "aria-hidden": !doorOpened || Boolean(reading), children: [
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { children: "PROJECT BOOKSHELF" }),
+            /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("p", { children: "\u6BCF\u4E00\u672C\u4E66\u90FD\u662F\u4E00\u6BB5\u6CD5\u5F8B\u5B66\u4E60\u3001\u5B9E\u8DF5\u4E0E\u5DE5\u5177\u63A2\u7D22\u3002" })
+          ] }),
+          /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+            "div",
+            {
+              className: "shelf-room",
+              id: "project-bookshelf",
+              ref: shelfRef,
+              tabIndex: -1,
+              "aria-label": "\u4E2A\u4EBA\u4F5C\u54C1\u96C6\u4E66\u67B6",
+              "aria-hidden": !doorReady || Boolean(reading),
+              inert: !doorReady || reading ? "" : void 0,
+              children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("div", { className: "shelf-wall", children: [
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "shelf-plank plank-top" }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "shelf-plank plank-mid" }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "shelf-plank plank-bottom" }),
+                /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("div", { className: "book-line", "aria-label": "\u4E2A\u4EBA\u4F5C\u54C1\u96C6\u4E66\u67B6", children: books.map((book, index) => /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
+                  "button",
+                  {
+                    type: "button",
+                    className: `shelf-book${hoveredId === book.id ? " is-hovered" : ""}`,
+                    style: {
+                      "--book-color": book.color,
+                      "--book-accent": book.accent,
+                      "--book-height": `${315 + index % 4 * 26}px`,
+                      "--book-width": `${72 + index % 2 * 10}px`,
+                      "--book-lean": `${(index - 3) * 0.7}deg`
+                    },
+                    onPointerEnter: () => setHoveredId(book.id),
+                    onPointerLeave: () => setHoveredId(null),
+                    onFocus: () => setHoveredId(book.id),
+                    onBlur: () => setHoveredId(null),
+                    onClick: (event) => openBook(book, event),
+                    children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "book-spine-face", children: [
+                      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "book-year", children: book.year }),
+                      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "book-name", children: book.title }),
+                      /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "book-index", children: String(book.id).padStart(2, "0") })
+                    ] })
                   },
-                  onPointerEnter: () => setHoveredId(book.id),
-                  onPointerLeave: () => setHoveredId(null),
-                  onFocus: () => setHoveredId(book.id),
-                  onBlur: () => setHoveredId(null),
-                  onClick: (event) => openBook(book, event),
-                  children: /* @__PURE__ */ (0, import_jsx_runtime8.jsxs)("span", { className: "book-spine-face", children: [
-                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "book-year", children: book.year }),
-                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "book-name", children: book.title }),
-                    /* @__PURE__ */ (0, import_jsx_runtime8.jsx)("span", { className: "book-index", children: String(book.id).padStart(2, "0") })
-                  ] })
-                },
-                book.slug
-              )) })
-            ] })
-          }
-        ),
+                  book.slug
+                )) })
+              ] })
+            }
+          )
+        ] }),
         extractBook ? /* @__PURE__ */ (0, import_jsx_runtime8.jsx)(
           "div",
           {
@@ -28654,14 +28600,15 @@ function Projects() {
             repeating-linear-gradient(90deg, rgba(255,255,255,0.018) 0 1px, transparent 1px 118px);
         }
 
-        .project-library:not(.is-gateway-open) .library-title,
-        .project-library:not(.is-gateway-open) .shelf-room {
+        .project-library:not(.is-gateway-open) .library-title {
           opacity: 0;
           pointer-events: none;
         }
 
         .project-library:not(.is-gateway-open) .shelf-room {
-          transform: scale(.91);
+          opacity: .25;
+          filter: blur(8px);
+          pointer-events: none;
         }
 
         .library-title {
