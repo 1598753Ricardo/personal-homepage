@@ -24,9 +24,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/cjs/react.development.js
+// node_modules/react/cjs/react.development.js
 var require_react_development = __commonJS({
-  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/cjs/react.development.js"(exports, module) {
+  "node_modules/react/cjs/react.development.js"(exports, module) {
     "use strict";
     if (true) {
       (function() {
@@ -1898,9 +1898,9 @@ var require_react_development = __commonJS({
   }
 });
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/index.js
+// node_modules/react/index.js
 var require_react = __commonJS({
-  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/index.js"(exports, module) {
+  "node_modules/react/index.js"(exports, module) {
     "use strict";
     if (false) {
       module.exports = null;
@@ -1910,9 +1910,9 @@ var require_react = __commonJS({
   }
 });
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/scheduler/cjs/scheduler.development.js
+// node_modules/scheduler/cjs/scheduler.development.js
 var require_scheduler_development = __commonJS({
-  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/scheduler/cjs/scheduler.development.js"(exports) {
+  "node_modules/scheduler/cjs/scheduler.development.js"(exports) {
     "use strict";
     if (true) {
       (function() {
@@ -2360,9 +2360,9 @@ var require_scheduler_development = __commonJS({
   }
 });
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/scheduler/index.js
+// node_modules/scheduler/index.js
 var require_scheduler = __commonJS({
-  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/scheduler/index.js"(exports, module) {
+  "node_modules/scheduler/index.js"(exports, module) {
     "use strict";
     if (false) {
       module.exports = null;
@@ -2372,9 +2372,9 @@ var require_scheduler = __commonJS({
   }
 });
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/cjs/react-dom.development.js
+// node_modules/react-dom/cjs/react-dom.development.js
 var require_react_dom_development = __commonJS({
-  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/cjs/react-dom.development.js"(exports) {
+  "node_modules/react-dom/cjs/react-dom.development.js"(exports) {
     "use strict";
     if (true) {
       (function() {
@@ -23536,9 +23536,9 @@ var require_react_dom_development = __commonJS({
   }
 });
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/index.js
+// node_modules/react-dom/index.js
 var require_react_dom = __commonJS({
-  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/index.js"(exports, module) {
+  "node_modules/react-dom/index.js"(exports, module) {
     "use strict";
     if (false) {
       checkDCE();
@@ -23549,9 +23549,9 @@ var require_react_dom = __commonJS({
   }
 });
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/client.js
+// node_modules/react-dom/client.js
 var require_client = __commonJS({
-  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-dom/client.js"(exports) {
+  "node_modules/react-dom/client.js"(exports) {
     "use strict";
     var m = require_react_dom();
     if (false) {
@@ -23580,9 +23580,9 @@ var require_client = __commonJS({
   }
 });
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/cjs/react-jsx-runtime.development.js
+// node_modules/react/cjs/react-jsx-runtime.development.js
 var require_react_jsx_runtime_development = __commonJS({
-  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
+  "node_modules/react/cjs/react-jsx-runtime.development.js"(exports) {
     "use strict";
     if (true) {
       (function() {
@@ -24473,9 +24473,9 @@ var require_react_jsx_runtime_development = __commonJS({
   }
 });
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/jsx-runtime.js
+// node_modules/react/jsx-runtime.js
 var require_jsx_runtime = __commonJS({
-  "D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react/jsx-runtime.js"(exports, module) {
+  "node_modules/react/jsx-runtime.js"(exports, module) {
     "use strict";
     if (false) {
       module.exports = null;
@@ -24485,14 +24485,14 @@ var require_jsx_runtime = __commonJS({
   }
 });
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/main.jsx
+// src/main.jsx
 var import_react7 = __toESM(require_react(), 1);
 var import_client = __toESM(require_client(), 1);
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/App.jsx
+// src/App.jsx
 var import_react6 = __toESM(require_react(), 1);
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/node_modules/react-router/dist/development/chunk-KS7C4IRE.mjs
+// node_modules/react-router/dist/development/chunk-KS7C4IRE.mjs
 var React = __toESM(require_react(), 1);
 var React2 = __toESM(require_react(), 1);
 var React3 = __toESM(require_react(), 1);
@@ -27308,7 +27308,7 @@ function useViewTransitionState(to, { relative } = {}) {
   return matchPath(path.pathname, nextPath) != null || matchPath(path.pathname, currentPath) != null;
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Navbar.jsx
+// src/components/Navbar.jsx
 var import_jsx_runtime = __toESM(require_jsx_runtime(), 1);
 var links = [
   { label: "\u5173\u4E8E", path: "/about" },
@@ -27343,10 +27343,10 @@ function Navbar() {
   ] });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/RingCarousel.jsx
+// src/components/RingCarousel.jsx
 var import_react = __toESM(require_react(), 1);
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/data/orbitItems.js
+// src/data/orbitItems.js
 var orbitItems = [
   {
     id: 1,
@@ -27399,7 +27399,7 @@ var orbitItems = [
 ];
 var orbitItems_default = orbitItems;
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/RingCarousel.jsx
+// src/components/RingCarousel.jsx
 var import_jsx_runtime2 = __toESM(require_jsx_runtime(), 1);
 var ROTATION_SECONDS = 35;
 var FULL_TURN = 360;
@@ -27827,7 +27827,7 @@ function RingCarousel() {
   );
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Hero.jsx
+// src/components/Hero.jsx
 var import_jsx_runtime3 = __toESM(require_jsx_runtime(), 1);
 function Hero() {
   return /* @__PURE__ */ (0, import_jsx_runtime3.jsxs)("section", { style: {
@@ -27854,13 +27854,13 @@ function Hero() {
   ] });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/HomePage.jsx
+// src/pages/HomePage.jsx
 var import_jsx_runtime4 = __toESM(require_jsx_runtime(), 1);
 function HomePage() {
   return /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(Hero, {});
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/AboutPage.jsx
+// src/pages/AboutPage.jsx
 var import_jsx_runtime5 = __toESM(require_jsx_runtime(), 1);
 var focusItems = [
   {
@@ -27935,10 +27935,10 @@ function AboutPage() {
   ] }) }) });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Projects.jsx
+// src/components/Projects.jsx
 var import_react4 = __toESM(require_react(), 1);
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Book3D.jsx
+// src/components/Book3D.jsx
 var import_react2 = __toESM(require_react(), 1);
 var import_react_dom = __toESM(require_react_dom(), 1);
 var import_jsx_runtime6 = __toESM(require_jsx_runtime(), 1);
@@ -28197,25 +28197,17 @@ function Book3D({ book, phase = "open", onClose }) {
   return (0, import_react_dom.createPortal)(stage, document.body);
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/ProjectGateway.jsx
+// src/components/ProjectGateway.jsx
 var import_react3 = __toESM(require_react(), 1);
 var import_jsx_runtime7 = __toESM(require_jsx_runtime(), 1);
 var ARTWORK = "/project-gate-original.png";
 var PHOTO = { size: 1254, left: 367, middle: 625, right: 882, top: 257, bottom: 1017 };
-var CLICK_DELAY = 300;
-var LEAF_DURATION = 1600;
-var LEAF_STAGGER = 30;
-var HANDOFF_DURATION = 350;
-var OPEN_DURATION = LEAF_DURATION + LEAF_STAGGER + HANDOFF_DURATION;
+var ENTRY_DURATION = 1550;
 var percent = (value) => `${value / PHOTO.size * 100}%`;
 var gatewayTimingStyles = {
-  "--gateway-leaf-duration": `${LEAF_DURATION}ms`,
-  "--gateway-leaf-stagger": `${LEAF_STAGGER}ms`,
-  "--gateway-handoff-delay": `${LEAF_DURATION + LEAF_STAGGER}ms`,
-  "--gateway-handoff-duration": `${HANDOFF_DURATION}ms`,
-  "--gateway-approach-delay": `${LEAF_DURATION * 0.8}ms`,
-  "--gateway-approach-duration": `${OPEN_DURATION - LEAF_DURATION * 0.8}ms`,
-  "--gateway-open-duration": `${OPEN_DURATION}ms`
+  "--gateway-entry-duration": `${ENTRY_DURATION}ms`,
+  "--gateway-room-delay": "600ms",
+  "--gateway-room-duration": "850ms"
 };
 var apertureStyle = {
   left: percent(PHOTO.left),
@@ -28234,11 +28226,7 @@ function DoorPanel({ side }) {
   const width = side === "left" ? PHOTO.middle - PHOTO.left : PHOTO.right - PHOTO.middle;
   const height = PHOTO.bottom - PHOTO.top;
   return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("span", { className: `gateway-door gateway-door-${side}`, style: { width: `${width / (PHOTO.right - PHOTO.left) * 100}%` }, children: [
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-back" }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-edge gateway-door-edge-free" }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-edge gateway-door-edge-hinge" }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-cap gateway-door-cap-top" }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-cap gateway-door-cap-bottom" }),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-edge" }),
     /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-door-face", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
       "img",
       {
@@ -28258,13 +28246,18 @@ function DoorPanel({ side }) {
 }
 function ProjectGateway({ open, onOpen, onEntered }) {
   const requested = (0, import_react3.useRef)(false);
-  const onOpenRef = (0, import_react3.useRef)(onOpen);
+  const completed = (0, import_react3.useRef)(false);
   const onEnteredRef = (0, import_react3.useRef)(onEntered);
   const [ready, setReady] = (0, import_react3.useState)(false);
-  const [waiting, setWaiting] = (0, import_react3.useState)(false);
+  const [entered, setEntered] = (0, import_react3.useState)(false);
   const [reducedMotion, setReducedMotion] = (0, import_react3.useState)(() => window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  onOpenRef.current = onOpen;
   onEnteredRef.current = onEntered;
+  function finishEntry() {
+    if (completed.current) return;
+    completed.current = true;
+    setEntered(true);
+    onEnteredRef.current?.();
+  }
   (0, import_react3.useEffect)(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setReducedMotion(media.matches);
@@ -28272,21 +28265,17 @@ function ProjectGateway({ open, onOpen, onEntered }) {
     return () => media.removeEventListener("change", update);
   }, []);
   (0, import_react3.useEffect)(() => {
-    if (!waiting || open) return void 0;
-    const timer = window.setTimeout(() => onOpenRef.current(), reducedMotion ? 0 : CLICK_DELAY);
-    return () => window.clearTimeout(timer);
-  }, [waiting, open, reducedMotion]);
-  (0, import_react3.useEffect)(() => {
-    if (!open) return void 0;
-    const timer = window.setTimeout(() => onEnteredRef.current?.(), reducedMotion ? 0 : OPEN_DURATION);
-    return () => window.clearTimeout(timer);
+    if (open && reducedMotion) finishEntry();
   }, [open, reducedMotion]);
   function requestOpen() {
     if (open || requested.current || !ready) return;
     requested.current = true;
-    setWaiting(true);
+    onOpen();
   }
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: `project-gateway${waiting ? " is-waiting" : ""}`, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "gateway-scene", children: [
+  if (entered) return null;
+  return /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "project-gateway", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("div", { className: "gateway-camera", onAnimationEnd: (event) => {
+    if (event.target === event.currentTarget && event.animationName === "gateway-camera-travel") finishEntry();
+  }, children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("div", { className: "gateway-scene", children: [
     /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(
       "img",
       {
@@ -28309,7 +28298,6 @@ function ProjectGateway({ open, onOpen, onEntered }) {
         "aria-controls": "project-bookshelf",
         "aria-expanded": open,
         "aria-hidden": open,
-        "aria-busy": waiting && !open,
         inert: open ? "" : void 0,
         disabled: !ready,
         onClick: requestOpen,
@@ -28318,12 +28306,11 @@ function ProjectGateway({ open, onOpen, onEntered }) {
           /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(DoorPanel, { side: "right" })
         ] })
       }
-    ),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("span", { className: "gateway-photo-feedback", "aria-hidden": "true" })
-  ] }) });
+    )
+  ] }) }) });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Projects.jsx
+// src/components/Projects.jsx
 var import_jsx_runtime8 = __toESM(require_jsx_runtime(), 1);
 var books = [
   {
@@ -28906,13 +28893,13 @@ function Projects() {
   );
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/ProjectsPage.jsx
+// src/pages/ProjectsPage.jsx
 var import_jsx_runtime9 = __toESM(require_jsx_runtime(), 1);
 function ProjectsPage() {
   return /* @__PURE__ */ (0, import_jsx_runtime9.jsx)(Projects, {});
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/data/siteData.js
+// src/data/siteData.js
 var siteData = {
   nav: {
     name: "\u6797\u6C47\u5DDD"
@@ -29055,7 +29042,7 @@ var siteData = {
 };
 var siteData_default = siteData;
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Strengths.jsx
+// src/components/Strengths.jsx
 var import_react5 = __toESM(require_react(), 1);
 var import_jsx_runtime10 = __toESM(require_jsx_runtime(), 1);
 function Strengths() {
@@ -29118,13 +29105,13 @@ function Strengths() {
   ) }) });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/StrengthsPage.jsx
+// src/pages/StrengthsPage.jsx
 var import_jsx_runtime11 = __toESM(require_jsx_runtime(), 1);
 function StrengthsPage() {
   return /* @__PURE__ */ (0, import_jsx_runtime11.jsx)("div", { style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime11.jsx)(Strengths, {}) });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Footer.jsx
+// src/components/Footer.jsx
 var import_jsx_runtime12 = __toESM(require_jsx_runtime(), 1);
 function Footer() {
   return /* @__PURE__ */ (0, import_jsx_runtime12.jsxs)("footer", { style: {
@@ -29148,13 +29135,13 @@ function Footer() {
   ] });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/ContactPage.jsx
+// src/pages/ContactPage.jsx
 var import_jsx_runtime13 = __toESM(require_jsx_runtime(), 1);
 function ContactPage() {
   return /* @__PURE__ */ (0, import_jsx_runtime13.jsx)("div", { style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime13.jsx)(Footer, {}) });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/components/Resume.jsx
+// src/components/Resume.jsx
 var import_jsx_runtime14 = __toESM(require_jsx_runtime(), 1);
 function Resume() {
   return /* @__PURE__ */ (0, import_jsx_runtime14.jsx)("section", { className: "section", style: { background: "var(--bg)" }, children: /* @__PURE__ */ (0, import_jsx_runtime14.jsxs)("div", { className: "container timeline-container", children: [
@@ -29180,13 +29167,13 @@ function Resume() {
   ] }) });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/ResumePage.jsx
+// src/pages/ResumePage.jsx
 var import_jsx_runtime15 = __toESM(require_jsx_runtime(), 1);
 function ResumePage() {
   return /* @__PURE__ */ (0, import_jsx_runtime15.jsx)("div", { style: { paddingTop: "var(--nav-h)" }, children: /* @__PURE__ */ (0, import_jsx_runtime15.jsx)(Resume, {}) });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/pages/CertificatePage.jsx
+// src/pages/CertificatePage.jsx
 var import_jsx_runtime16 = __toESM(require_jsx_runtime(), 1);
 function CertificatePage() {
   const { slug } = useParams();
@@ -29204,7 +29191,7 @@ function CertificatePage() {
   ] }) });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/App.jsx
+// src/App.jsx
 var import_jsx_runtime17 = __toESM(require_jsx_runtime(), 1);
 function App() {
   const Router2 = window.location.protocol === "file:" ? HashRouter : BrowserRouter;
@@ -29248,7 +29235,7 @@ function AnimatedApp() {
   ] });
 }
 
-// D:/Codex/2026-07-27/hai/work/personal-homepage/src/main.jsx
+// src/main.jsx
 var import_jsx_runtime18 = __toESM(require_jsx_runtime(), 1);
 import_client.default.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(import_react7.default.StrictMode, { children: /* @__PURE__ */ (0, import_jsx_runtime18.jsx)(App, {}) })
